@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COKLIT DAFTAR PEMILIH SEMENTARA (DPS) - Desa Payo Lebar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { background-color: #f8f9fa; font-family: Arial, sans-serif; }
+        .hero-banner { background: #b91c1c; color: white; padding: 15px 20px; border-radius: 6px; margin-bottom: 20px; }
+        .card-custom { border-radius: 6px; border: 1px solid #d1d5db; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .kk-separator-empty { height: 12px; background-color: transparent !important; }
+        .table-coklit { font-size: 11px; }
+        .table-coklit th, .table-coklit td { padding: 4px 6px !important; vertical-align: middle; }
+        
+        @media print {
+            .no-print { display: none !important; }
+            @page { 
+                size: F4 landscape; 
+                margin: 5mm; 
+            }
+            body { background-color: #fff; font-size: 10px; }
+            .table-responsive { overflow: visible !important; }
+            .table-coklit { width: 100% !important; font-size: 9px; table-layout: auto; }
+            .table-coklit th, .table-coklit td { padding: 2px 4px !important; border: 1px solid #000 !important; }
+            .card-custom { border: none !important; box-shadow: none !important; padding: 0 !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid px-3 my-3">
+    <div class="hero-banner text-center no-print">
+        <h3 class="fw-bold mb-1">COKLIT DAFTAR PEMILIH SEMENTARA (DPS)</h3>
+        <h5 class="fw-normal mb-0">Pemilihan Kepala Desa Payo Lebar Tahun 2026</h5>
+    </div>
+
+    <div class="card card-custom p-3 mb-3 no-print">
+        <h6 class="fw-bold">1. Upload File Data Pemilih (.xlsx / .xls)</h6>
+        <p class="text-muted small mb-2">Unggah file Excel Anda (baik file mentah atau hasil unduhan Coklit sebelumnya).</p>
+        <input type="file" class="form-control form-control-sm my-1" id="excelFile" accept=".xlsx, .xls">
+        <div id="status" class="fw-bold text-primary mt-1 small"></div>
+
+        <div class="d-flex gap-2 mt-2">
+            <button class="btn btn-sm btn-outline-secondary" onclick="window.print()">🖨️ Cetak / Print (Landscape)</button>
+            <button class="btn btn-sm btn-success" onclick="eksporExcel()">📥 Unduh Hasil Coklit (.xlsx)</button>
+            <button class="btn btn-sm btn-primary ms-auto" onclick="openModalTambah()">➕ Tambah Pemilih Baru / KK Baru</button>
+        </div>
+    </div>
+
+    <div id="dashboardSection" class="row mb-3 no-print" style="display: none;">
+        <div class="col-md-4 mb-2">
+            <div class="card card-custom p-2 h-100">
+                <h6 class="fw-bold text-secondary mb-2 small">📊 Statistik Coklit Pemilih</h6>
+                <div class="d-flex flex-column gap-1 extra-small" style="font-size: 12px;">
+                    <div class="d-flex justify-content-between p-1 bg-light rounded"><span>Total Pemilih:</span><strong id="statTotal">0</strong></div>
+                    <div class="d-flex justify-content-between p-1 bg-success-subtle rounded text-success"><span>Berhak Memilih (Aktif/Pindah Dalam Desa/Baru):</span><strong id="statAktif">0</strong></div>
+                    <div class="d-flex justify-content-between p-1 bg-danger-subtle rounded text-danger"><span>TMS / Tidak Berhak (Meninggal/Pindah Luar/Dll):</span><strong id="statTMS">0</strong></div>
+                    <div class="d-flex justify-content-between p-1 bg-warning-subtle rounded text-warning-emphasis"><span>Perbaikan Data (Ubah):</span><strong id="statUbah">0</strong></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 mb-2">
+            <div class="card card-custom p-2 h-100">
+                <h6 class="fw-bold text-secondary mb-1 small">📈 Grafik Distribusi Kode Coklit</h6>
+                <div style="height: 160px; position: relative;">
+                    <canvas id="coklitChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-custom p-3 mb-3 no-print">
+        <h6 class="fw-bold mb-2">2. Filter & Pencarian Data</h6>
+        <div class="row g-2">
+            <div class="col-md-5">
+                <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Cari Nama, NIK, DP-ID, No KK..." onkeyup="filterData()">
+            </div>
+            <div class="col-md-3">
+                <select id="filterRT" class="form-select form-select-sm" onchange="filterData()">
+                    <option value="">-- Semua RT / Alamat --</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <select id="filterStatus" class="form-select form-select-sm" onchange="filterData()">
+                    <option value="">-- Semua Kode Coklit --</option>
+                    <option value="0">0 - Aktif</option>
+                    <option value="1">1 - Meninggal</option>
+                    <option value="2">2 - Ganda</option>
+                    <option value="3">3 - TNI</option>
+                    <option value="4">4 - Polisi</option>
+                    <option value="5">5 - Pindah domisili (Luar Desa)</option>
+                    <option value="6">6 - Pindah Domisili (Dalam Desa)</option>
+                    <option value="7">7 - Pisah KK</option>
+                    <option value="8">8 - Belum Cukup Umur</option>
+                    <option value="U">U - Ubah</option>
+                    <option value="B">B - Baru</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-custom p-2">
+        <div class="d-flex justify-content-between align-items-center mb-2 no-print">
+            <div class="d-flex align-items-center gap-2">
+                <span class="fw-bold text-muted small">Tampilkan:</span>
+                <select id="rowsPerPageSelect" class="form-select form-select-sm" style="width: auto;" onchange="changeRowsPerPage()">
+                    <option value="50">50 Baris</option>
+                    <option value="100">100 Baris</option>
+                    <option value="500">500 Baris</option>
+                    <option value="ALL">Semua Data</option>
+                </select>
+            </div>
+            <span id="pageInfo" class="fw-bold text-muted small">Halaman 1</span>
+            <div>
+                <button class="btn btn-sm btn-outline-primary py-0 px-2" onclick="prevPage()">❮ Sblmnya</button>
+                <button class="btn btn-sm btn-outline-primary py-0 px-2" onclick="nextPage()">Lanjut ❯</button>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle table-coklit">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th style="width: 30px;">NO</th>
+                        <th style="width: 70px;">DP-ID</th>
+                        <th style="width: 110px;">NO KK</th>
+                        <th style="width: 110px;">NIK</th>
+                        <th>NAMA LENGKAP</th>
+                        <th style="width: 30px;">L/P</th>
+                        <th>TEMPAT LAHIR</th>
+                        <th style="width: 80px;">TGL LAHIR</th>
+                        <th style="width: 40px;">UMUR</th>
+                        <th style="width: 45px;">RT/RW</th>
+                        <th style="width: 75px;">STATUS HUB</th>
+                        <th style="width: 40px;">KODE</th>
+                        <th>KETERANGAN</th>
+                        <th class="no-print" style="width: 50px;">AKSI</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td colspan="14" class="text-center text-muted">Silakan unggah file Excel data pemilih Anda.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit Coklit -->
+<div class="modal fade" id="modalCoklit" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header py-2">
+        <h6 class="modal-title fw-bold">Coklit Pemilih</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body small">
+        <input type="hidden" id="modalUid">
+        <div class="mb-2"><label class="form-label mb-1">Nama Lengkap</label><input type="text" id="modalNama" class="form-control form-control-sm" readonly></div>
+        <div class="mb-2"><label class="form-label mb-1">NIK</label><input type="text" id="modalNIK" class="form-control form-control-sm" readonly></div>
+        
+        <div class="mb-2">
+            <label class="form-label fw-bold mb-1">Kode Coklit:</label>
+            <select id="modalKodeCoklit" class="form-select form-select-sm" onchange="updateKetOtomatis()">
+                <option value="0">0 - Aktif</option>
+                <option value="1">1 - Meninggal</option>
+                <option value="2">2 - Ganda</option>
+                <option value="3">3 - TNI</option>
+                <option value="4">4 - Polisi</option>
+                <option value="5">5 - Pindah domisili (Luar Desa)</option>
+                <option value="6">6 - Pindah Domisili (Dalam Desa)</option>
+                <option value="7">7 - Pisah KK</option>
+                <option value="8">8 - Belum Cukup Umur</option>
+                <option value="U">U - Ubah</option>
+                <option value="B">B - Baru</option>
+            </select>
+        </div>
+
+        <div id="formPindahRT" class="p-2 mb-2 bg-light border rounded" style="display:none;">
+            <label class="form-label text-primary fw-bold mb-1">Pindah ke RT / Alamat Mana?:</label>
+            <select id="modalTargetRT" class="form-select form-select-sm mb-1"></select>
+            <input type="text" id="modalAlamatLain" class="form-control form-control-sm" placeholder="Atau ketik manual alamat/RT tujuan baru">
+        </div>
+
+        <div id="formPecahKK" class="p-2 mb-2 bg-light border rounded" style="display:none;">
+            <label class="form-label text-success fw-bold mb-1">Detail Pisah KK:</label>
+            <input type="text" id="modalNamaPasangan" class="form-control form-control-sm mb-1" placeholder="Nama Istri / Suami / Anggota">
+            <input type="text" id="modalNoKKBaru" class="form-control form-control-sm mb-1" placeholder="Nomor KK Baru">
+            <input type="text" id="modalAlamatBaru" class="form-control form-control-sm" placeholder="Alamat / RT Tempat Tinggal Baru">
+        </div>
+
+        <div class="mb-2">
+            <label class="form-label fw-bold mb-1">Keterangan Status:</label>
+            <input type="text" id="modalKet" class="form-control form-control-sm">
+        </div>
+      </div>
+      <div class="modal-footer py-1">
+        <button type="button" class="btn btn-sm btn-primary" onclick="simpanCoklit()">Simpan Coklit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Tambah Pemilih Baru -->
+<div class="modal fade" id="modalTambahPemilih" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header py-2 bg-primary text-white">
+        <h6 class="modal-title fw-bold">➕ Tambah Pemilih Baru / Anggota KK</h6>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body small">
+        <div class="row g-2 mb-2">
+            <div class="col-6"><label class="form-label mb-1 fw-bold">NO KK</label><input type="text" id="addNoKK" class="form-control form-control-sm" placeholder="Nomor KK"></div>
+            <div class="col-6"><label class="form-label mb-1 fw-bold">NIK</label><input type="text" id="addNIK" class="form-control form-control-sm" placeholder="16 Digit NIK"></div>
+        </div>
+        <div class="mb-2"><label class="form-label mb-1 fw-bold">Nama Lengkap</label><input type="text" id="addNama" class="form-control form-control-sm" placeholder="Nama Lengkap Pemilih"></div>
+        <div class="row g-2 mb-2">
+            <div class="col-4"><label class="form-label mb-1 fw-bold">L/P</label><select id="addLP" class="form-select form-select-sm"><option value="L">L</option><option value="P">P</option></select></div>
+            <div class="col-8"><label class="form-label mb-1 fw-bold">Tempat Lahir</label><input type="text" id="addTempatLahir" class="form-control form-control-sm" placeholder="Kota Tempat Lahir"></div>
+        </div>
+        <div class="row g-2 mb-2">
+            <div class="col-6">
+                <label class="form-label mb-1 fw-bold">Tanggal Lahir</label>
+                <input type="text" id="addTglLahir" class="form-control form-control-sm" placeholder="DD/MM/YYYY" oninput="hitungUmurOtomatis()">
+            </div>
+            <div class="col-6">
+                <label class="form-label mb-1 fw-bold">Umur (Per 29-10-2026)</label>
+                <input type="text" id="addUmur" class="form-control form-control-sm" placeholder="Otomatis" readonly style="background-color: #e9ecef;">
+            </div>
+        </div>
+        <div class="row g-2 mb-2">
+            <div class="col-6"><label class="form-label mb-1 fw-bold">RT/RW</label><input type="text" id="addRTRW" class="form-control form-control-sm" placeholder="Contoh: 23"></div>
+            <div class="col-6"><label class="form-label mb-1 fw-bold">Status Hubungan</label>
+                <select id="addStatusHub" class="form-select form-select-sm" onchange="hitungUmurOtomatis()">
+                    <option value="KEPALA KK">KEPALA KK</option><option value="ISTRI">ISTRI</option><option value="ANAK" selected>ANAK</option><option value="ORANG TUA">ORANG TUA</option><option value="FAMILI LAIN">FAMILI LAIN</option>
+                </select>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer py-1"><button type="button" class="btn btn-sm btn-primary" onclick="simpanPemilihBaru()">Simpan Pemilih Baru</button></div>
+    </div>
+  </div>
+</div>
+
+<script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZxJmDgSEdTdUnVdZb_Z2huvsq98Qzei8LkXzrm7JjlK34PjToBgdgCH_UG2PlqyTyKw/exec";
+
+    let pemilihData = [];
+    let filteredData = [];
+    let currentPage = 1;
+    let rowsPerPage = 50;
+    let modalInstance = null;
+    let modalTambahInstance = null;
+    let myChart = null;
+
+    const mapKet = {
+        '0': 'Aktif', '1': 'Meninggal', '2': 'Ganda', '3': 'TNI', '4': 'Polisi',
+        '5': 'Pindah domisili (Luar Desa)', '6': 'Pindah Domisili (Dalam Desa)',
+        '7': 'Pisah KK', '8': 'Belum Cukup Umur', 'U': 'Ubah', 'B': 'Baru'
+    };
+
+    function kirimDataKeSheets(payload) {
+        fetch(SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        }).catch(err => console.error("Gagal mengirim data:", err));
+    }
+
+    function parseLPFromNIK(nik) {
+        if (!nik || nik.length < 12) return '-';
+        let dayDigits = parseInt(nik.substring(6, 8), 10);
+        return isNaN(dayDigits) ? '-' : (dayDigits > 40 ? 'P' : 'L');
+    }
+
+    // Fungsi Kalkulasi Umur Berdasarkan Tgl Lahir
+    function hitungUmurDariString(tglStr) {
+        if (!tglStr || tglStr === '-') return '-';
+        const tglPilkades = new Date(2026, 9, 29);
+        const parts = String(tglStr).trim().split(/[\/\-]/);
+        if (parts.length === 3) {
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10) - 1;
+            const year = parseInt(parts[2], 10);
+
+            if (!isNaN(day) && !isNaN(month) && !isNaN(year) && year > 1900) {
+                const tglLahir = new Date(year, month, day);
+                let umur = tglPilkades.getFullYear() - tglLahir.getFullYear();
+                const m = tglPilkades.getMonth() - tglLahir.getMonth();
+                if (m < 0 || (m === 0 && tglPilkades.getDate() < tglLahir.getDate())) {
+                    umur--;
+                }
+                return (umur >= 0 && umur < 120) ? umur : '-';
+            }
+        }
+        return '-';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        modalInstance = new bootstrap.Modal(document.getElementById('modalCoklit'));
+        modalTambahInstance = new bootstrap.Modal(document.getElementById('modalTambahPemilih'));
+    });
+
+    document.getElementById('excelFile').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const status = document.getElementById('status');
+        status.innerHTML = `<span class="spinner-border spinner-border-sm"></span> Membaca data Excel...`;
+
+        setTimeout(() => {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: 'array', dense: true, cellDates: false });
+                const sheet = workbook.Sheets[workbook.SheetNames[0]];
+                
+                const rawRows = XLSX.utils.sheet_to_json(sheet, { header: 1, raw: false, dateNF: 'dd/mm/yyyy' });
+
+                if (!rawRows || rawRows.length === 0) {
+                    status.innerHTML = `<span class="text-danger">❌ File Excel kosong!</span>`;
+                    return;
+                }
+
+                let headerIdx = rawRows.findIndex(r => Array.isArray(r) && r.some(c => String(c).toUpperCase().includes('NIK')));
+                if (headerIdx === -1) headerIdx = 0;
+
+                const headers = (rawRows[headerIdx] || []).map(h => String(h || '').trim().toUpperCase());
+                
+                const idxDPID = headers.findIndex(h => h.includes('DP-ID') || h.includes('DPID'));
+                const idxKK = headers.findIndex(h => h.includes('KK'));
+                const idxNIK = headers.findIndex(h => h.includes('NIK'));
+                const idxNama = headers.findIndex(h => h.includes('NAMA'));
+                const idxLP = headers.findIndex(h => h.includes('KELAMIN') || h === 'L/P' || h === 'LP');
+                const idxTempat = headers.findIndex(h => h.includes('TEMPAT'));
+                const idxTgl = headers.findIndex(h => h.includes('TANGGAL') || h.includes('TGL'));
+                const idxUmur = headers.findIndex(h => h.includes('UMUR') || h.includes('USIA'));
+                const idxRT = headers.findIndex(h => h.includes('RT') || h.includes('ALAMAT'));
+                const idxStatus = headers.findIndex(h => h.includes('HUB') || h.includes('STATUS'));
+                const idxKode = headers.findIndex(h => h === 'KODE' || h.includes('KODE'));
+                const idxKet = headers.findIndex(h => h === 'KETERANGAN' || h.includes('KETERANGAN'));
+
+                const parsedData = [];
+                const len = rawRows.length;
+
+                for (let i = headerIdx + 1; i < len; i++) {
+                    const row = rawRows[i];
+                    if (!row || row.length === 0) continue;
+
+                    const nik = idxNIK !== -1 && row[idxNIK] ? String(row[idxNIK]).trim() : '';
+                    const nama = idxNama !== -1 && row[idxNama] ? String(row[idxNama]).trim() : '';
+                    if (!nik && !nama) continue;
+
+                    const valTglLahir = idxTgl !== -1 && row[idxTgl] ? String(row[idxTgl]).trim() : '-';
+                    let valUmurRaw = idxUmur !== -1 && row[idxUmur] ? String(row[idxUmur]).trim() : '-';
+
+                    // Hitung umur otomatis jika kosong/strip tetapi ada Tanggal Lahir
+                    if (valUmurRaw === '-' || valUmurRaw === '' || isNaN(parseInt(valUmurRaw, 10))) {
+                        valUmurRaw = hitungUmurDariString(valTglLahir);
+                    }
+
+                    const numUmur = parseInt(valUmurRaw, 10);
+                    const statusHubVal = idxStatus !== -1 && row[idxStatus] ? String(row[idxStatus]).trim() : '-';
+
+                    let initialKode = idxKode !== -1 && row[idxKode] !== undefined && String(row[idxKode]).trim() !== '' ? String(row[idxKode]).trim() : '';
+                    let initialKet = idxKet !== -1 && row[idxKet] !== undefined && String(row[idxKet]).trim() !== '' ? String(row[idxKet]).trim() : '';
+
+                    if (initialKode === '') {
+                        if (!isNaN(numUmur) && numUmur < 17 && !statusHubVal.toUpperCase().includes('KEPALA') && !statusHubVal.toUpperCase().includes('ISTRI')) {
+                            initialKode = '8';
+                            initialKet = 'Belum Cukup Umur';
+                        } else {
+                            initialKode = '0';
+                            initialKet = 'Aktif';
+                        }
+                    }
+
+                    parsedData.push({
+                        uid: 'U_' + i,
+                        dpId: idxDPID !== -1 && row[idxDPID] ? String(row[idxDPID]).trim() : '-',
+                        noKK: idxKK !== -1 && row[idxKK] ? String(row[idxKK]).trim() : '-',
+                        nik: nik || '-',
+                        nama: nama || '-',
+                        lp: idxLP !== -1 && row[idxLP] ? String(row[idxLP]).trim() : parseLPFromNIK(nik),
+                        tempatLahir: idxTempat !== -1 && row[idxTempat] ? String(row[idxTempat]).trim() : '-',
+                        tglLahir: valTglLahir,
+                        umur: valUmurRaw,
+                        rtRw: idxRT !== -1 && row[idxRT] ? String(row[idxRT]).trim() : '1',
+                        statusHub: statusHubVal,
+                        kodeCoklit: initialKode,
+                        keterangan: initialKet
+                    });
+                }
+
+                pemilihData = parsedData;
+                status.innerHTML = `<span class="text-success">✅ Berhasil dimuat ${pemilihData.length} data pemilih.</span>`;
+                document.getElementById('dashboardSection').style.display = 'flex';
+                populateRTFilter();
+                updateDashboardStats();
+                filterData();
+            };
+            reader.readAsArrayBuffer(file);
+        }, 50);
+    });
+
+    function populateRTFilter() {
+        const rtSet = new Set(pemilihData.map(item => item.rtRw));
+        const filterRT = document.getElementById('filterRT');
+        const modalTargetRT = document.getElementById('modalTargetRT');
+        
+        filterRT.innerHTML = '<option value="">-- Semua RT / Alamat --</option>';
+        modalTargetRT.innerHTML = '';
+
+        const sortedRT = Array.from(rtSet).sort((a, b) => String(a).localeCompare(String(b), undefined, { numeric: true }));
+
+        sortedRT.forEach(rt => {
+            if(rt && rt !== '-') {
+                filterRT.innerHTML += `<option value="${rt}">${rt}</option>`;
+                modalTargetRT.innerHTML += `<option value="${rt}">${rt}</option>`;
+            }
+        });
+        modalTargetRT.innerHTML += `<option value="Lainnya">Lainnya / Manual</option>`;
+    }
+
+    function updateDashboardStats() {
+        const total = pemilihData.length;
+        let aktif = 0, tms = 0, ubah = 0;
+        const counts = { '0':0, '1':0, '2':0, '3':0, '4':0, '5':0, '6':0, '7':0, '8':0, 'U':0, 'B':0 };
+
+        for (let i = 0; i < total; i++) {
+            const k = pemilihData[i].kodeCoklit;
+            if (counts[k] !== undefined) counts[k]++;
+            
+            if (['0', '6', '7', 'B'].includes(k)) aktif++;
+            else if (['1', '2', '3', '4', '5', '8'].includes(k)) tms++;
+            else if (k === 'U') ubah++;
+        }
+
+        document.getElementById('statTotal').innerText = total;
+        document.getElementById('statAktif').innerText = aktif;
+        document.getElementById('statTMS').innerText = tms;
+        document.getElementById('statUbah').innerText = ubah;
+
+        const ctx = document.getElementById('coklitChart').getContext('2d');
+        if (myChart) myChart.destroy();
+
+        myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(mapKet).map(k => `${k}: ${mapKet[k]}`),
+                datasets: [{ label: 'Jumlah Pemilih', data: Object.values(counts), backgroundColor: '#b91c1c' }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+        });
+    }
+
+    function changeRowsPerPage() {
+        const val = document.getElementById('rowsPerPageSelect').value;
+        rowsPerPage = val === "ALL" ? filteredData.length || 10000 : parseInt(val, 10);
+        currentPage = 1;
+        renderPage();
+    }
+
+    function renderPage() {
+        const tbody = document.getElementById('tableBody');
+        
+        if (filteredData.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="14" class="text-center text-muted">Tidak ada data ditemukan.</td></tr>`;
+            document.getElementById('pageInfo').innerText = "Halaman 0 dari 0";
+            return;
+        }
+
+        const start = (currentPage - 1) * rowsPerPage;
+        const pageItems = filteredData.slice(start, start + rowsPerPage);
+        document.getElementById('pageInfo').innerText = `Halaman ${currentPage} dari ${Math.ceil(filteredData.length / rowsPerPage)} (${filteredData.length} Data)`;
+
+        let currentKK = "";
+        let htmlStr = "";
+
+        for (let i = 0; i < pageItems.length; i++) {
+            const item = pageItems[i];
+            
+            if (item.noKK !== '-' && item.noKK !== currentKK) {
+                if (currentKK !== "") htmlStr += `<tr><td colspan="14" class="kk-separator-empty"></td></tr>`;
+                currentKK = item.noKK;
+            }
+
+            let badgeClass = "bg-success"; 
+            if (['1', '2', '3', '4', '5', '8'].includes(item.kodeCoklit)) {
+                badgeClass = "bg-danger";
+            } else if (item.kodeCoklit === 'U') {
+                badgeClass = "bg-warning text-dark";
+            }
+
+            htmlStr += `<tr>
+                <td class="text-center">${start + i + 1}</td>
+                <td class="fw-bold ${item.dpId === '-' ? 'text-muted' : 'text-danger'}">${item.dpId}</td>
+                <td>${item.noKK}</td>
+                <td>${item.nik}</td>
+                <td><b>${item.nama}</b></td>
+                <td class="text-center font-monospace">${item.lp}</td>
+                <td>${item.tempatLahir}</td>
+                <td class="text-center fw-bold text-dark">${item.tglLahir}</td>
+                <td class="text-center">${item.umur}</td>
+                <td class="text-center">${item.rtRw}</td>
+                <td class="text-center">${item.statusHub}</td>
+                <td class="text-center"><span class="badge ${badgeClass}">${item.kodeCoklit}</span></td>
+                <td>${item.keterangan}</td>
+                <td class="no-print text-center">
+                    <button class="btn btn-sm btn-outline-danger py-0 px-1" onclick="openModal('${item.uid}')">Coklit</button>
+                </td>
+            </tr>`;
+        }
+
+        tbody.innerHTML = htmlStr;
+    }
+
+    function updateKetOtomatis() {
+        const kode = document.getElementById('modalKodeCoklit').value;
+        document.getElementById('formPindahRT').style.display = kode === '6' ? 'block' : 'none';
+        document.getElementById('formPecahKK').style.display = kode === '7' ? 'block' : 'none';
+        document.getElementById('modalKet').value = mapKet[kode] || '';
+    }
+
+    function openModal(uid) {
+        const target = pemilihData.find(i => i.uid === uid);
+        if (!target) return;
+
+        document.getElementById('modalUid').value = target.uid;
+        document.getElementById('modalNama').value = target.nama;
+        document.getElementById('modalNIK').value = target.nik;
+        document.getElementById('modalKodeCoklit').value = target.kodeCoklit;
+        document.getElementById('modalKet').value = target.keterangan;
+
+        updateKetOtomatis();
+        modalInstance.show();
+    }
+
+    function openModalTambah() {
+        document.getElementById('addNoKK').value = '';
+        document.getElementById('addNIK').value = '';
+        document.getElementById('addNama').value = '';
+        document.getElementById('addLP').value = 'L';
+        document.getElementById('addTempatLahir').value = '';
+        document.getElementById('addTglLahir').value = '';
+        document.getElementById('addUmur').value = '';
+        document.getElementById('addRTRW').value = '1';
+        document.getElementById('addStatusHub').value = 'ANAK';
+        modalTambahInstance.show();
+    }
+
+    function hitungUmurOtomatis() {
+        const inputTgl = document.getElementById('addTglLahir').value.trim();
+        const inputUmur = document.getElementById('addUmur');
+        const hasil = hitungUmurDariString(inputTgl);
+        inputUmur.value = hasil !== '-' ? hasil : '';
+    }
+
+    function simpanPemilihBaru() {
+        const nama = document.getElementById('addNama').value.trim();
+        if (!nama) return alert('Nama Lengkap wajib diisi!');
+
+        let umurVal = parseInt(document.getElementById('addUmur').value.trim(), 10);
+        const statusHub = document.getElementById('addStatusHub').value;
+
+        if (isNaN(umurVal)) {
+            hitungUmurOtomatis();
+            umurVal = parseInt(document.getElementById('addUmur').value.trim(), 10);
+        }
+
+        let initialKode = 'B';
+        let initialKet = 'Pemilih Baru';
+
+        if (!isNaN(umurVal) && umurVal < 17 && statusHub !== 'KEPALA KK' && statusHub !== 'ISTRI') {
+            initialKode = '8';
+            initialKet = 'Belum Cukup Umur';
+        }
+
+        const newPemilih = {
+            uid: 'U_NEW_' + Math.random().toString(36).substr(2, 5),
+            dpId: 'BARU',
+            noKK: document.getElementById('addNoKK').value.trim() || '-',
+            nik: document.getElementById('addNIK').value.trim() || '-',
+            nama: nama,
+            lp: document.getElementById('addLP').value,
+            tempatLahir: document.getElementById('addTempatLahir').value.trim() || '-',
+            tglLahir: document.getElementById('addTglLahir').value.trim() || '-',
+            umur: isNaN(umurVal) ? '-' : umurVal,
+            rtRw: document.getElementById('addRTRW').value.trim() || '1',
+            statusHub: statusHub,
+            kodeCoklit: initialKode,
+            keterangan: initialKet
+        };
+
+        pemilihData.push(newPemilih);
+
+        kirimDataKeSheets({
+            action: "tambahPemilih",
+            nik: newPemilih.nik,
+            nama: newPemilih.nama,
+            noKK: newPemilih.noKK,
+            kode: newPemilih.kodeCoklit,
+            ket: newPemilih.keterangan,
+            rt: newPemilih.rtRw
+        });
+
+        modalTambahInstance.hide();
+        populateRTFilter();
+        updateDashboardStats();
+        filterData();
+    }
+
+    function simpanCoklit() {
+        const uid = document.getElementById('modalUid').value;
+        const target = pemilihData.find(i => i.uid === uid);
+        
+        if (!target) return alert("Terjadi kesalahan identifikasi data!");
+
+        const kode = document.getElementById('modalKodeCoklit').value;
+        let ket = document.getElementById('modalKet').value;
+
+        if (kode === '6') {
+            let rtTujuan = document.getElementById('modalTargetRT').value;
+            const rtManual = document.getElementById('modalAlamatLain').value.trim();
+            if (rtManual) rtTujuan = rtManual;
+            target.rtRw = rtTujuan;
+            ket = `Pindah ke RT/Alamat: ${rtTujuan} | ` + ket;
+        } else if (kode === '7') {
+            const noKKBaru = document.getElementById('modalNoKKBaru').value.trim();
+            const alamatBaru = document.getElementById('modalAlamatBaru').value.trim();
+            if(noKKBaru) target.noKK = noKKBaru;
+            if(alamatBaru) target.rtRw = alamatBaru;
+            ket = `Pisah KK | ` + ket;
+        }
+
+        target.kodeCoklit = kode;
+        target.keterangan = ket;
+
+        kirimDataKeSheets({
+            action: "updateCoklit",
+            nik: target.nik,
+            nama: target.nama,
+            kode: target.kodeCoklit,
+            ket: target.keterangan,
+            rt: target.rtRw
+        });
+
+        modalInstance.hide();
+        updateDashboardStats();
+        filterData();
+    }
+
+    function prevPage() { if (currentPage > 1) { currentPage--; renderPage(); } }
+    function nextPage() { if (currentPage * rowsPerPage < filteredData.length) { currentPage++; renderPage(); } }
+
+    function filterData() {
+        const keyword = document.getElementById('searchInput').value.toLowerCase();
+        const selectedRT = document.getElementById('filterRT').value;
+        const selectedStatus = document.getElementById('filterStatus').value;
+
+        filteredData = pemilihData.filter(item => {
+            const matchSearch = keyword === '' || 
+                                item.nama.toLowerCase().includes(keyword) || 
+                                item.nik.includes(keyword) || 
+                                item.dpId.toLowerCase().includes(keyword) || 
+                                item.noKK.includes(keyword);
+            const matchRT = selectedRT === '' || item.rtRw === selectedRT;
+            const matchStatus = selectedStatus === '' || item.kodeCoklit === selectedStatus;
+
+            return matchSearch && matchRT && matchStatus;
+        });
+
+        currentPage = 1;
+        renderPage();
+    }
+
+    function eksporExcel() {
+        if (pemilihData.length === 0) return alert('Tidak ada data yang tersedia untuk diunduh.');
+
+        const dataToExport = filteredData.length > 0 ? filteredData : pemilihData;
+
+        const excelRows = [
+            ["COKLIT DAFTAR PEMILIH SEMENTARA (DPS)"],
+            ["Pemilihan Kepala Desa Payo Lebar Tahun 2026"],
+            [],
+            ["NO", "DP-ID", "NO KK", "NIK", "NAMA LENGKAP", "L/P", "TEMPAT LAHIR", "TGL LAHIR", "UMUR", "RT/RW", "STATUS HUB", "KODE", "KETERANGAN"]
+        ];
+
+        let currentKK = "";
+        let noUrut = 1;
+
+        for (let i = 0; i < dataToExport.length; i++) {
+            const item = dataToExport[i];
+            if (item.noKK !== '-' && item.noKK !== currentKK) {
+                if (currentKK !== "") excelRows.push([]);
+                currentKK = item.noKK;
+            }
+
+            excelRows.push([
+                noUrut++, 
+                item.dpId, 
+                item.noKK, 
+                item.nik, 
+                item.nama, 
+                item.lp,
+                item.tempatLahir, 
+                item.tglLahir, 
+                item.umur, 
+                item.rtRw, 
+                item.statusHub,
+                item.kodeCoklit, 
+                item.keterangan
+            ]);
+        }
+
+        const worksheet = XLSX.utils.aoa_to_sheet(excelRows);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Hasil Coklit");
+        XLSX.writeFile(workbook, "Hasil_Coklit_Terfilter_DPS_2026.xlsx");
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
