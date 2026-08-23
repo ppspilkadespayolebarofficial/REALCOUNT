@@ -1,408 +1,730 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal Resmi Pilkades Payo Lebar 2026</title>
-  
-  <!-- Font Modern (Inter) & Ikon FontAwesome -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <style>
-    /* 1. RESET & VARIABLES */
-    :root {
-      --primary: #b91c1c;
-      --primary-dark: #7f1d1d;
-      --accent: #f59e0b;
-      --bg-body: #f8fafc;
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-    body { background-color: var(--bg-body); color: var(--text-main); }
-
-    /* 2. NAVBAR MODERN (HEADER ATAS) */
-    .navbar {
-      background: #ffffff;
-      height: 70px;
-      padding: 0 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid #e2e8f0;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 800;
-      font-size: 1.1rem;
-      color: var(--primary-dark);
-    }
-
-    .brand-icon {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: white;
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 10px rgba(185, 28, 28, 0.3);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 8px;
-    }
-
-    .nav-btn {
-      border: none;
-      background: transparent;
-      padding: 10px 16px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .nav-btn:hover {
-      background: #f1f5f9;
-      color: var(--primary);
-    }
-
-    .nav-btn.active {
-      background: var(--primary);
-      color: #ffffff;
-      box-shadow: 0 4px 12px rgba(185, 28, 28, 0.25);
-    }
-
-    /* 3. LAYOUT CONTAINER */
-    .main-container {
-      max-width: 1200px;
-      margin: 30px auto;
-      padding: 0 20px;
-    }
-
-    /* 4. HERO BANNER LUXURY */
-    .hero-banner {
-      background: linear-gradient(135deg, #991b1b 0%, #450a0a 100%);
-      color: white;
-      border-radius: 20px;
-      padding: 40px 30px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 15px 30px rgba(69, 10, 10, 0.15);
-      margin-bottom: 30px;
-    }
-
-    /* Hiasan background lingkaran transparan */
-    .hero-banner::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -10%;
-      width: 300px;
-      height: 300px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 50%;
-    }
-
-    .badge-top {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(5px);
-      padding: 6px 16px;
-      border-radius: 30px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      margin-bottom: 15px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .hero-banner h1 {
-      font-size: 2.2rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      margin-bottom: 8px;
-    }
-
-    .hero-banner p {
-      font-size: 0.95rem;
-      opacity: 0.85;
-      font-weight: 400;
-    }
-
-    /* 5. TAB KONTEN */
-    .tab-content {
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 30px;
-      display: none;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.03);
-      border: 1px solid #f1f5f9;
-    }
-
-    .tab-content.active {
-      display: block;
-      animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 25px;
-      padding-bottom: 15px;
-      border-bottom: 2px solid #f1f5f9;
-    }
-
-    .section-header i {
-      font-size: 1.5rem;
-      color: var(--primary);
-    }
-
-    .section-header h2 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--text-main);
-    }
-
-    /* TAHAPAN STYLING (TIMELINE) */
-    .timeline {
-      position: relative;
-      padding-left: 30px;
-    }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 7px;
-      top: 5px;
-      bottom: 5px;
-      width: 2px;
-      background: #e2e8f0;
-    }
-    .timeline-item {
-      position: relative;
-      margin-bottom: 25px;
-    }
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -30px;
-      top: 4px;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: var(--primary);
-      border: 3px solid #fff;
-      box-shadow: 0 0 0 2px var(--primary);
-    }
-    .timeline-date {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 4px;
-    }
-    .timeline-title {
-      font-size: 1rem;
-      font-weight: 600;
-    }
-
-    /* CALON STYLING (CARDS) */
-    .calon-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
-    .card-calon {
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 25px;
-      text-align: center;
-      background: #ffffff;
-      transition: transform 0.3s, box-shadow 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-    .card-calon:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 20px rgba(0,0,0,0.06);
-    }
-    .no-tag {
-      position: absolute;
-      top: 15px;
-      left: 15px;
-      background: var(--primary);
-      color: white;
-      font-weight: 800;
-      padding: 4px 12px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-    }
-    .avatar-placeholder {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background: #f1f5f9;
-      margin: 15px auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-      color: #94a3b8;
-      border: 3px solid #f8fafc;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COKLIT DAFTAR PEMILIH SEMENTARA (DPS) - Desa Payo Lebar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { background-color: #f8f9fa; font-family: Arial, sans-serif; }
+        .hero-banner { background: #b91c1c; color: white; padding: 15px 20px; border-radius: 6px; margin-bottom: 20px; }
+        .card-custom { border-radius: 6px; border: 1px solid #d1d5db; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .kk-separator-empty { height: 12px; background-color: transparent !important; }
+        .table-coklit { font-size: 11px; }
+        .table-coklit th, .table-coklit td { padding: 4px 6px !important; vertical-align: middle; }
+        
+        @media print {
+            .no-print { display: none !important; }
+            @page { 
+                size: F4 landscape; 
+                margin: 5mm; 
+            }
+            body { background-color: #fff; font-size: 10px; }
+            .table-responsive { overflow: visible !important; }
+            .table-coklit { width: 100% !important; font-size: 9px; table-layout: auto; }
+            .table-coklit th, .table-coklit td { padding: 2px 4px !important; border: 1px solid #000 !important; }
+            .card-custom { border: none !important; box-shadow: none !important; padding: 0 !important; }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- NAVBAR HEADER ATAS -->
-  <header class="navbar">
-    <div class="brand">
-      <div class="brand-icon">
-        <i class="fa-solid fa-check-to-slot"></i>
-      </div>
-      <span>PILKADES PAYO LEBAR</span>
+<div class="container-fluid px-3 my-3">
+    <div class="hero-banner text-center no-print">
+        <h3 class="fw-bold mb-1">COKLIT DAFTAR PEMILIH SEMENTARA (DPS)</h3>
+        <h5 class="fw-normal mb-0">Pemilihan Kepala Desa Payo Lebar Tahun 2026</h5>
     </div>
 
-    <nav class="nav-links">
-      <button class="nav-btn active" onclick="bukaTab('tab-dps', this)">
-        <i class="fa-solid fa-chart-pie"></i> DPS
-      </button>
-      <button class="nav-btn" onclick="bukaTab('tab-tahapan', this)">
-        <i class="fa-solid fa-calendar-check"></i> Tahapan
-      </button>
-      <button class="nav-btn" onclick="bukaTab('tab-calon', this)">
-        <i class="fa-solid fa-users-viewfinder"></i> Calon Kades
-      </button>
-      <button class="nav-btn" onclick="bukaTab('tab-panitia', this)">
-        <i class="fa-solid fa-user-shield"></i> Panitia
-      </button>
-    </nav>
-  </header>
+    <div class="card card-custom p-3 mb-3 no-print">
+        <h6 class="fw-bold">1. Upload File Data Pemilih (.xlsx / .xls)</h6>
+        <p class="text-muted small mb-2">Unggah file Excel Anda (baik file mentah atau hasil unduhan Coklit sebelumnya).</p>
+        <input type="file" class="form-control form-control-sm my-1" id="excelFile" accept=".xlsx, .xls">
+        <div id="status" class="fw-bold text-primary mt-1 small"></div>
 
-  <div class="main-container">
-
-    <!-- HERO BANNER PREMIUM -->
-    <div class="hero-banner">
-      <div class="badge-top">
-        <i class="fa-solid fa-shield-halved"></i> PORTAL RESMI DESA
-      </div>
-      <h1>PILKADES PAYO LEBAR 2026</h1>
-      <p>Kecamatan Singkut, Kabupaten Sarolangun, Provinsi Jambi</p>
+        <div class="d-flex gap-2 mt-2">
+            <button class="btn btn-sm btn-outline-secondary" onclick="window.print()">🖨️ Cetak / Print (Landscape)</button>
+            <button class="btn btn-sm btn-success" onclick="eksporExcel()">📥 Unduh Hasil Coklit (.xlsx)</button>
+            <button class="btn btn-sm btn-primary ms-auto" onclick="openModalTambah()">➕ Tambah Pemilih Baru / KK Baru</button>
+        </div>
     </div>
 
-    <!-- TAB 1: DATA PEMILIH (DPS) -->
-    <div id="tab-dps" class="tab-content active">
-      <div class="section-header">
-        <i class="fa-solid fa-chart-pie"></i>
-        <h2>Dashboard & Filter Data Pemilih (DPS)</h2>
-      </div>
-      
-      <!-- TEMPAT KODE DASHBOARD LAMA KAMU -->
-      <div style="background: #f8fafc; border: 2px dashed #cbd5e1; padding: 40px; border-radius: 12px; text-align: center; color: #64748b;">
-        <i class="fa-solid fa-code" style="font-size: 2rem; margin-bottom: 10px; color: #94a3b8;"></i>
-        <p><strong>[ AREA KODINGAN DASHBOARD DPT 4.072 DATA KAMU ]</strong></p>
-        <small>Tabel filter, statistik gender, dan card total pemilih dipasang di sini.</small>
-      </div>
+    <div id="dashboardSection" class="row mb-3 no-print" style="display: none;">
+        <div class="col-md-4 mb-2">
+            <div class="card card-custom p-2 h-100">
+                <h6 class="fw-bold text-secondary mb-2 small">📊 Statistik Coklit Pemilih</h6>
+                <div class="d-flex flex-column gap-1 extra-small" style="font-size: 12px;">
+                    <div class="d-flex justify-content-between p-1 bg-light rounded"><span>Total Pemilih:</span><strong id="statTotal">0</strong></div>
+                    <div class="d-flex justify-content-between p-1 bg-success-subtle rounded text-success"><span>Berhak Memilih (Aktif/Pindah Dalam Desa/Baru):</span><strong id="statAktif">0</strong></div>
+                    <div class="d-flex justify-content-between p-1 bg-danger-subtle rounded text-danger"><span>TMS / Tidak Berhak (Meninggal/Pindah Luar/Dll):</span><strong id="statTMS">0</strong></div>
+                    <div class="d-flex justify-content-between p-1 bg-warning-subtle rounded text-warning-emphasis"><span>Perbaikan Data (Ubah):</span><strong id="statUbah">0</strong></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 mb-2">
+            <div class="card card-custom p-2 h-100">
+                <h6 class="fw-bold text-secondary mb-1 small">📈 Grafik Distribusi Kode Coklit</h6>
+                <div style="height: 160px; position: relative;">
+                    <canvas id="coklitChart"></canvas>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- TAB 2: TAHAPAN -->
-    <div id="tab-tahapan" class="tab-content">
-      <div class="section-header">
-        <i class="fa-solid fa-calendar-check"></i>
-        <h2>Tahapan & Jadwal Pelaksanaan</h2>
-      </div>
-
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-date">01 - 10 AGUSTUS 2026</div>
-          <div class="timeline-title">Pendaftaran & Penerimaan Berkas Calon Kades</div>
+    <div class="card card-custom p-3 mb-3 no-print">
+        <h6 class="fw-bold mb-2">2. Filter & Pencarian Data</h6>
+        <div class="row g-2">
+            <div class="col-md-5">
+                <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Cari Nama, NIK, DP-ID, No KK..." onkeyup="filterData()">
+            </div>
+            <div class="col-md-3">
+                <select id="filterRT" class="form-select form-select-sm" onchange="filterData()">
+                    <option value="">-- Semua RT / Alamat --</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <select id="filterStatus" class="form-select form-select-sm" onchange="filterData()">
+                    <option value="">-- Semua Kode Coklit --</option>
+                    <option value="0">0 - Aktif</option>
+                    <option value="1">1 - Meninggal</option>
+                    <option value="2">2 - Ganda</option>
+                    <option value="3">3 - TNI</option>
+                    <option value="4">4 - Polisi</option>
+                    <option value="5">5 - Pindah domisili (Luar Desa)</option>
+                    <option value="6">6 - Pindah Domisili (Dalam Desa)</option>
+                    <option value="7">7 - Pisah KK</option>
+                    <option value="8">8 - Belum Cukup Umur</option>
+                    <option value="U">U - Ubah</option>
+                    <option value="B">B - Baru</option>
+                </select>
+            </div>
         </div>
-        <div class="timeline-item">
-          <div class="timeline-date">11 - 15 AGUSTUS 2026</div>
-          <div class="timeline-title">Verifikasi & Penelitian Keabsahan Berkas</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-date">16 - 20 AGUSTUS 2026</div>
-          <div class="timeline-title">Pengumuman Daftar Pemilih Sementara (DPS)</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-date">25 AGUSTUS 2026</div>
-          <div class="timeline-title">Pemungutan & Penghitungan Suara (Hari H)</div>
-        </div>
-      </div>
     </div>
 
-    <!-- TAB 3: CALON KADES -->
-    <div id="tab-calon" class="tab-content">
-      <div class="section-header">
-        <i class="fa-solid fa-users-viewfinder"></i>
-        <h2>Calon Kepala Desa Payo Lebar</h2>
-      </div>
-
-      <div class="calon-grid">
-        <div class="card-calon">
-          <div class="no-tag">01</div>
-          <div class="avatar-placeholder"><i class="fa-solid fa-user"></i></div>
-          <h3 style="font-size: 1.1rem; margin-bottom: 5px;">Nama Calon 1</h3>
-          <p style="font-size: 0.85rem; color: #64748b; font-style: italic;">"Mewujudkan Desa Payo Lebar Maju & Mandiri"</p>
+    <div class="card card-custom p-2">
+        <div class="d-flex justify-content-between align-items-center mb-2 no-print">
+            <div class="d-flex align-items-center gap-2">
+                <span class="fw-bold text-muted small">Tampilkan:</span>
+                <select id="rowsPerPageSelect" class="form-select form-select-sm" style="width: auto;" onchange="changeRowsPerPage()">
+                    <option value="50">50 Baris</option>
+                    <option value="100">100 Baris</option>
+                    <option value="500">500 Baris</option>
+                    <option value="ALL">Semua Data</option>
+                </select>
+            </div>
+            <span id="pageInfo" class="fw-bold text-muted small">Halaman 1</span>
+            <div>
+                <button class="btn btn-sm btn-outline-primary py-0 px-2" onclick="prevPage()">❮ Sblmnya</button>
+                <button class="btn btn-sm btn-outline-primary py-0 px-2" onclick="nextPage()">Lanjut ❯</button>
+            </div>
         </div>
 
-        <div class="card-calon">
-          <div class="no-tag">02</div>
-          <div class="avatar-placeholder"><i class="fa-solid fa-user"></i></div>
-          <h3 style="font-size: 1.1rem; margin-bottom: 5px;">Nama Calon 2</h3>
-          <p style="font-size: 0.85rem; color: #64748b; font-style: italic;">"Transparansi Anggaran dan Kesejahteraan Warga"</p>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle table-coklit">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th style="width: 30px;">NO</th>
+                        <th style="width: 70px;">DP-ID</th>
+                        <th style="width: 110px;">NO KK</th>
+                        <th style="width: 110px;">NIK</th>
+                        <th>NAMA LENGKAP</th>
+                        <th style="width: 30px;">L/P</th>
+                        <th>TEMPAT LAHIR</th>
+                        <th style="width: 80px;">TGL LAHIR</th>
+                        <th style="width: 40px;">UMUR</th>
+                        <th style="width: 45px;">RT/RW</th>
+                        <th style="width: 75px;">STATUS HUB</th>
+                        <th style="width: 40px;">KODE</th>
+                        <th>KETERANGAN</th>
+                        <th class="no-print" style="width: 50px;">AKSI</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td colspan="14" class="text-center text-muted">Silakan unggah file Excel data pemilih Anda.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit Coklit -->
+<div class="modal fade" id="modalCoklit" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header py-2">
+        <h6 class="modal-title fw-bold">Coklit Pemilih</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body small">
+        <input type="hidden" id="modalUid">
+        <div class="mb-2"><label class="form-label mb-1">Nama Lengkap</label><input type="text" id="modalNama" class="form-control form-control-sm" readonly></div>
+        <div class="mb-2"><label class="form-label mb-1">NIK</label><input type="text" id="modalNIK" class="form-control form-control-sm" readonly></div>
+        
+        <div class="mb-2">
+            <label class="form-label fw-bold mb-1">Kode Coklit:</label>
+            <select id="modalKodeCoklit" class="form-select form-select-sm" onchange="updateKetOtomatis()">
+                <option value="0">0 - Aktif</option>
+                <option value="1">1 - Meninggal</option>
+                <option value="2">2 - Ganda</option>
+                <option value="3">3 - TNI</option>
+                <option value="4">4 - Polisi</option>
+                <option value="5">5 - Pindah domisili (Luar Desa)</option>
+                <option value="6">6 - Pindah Domisili (Dalam Desa)</option>
+                <option value="7">7 - Pisah KK</option>
+                <option value="8">8 - Belum Cukup Umur</option>
+                <option value="U">U - Ubah</option>
+                <option value="B">B - Baru</option>
+            </select>
+        </div>
+
+        <div id="formPindahRT" class="p-2 mb-2 bg-light border rounded" style="display:none;">
+            <label class="form-label text-primary fw-bold mb-1">Pindah ke RT / Alamat Mana?:</label>
+            <select id="modalTargetRT" class="form-select form-select-sm mb-1"></select>
+            <input type="text" id="modalAlamatLain" class="form-control form-control-sm" placeholder="Atau ketik manual alamat/RT tujuan baru">
+        </div>
+
+        <div id="formPecahKK" class="p-2 mb-2 bg-light border rounded" style="display:none;">
+            <label class="form-label text-success fw-bold mb-1">Detail Pisah KK:</label>
+            <input type="text" id="modalNamaPasangan" class="form-control form-control-sm mb-1" placeholder="Nama Istri / Suami / Anggota">
+            <input type="text" id="modalNoKKBaru" class="form-control form-control-sm mb-1" placeholder="Nomor KK Baru">
+            <input type="text" id="modalAlamatBaru" class="form-control form-control-sm" placeholder="Alamat / RT Tempat Tinggal Baru">
+        </div>
+
+        <div class="mb-2">
+            <label class="form-label fw-bold mb-1">Keterangan Status:</label>
+            <input type="text" id="modalKet" class="form-control form-control-sm">
         </div>
       </div>
-    </div>
-
-    <!-- TAB 4: PANITIA -->
-    <div id="tab-panitia" class="tab-content">
-      <div class="section-header">
-        <i class="fa-solid fa-user-shield"></i>
-        <h2>Struktur Panitia Pemilihan Desa (PPS)</h2>
+      <div class="modal-footer py-1">
+        <button type="button" class="btn btn-sm btn-primary" onclick="simpanCoklit()">Simpan Coklit</button>
       </div>
-      <p style="color: #64748b;">Susunan panitia resmi Pilkades Payo Lebar 2026...</p>
     </div>
-
   </div>
+</div>
 
-  <!-- SCRIPT PINDAH TAB -->
-  <script>
-    function bukaTab(idTab, elementTombol) {
-      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+<!-- Modal Tambah Pemilih Baru -->
+<div class="modal fade" id="modalTambahPemilih" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header py-2 bg-primary text-white">
+        <h6 class="modal-title fw-bold">➕ Tambah Pemilih Baru / Anggota KK</h6>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body small">
+        <div class="row g-2 mb-2">
+            <div class="col-6"><label class="form-label mb-1 fw-bold">NO KK</label><input type="text" id="addNoKK" class="form-control form-control-sm" placeholder="Nomor KK"></div>
+            <div class="col-6"><label class="form-label mb-1 fw-bold">NIK</label><input type="text" id="addNIK" class="form-control form-control-sm" placeholder="16 Digit NIK"></div>
+        </div>
+        <div class="mb-2"><label class="form-label mb-1 fw-bold">Nama Lengkap</label><input type="text" id="addNama" class="form-control form-control-sm" placeholder="Nama Lengkap Pemilih"></div>
+        <div class="row g-2 mb-2">
+            <div class="col-4"><label class="form-label mb-1 fw-bold">L/P</label><select id="addLP" class="form-select form-select-sm"><option value="L">L</option><option value="P">P</option></select></div>
+            <div class="col-8"><label class="form-label mb-1 fw-bold">Tempat Lahir</label><input type="text" id="addTempatLahir" class="form-control form-control-sm" placeholder="Kota Tempat Lahir"></div>
+        </div>
+        <div class="row g-2 mb-2">
+            <div class="col-6">
+                <label class="form-label mb-1 fw-bold">Tanggal Lahir</label>
+                <input type="text" id="addTglLahir" class="form-control form-control-sm" placeholder="DD/MM/YYYY" oninput="hitungUmurOtomatis()">
+            </div>
+            <div class="col-6">
+                <label class="form-label mb-1 fw-bold">Umur (Per 29-10-2026)</label>
+                <input type="text" id="addUmur" class="form-control form-control-sm" placeholder="Otomatis" readonly style="background-color: #e9ecef;">
+            </div>
+        </div>
+        <div class="row g-2 mb-2">
+            <div class="col-6"><label class="form-label mb-1 fw-bold">RT/RW</label><input type="text" id="addRTRW" class="form-control form-control-sm" placeholder="Contoh: 23"></div>
+            <div class="col-6"><label class="form-label mb-1 fw-bold">Status Hubungan</label>
+                <select id="addStatusHub" class="form-select form-select-sm" onchange="hitungUmurOtomatis()">
+                    <option value="KEPALA KK">KEPALA KK</option><option value="ISTRI">ISTRI</option><option value="ANAK" selected>ANAK</option><option value="ORANG TUA">ORANG TUA</option><option value="FAMILI LAIN">FAMILI LAIN</option>
+                </select>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer py-1"><button type="button" class="btn btn-sm btn-primary" onclick="simpanPemilihBaru()">Simpan Pemilih Baru</button></div>
+    </div>
+  </div>
+</div>
 
-      document.getElementById(idTab).classList.add('active');
-      elementTombol.classList.add('active');
+<script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzZxJmDgSEdTdUnVdZb_Z2huvsq98Qzei8LkXzrm7JjlK34PjToBgdgCH_UG2PlqyTyKw/exec";
+
+    let pemilihData = [];
+    let filteredData = [];
+    let currentPage = 1;
+    let rowsPerPage = 50;
+    let modalInstance = null;
+    let modalTambahInstance = null;
+    let myChart = null;
+
+    const mapKet = {
+        '0': 'Aktif', '1': 'Meninggal', '2': 'Ganda', '3': 'TNI', '4': 'Polisi',
+        '5': 'Pindah domisili (Luar Desa)', '6': 'Pindah Domisili (Dalam Desa)',
+        '7': 'Pisah KK', '8': 'Belum Cukup Umur', 'U': 'Ubah', 'B': 'Baru'
+    };
+
+    function kirimDataKeSheets(payload) {
+        fetch(SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        }).catch(err => console.error("Gagal mengirim data:", err));
     }
-  </script>
 
+    function parseLPFromNIK(nik) {
+        if (!nik || nik.length < 12) return '-';
+        let dayDigits = parseInt(nik.substring(6, 8), 10);
+        return isNaN(dayDigits) ? '-' : (dayDigits > 40 ? 'P' : 'L');
+    }
+
+    // Fungsi Kalkulasi Umur Berdasarkan Tgl Lahir
+    function hitungUmurDariString(tglStr) {
+        if (!tglStr || tglStr === '-') return '-';
+        const tglPilkades = new Date(2026, 9, 29);
+        const parts = String(tglStr).trim().split(/[\/\-]/);
+        if (parts.length === 3) {
+            const day = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10) - 1;
+            const year = parseInt(parts[2], 10);
+
+            if (!isNaN(day) && !isNaN(month) && !isNaN(year) && year > 1900) {
+                const tglLahir = new Date(year, month, day);
+                let umur = tglPilkades.getFullYear() - tglLahir.getFullYear();
+                const m = tglPilkades.getMonth() - tglLahir.getMonth();
+                if (m < 0 || (m === 0 && tglPilkades.getDate() < tglLahir.getDate())) {
+                    umur--;
+                }
+                return (umur >= 0 && umur < 120) ? umur : '-';
+            }
+        }
+        return '-';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        modalInstance = new bootstrap.Modal(document.getElementById('modalCoklit'));
+        modalTambahInstance = new bootstrap.Modal(document.getElementById('modalTambahPemilih'));
+    });
+
+    document.getElementById('excelFile').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const status = document.getElementById('status');
+        status.innerHTML = `<span class="spinner-border spinner-border-sm"></span> Membaca data Excel...`;
+
+        setTimeout(() => {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const data = new Uint8Array(e.target.result);
+                const workbook = XLSX.read(data, { type: 'array', dense: true, cellDates: false });
+                const sheet = workbook.Sheets[workbook.SheetNames[0]];
+                
+                const rawRows = XLSX.utils.sheet_to_json(sheet, { header: 1, raw: false, dateNF: 'dd/mm/yyyy' });
+
+                if (!rawRows || rawRows.length === 0) {
+                    status.innerHTML = `<span class="text-danger">❌ File Excel kosong!</span>`;
+                    return;
+                }
+
+                let headerIdx = rawRows.findIndex(r => Array.isArray(r) && r.some(c => String(c).toUpperCase().includes('NIK')));
+                if (headerIdx === -1) headerIdx = 0;
+
+                const headers = (rawRows[headerIdx] || []).map(h => String(h || '').trim().toUpperCase());
+                
+                const idxDPID = headers.findIndex(h => h.includes('DP-ID') || h.includes('DPID'));
+                const idxKK = headers.findIndex(h => h.includes('KK'));
+                const idxNIK = headers.findIndex(h => h.includes('NIK'));
+                const idxNama = headers.findIndex(h => h.includes('NAMA'));
+                const idxLP = headers.findIndex(h => h.includes('KELAMIN') || h === 'L/P' || h === 'LP');
+                const idxTempat = headers.findIndex(h => h.includes('TEMPAT'));
+                const idxTgl = headers.findIndex(h => h.includes('TANGGAL') || h.includes('TGL'));
+                const idxUmur = headers.findIndex(h => h.includes('UMUR') || h.includes('USIA'));
+                const idxRT = headers.findIndex(h => h.includes('RT') || h.includes('ALAMAT'));
+                const idxStatus = headers.findIndex(h => h.includes('HUB') || h.includes('STATUS'));
+                const idxKode = headers.findIndex(h => h === 'KODE' || h.includes('KODE'));
+                const idxKet = headers.findIndex(h => h === 'KETERANGAN' || h.includes('KETERANGAN'));
+
+                const parsedData = [];
+                const len = rawRows.length;
+
+                for (let i = headerIdx + 1; i < len; i++) {
+                    const row = rawRows[i];
+                    if (!row || row.length === 0) continue;
+
+                    const nik = idxNIK !== -1 && row[idxNIK] ? String(row[idxNIK]).trim() : '';
+                    const nama = idxNama !== -1 && row[idxNama] ? String(row[idxNama]).trim() : '';
+                    if (!nik && !nama) continue;
+
+                    const valTglLahir = idxTgl !== -1 && row[idxTgl] ? String(row[idxTgl]).trim() : '-';
+                    let valUmurRaw = idxUmur !== -1 && row[idxUmur] ? String(row[idxUmur]).trim() : '-';
+
+                    // Hitung umur otomatis jika kosong/strip tetapi ada Tanggal Lahir
+                    if (valUmurRaw === '-' || valUmurRaw === '' || isNaN(parseInt(valUmurRaw, 10))) {
+                        valUmurRaw = hitungUmurDariString(valTglLahir);
+                    }
+
+                    const numUmur = parseInt(valUmurRaw, 10);
+                    const statusHubVal = idxStatus !== -1 && row[idxStatus] ? String(row[idxStatus]).trim() : '-';
+
+                    let initialKode = idxKode !== -1 && row[idxKode] !== undefined && String(row[idxKode]).trim() !== '' ? String(row[idxKode]).trim() : '';
+                    let initialKet = idxKet !== -1 && row[idxKet] !== undefined && String(row[idxKet]).trim() !== '' ? String(row[idxKet]).trim() : '';
+
+                    if (initialKode === '') {
+                        if (!isNaN(numUmur) && numUmur < 17 && !statusHubVal.toUpperCase().includes('KEPALA') && !statusHubVal.toUpperCase().includes('ISTRI')) {
+                            initialKode = '8';
+                            initialKet = 'Belum Cukup Umur';
+                        } else {
+                            initialKode = '0';
+                            initialKet = 'Aktif';
+                        }
+                    }
+
+                    parsedData.push({
+                        uid: 'U_' + i,
+                        dpId: idxDPID !== -1 && row[idxDPID] ? String(row[idxDPID]).trim() : '-',
+                        noKK: idxKK !== -1 && row[idxKK] ? String(row[idxKK]).trim() : '-',
+                        nik: nik || '-',
+                        nama: nama || '-',
+                        lp: idxLP !== -1 && row[idxLP] ? String(row[idxLP]).trim() : parseLPFromNIK(nik),
+                        tempatLahir: idxTempat !== -1 && row[idxTempat] ? String(row[idxTempat]).trim() : '-',
+                        tglLahir: valTglLahir,
+                        umur: valUmurRaw,
+                        rtRw: idxRT !== -1 && row[idxRT] ? String(row[idxRT]).trim() : '1',
+                        statusHub: statusHubVal,
+                        kodeCoklit: initialKode,
+                        keterangan: initialKet
+                    });
+                }
+
+                pemilihData = parsedData;
+                status.innerHTML = `<span class="text-success">✅ Berhasil dimuat ${pemilihData.length} data pemilih.</span>`;
+                document.getElementById('dashboardSection').style.display = 'flex';
+                populateRTFilter();
+                updateDashboardStats();
+                filterData();
+            };
+            reader.readAsArrayBuffer(file);
+        }, 50);
+    });
+
+    function populateRTFilter() {
+        const rtSet = new Set(pemilihData.map(item => item.rtRw));
+        const filterRT = document.getElementById('filterRT');
+        const modalTargetRT = document.getElementById('modalTargetRT');
+        
+        filterRT.innerHTML = '<option value="">-- Semua RT / Alamat --</option>';
+        modalTargetRT.innerHTML = '';
+
+        const sortedRT = Array.from(rtSet).sort((a, b) => String(a).localeCompare(String(b), undefined, { numeric: true }));
+
+        sortedRT.forEach(rt => {
+            if(rt && rt !== '-') {
+                filterRT.innerHTML += `<option value="${rt}">${rt}</option>`;
+                modalTargetRT.innerHTML += `<option value="${rt}">${rt}</option>`;
+            }
+        });
+        modalTargetRT.innerHTML += `<option value="Lainnya">Lainnya / Manual</option>`;
+    }
+
+    function updateDashboardStats() {
+        const total = pemilihData.length;
+        let aktif = 0, tms = 0, ubah = 0;
+        const counts = { '0':0, '1':0, '2':0, '3':0, '4':0, '5':0, '6':0, '7':0, '8':0, 'U':0, 'B':0 };
+
+        for (let i = 0; i < total; i++) {
+            const k = pemilihData[i].kodeCoklit;
+            if (counts[k] !== undefined) counts[k]++;
+            
+            if (['0', '6', '7', 'B'].includes(k)) aktif++;
+            else if (['1', '2', '3', '4', '5', '8'].includes(k)) tms++;
+            else if (k === 'U') ubah++;
+        }
+
+        document.getElementById('statTotal').innerText = total;
+        document.getElementById('statAktif').innerText = aktif;
+        document.getElementById('statTMS').innerText = tms;
+        document.getElementById('statUbah').innerText = ubah;
+
+        const ctx = document.getElementById('coklitChart').getContext('2d');
+        if (myChart) myChart.destroy();
+
+        myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(mapKet).map(k => `${k}: ${mapKet[k]}`),
+                datasets: [{ label: 'Jumlah Pemilih', data: Object.values(counts), backgroundColor: '#b91c1c' }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+        });
+    }
+
+    function changeRowsPerPage() {
+        const val = document.getElementById('rowsPerPageSelect').value;
+        rowsPerPage = val === "ALL" ? filteredData.length || 10000 : parseInt(val, 10);
+        currentPage = 1;
+        renderPage();
+    }
+
+    function renderPage() {
+        const tbody = document.getElementById('tableBody');
+        
+        if (filteredData.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="14" class="text-center text-muted">Tidak ada data ditemukan.</td></tr>`;
+            document.getElementById('pageInfo').innerText = "Halaman 0 dari 0";
+            return;
+        }
+
+        const start = (currentPage - 1) * rowsPerPage;
+        const pageItems = filteredData.slice(start, start + rowsPerPage);
+        document.getElementById('pageInfo').innerText = `Halaman ${currentPage} dari ${Math.ceil(filteredData.length / rowsPerPage)} (${filteredData.length} Data)`;
+
+        let currentKK = "";
+        let htmlStr = "";
+
+        for (let i = 0; i < pageItems.length; i++) {
+            const item = pageItems[i];
+            
+            if (item.noKK !== '-' && item.noKK !== currentKK) {
+                if (currentKK !== "") htmlStr += `<tr><td colspan="14" class="kk-separator-empty"></td></tr>`;
+                currentKK = item.noKK;
+            }
+
+            let badgeClass = "bg-success"; 
+            if (['1', '2', '3', '4', '5', '8'].includes(item.kodeCoklit)) {
+                badgeClass = "bg-danger";
+            } else if (item.kodeCoklit === 'U') {
+                badgeClass = "bg-warning text-dark";
+            }
+
+            htmlStr += `<tr>
+                <td class="text-center">${start + i + 1}</td>
+                <td class="fw-bold ${item.dpId === '-' ? 'text-muted' : 'text-danger'}">${item.dpId}</td>
+                <td>${item.noKK}</td>
+                <td>${item.nik}</td>
+                <td><b>${item.nama}</b></td>
+                <td class="text-center font-monospace">${item.lp}</td>
+                <td>${item.tempatLahir}</td>
+                <td class="text-center fw-bold text-dark">${item.tglLahir}</td>
+                <td class="text-center">${item.umur}</td>
+                <td class="text-center">${item.rtRw}</td>
+                <td class="text-center">${item.statusHub}</td>
+                <td class="text-center"><span class="badge ${badgeClass}">${item.kodeCoklit}</span></td>
+                <td>${item.keterangan}</td>
+                <td class="no-print text-center">
+                    <button class="btn btn-sm btn-outline-danger py-0 px-1" onclick="openModal('${item.uid}')">Coklit</button>
+                </td>
+            </tr>`;
+        }
+
+        tbody.innerHTML = htmlStr;
+    }
+
+    function updateKetOtomatis() {
+        const kode = document.getElementById('modalKodeCoklit').value;
+        document.getElementById('formPindahRT').style.display = kode === '6' ? 'block' : 'none';
+        document.getElementById('formPecahKK').style.display = kode === '7' ? 'block' : 'none';
+        document.getElementById('modalKet').value = mapKet[kode] || '';
+    }
+
+    function openModal(uid) {
+        const target = pemilihData.find(i => i.uid === uid);
+        if (!target) return;
+
+        document.getElementById('modalUid').value = target.uid;
+        document.getElementById('modalNama').value = target.nama;
+        document.getElementById('modalNIK').value = target.nik;
+        document.getElementById('modalKodeCoklit').value = target.kodeCoklit;
+        document.getElementById('modalKet').value = target.keterangan;
+
+        updateKetOtomatis();
+        modalInstance.show();
+    }
+
+    function openModalTambah() {
+        document.getElementById('addNoKK').value = '';
+        document.getElementById('addNIK').value = '';
+        document.getElementById('addNama').value = '';
+        document.getElementById('addLP').value = 'L';
+        document.getElementById('addTempatLahir').value = '';
+        document.getElementById('addTglLahir').value = '';
+        document.getElementById('addUmur').value = '';
+        document.getElementById('addRTRW').value = '1';
+        document.getElementById('addStatusHub').value = 'ANAK';
+        modalTambahInstance.show();
+    }
+
+    function hitungUmurOtomatis() {
+        const inputTgl = document.getElementById('addTglLahir').value.trim();
+        const inputUmur = document.getElementById('addUmur');
+        const hasil = hitungUmurDariString(inputTgl);
+        inputUmur.value = hasil !== '-' ? hasil : '';
+    }
+
+    function simpanPemilihBaru() {
+        const nama = document.getElementById('addNama').value.trim();
+        if (!nama) return alert('Nama Lengkap wajib diisi!');
+
+        let umurVal = parseInt(document.getElementById('addUmur').value.trim(), 10);
+        const statusHub = document.getElementById('addStatusHub').value;
+
+        if (isNaN(umurVal)) {
+            hitungUmurOtomatis();
+            umurVal = parseInt(document.getElementById('addUmur').value.trim(), 10);
+        }
+
+        let initialKode = 'B';
+        let initialKet = 'Pemilih Baru';
+
+        if (!isNaN(umurVal) && umurVal < 17 && statusHub !== 'KEPALA KK' && statusHub !== 'ISTRI') {
+            initialKode = '8';
+            initialKet = 'Belum Cukup Umur';
+        }
+
+        const newPemilih = {
+            uid: 'U_NEW_' + Math.random().toString(36).substr(2, 5),
+            dpId: 'BARU',
+            noKK: document.getElementById('addNoKK').value.trim() || '-',
+            nik: document.getElementById('addNIK').value.trim() || '-',
+            nama: nama,
+            lp: document.getElementById('addLP').value,
+            tempatLahir: document.getElementById('addTempatLahir').value.trim() || '-',
+            tglLahir: document.getElementById('addTglLahir').value.trim() || '-',
+            umur: isNaN(umurVal) ? '-' : umurVal,
+            rtRw: document.getElementById('addRTRW').value.trim() || '1',
+            statusHub: statusHub,
+            kodeCoklit: initialKode,
+            keterangan: initialKet
+        };
+
+        pemilihData.push(newPemilih);
+
+        kirimDataKeSheets({
+            action: "tambahPemilih",
+            nik: newPemilih.nik,
+            nama: newPemilih.nama,
+            noKK: newPemilih.noKK,
+            kode: newPemilih.kodeCoklit,
+            ket: newPemilih.keterangan,
+            rt: newPemilih.rtRw
+        });
+
+        modalTambahInstance.hide();
+        populateRTFilter();
+        updateDashboardStats();
+        filterData();
+    }
+
+    function simpanCoklit() {
+        const uid = document.getElementById('modalUid').value;
+        const target = pemilihData.find(i => i.uid === uid);
+        
+        if (!target) return alert("Terjadi kesalahan identifikasi data!");
+
+        const kode = document.getElementById('modalKodeCoklit').value;
+        let ket = document.getElementById('modalKet').value;
+
+        if (kode === '6') {
+            let rtTujuan = document.getElementById('modalTargetRT').value;
+            const rtManual = document.getElementById('modalAlamatLain').value.trim();
+            if (rtManual) rtTujuan = rtManual;
+            target.rtRw = rtTujuan;
+            ket = `Pindah ke RT/Alamat: ${rtTujuan} | ` + ket;
+        } else if (kode === '7') {
+            const noKKBaru = document.getElementById('modalNoKKBaru').value.trim();
+            const alamatBaru = document.getElementById('modalAlamatBaru').value.trim();
+            if(noKKBaru) target.noKK = noKKBaru;
+            if(alamatBaru) target.rtRw = alamatBaru;
+            ket = `Pisah KK | ` + ket;
+        }
+
+        target.kodeCoklit = kode;
+        target.keterangan = ket;
+
+        kirimDataKeSheets({
+            action: "updateCoklit",
+            nik: target.nik,
+            nama: target.nama,
+            kode: target.kodeCoklit,
+            ket: target.keterangan,
+            rt: target.rtRw
+        });
+
+        modalInstance.hide();
+        updateDashboardStats();
+        filterData();
+    }
+
+    function prevPage() { if (currentPage > 1) { currentPage--; renderPage(); } }
+    function nextPage() { if (currentPage * rowsPerPage < filteredData.length) { currentPage++; renderPage(); } }
+
+    function filterData() {
+        const keyword = document.getElementById('searchInput').value.toLowerCase();
+        const selectedRT = document.getElementById('filterRT').value;
+        const selectedStatus = document.getElementById('filterStatus').value;
+
+        filteredData = pemilihData.filter(item => {
+            const matchSearch = keyword === '' || 
+                                item.nama.toLowerCase().includes(keyword) || 
+                                item.nik.includes(keyword) || 
+                                item.dpId.toLowerCase().includes(keyword) || 
+                                item.noKK.includes(keyword);
+            const matchRT = selectedRT === '' || item.rtRw === selectedRT;
+            const matchStatus = selectedStatus === '' || item.kodeCoklit === selectedStatus;
+
+            return matchSearch && matchRT && matchStatus;
+        });
+
+        currentPage = 1;
+        renderPage();
+    }
+
+    function eksporExcel() {
+        if (pemilihData.length === 0) return alert('Tidak ada data yang tersedia untuk diunduh.');
+
+        const dataToExport = filteredData.length > 0 ? filteredData : pemilihData;
+
+        const excelRows = [
+            ["COKLIT DAFTAR PEMILIH SEMENTARA (DPS)"],
+            ["Pemilihan Kepala Desa Payo Lebar Tahun 2026"],
+            [],
+            ["NO", "DP-ID", "NO KK", "NIK", "NAMA LENGKAP", "L/P", "TEMPAT LAHIR", "TGL LAHIR", "UMUR", "RT/RW", "STATUS HUB", "KODE", "KETERANGAN"]
+        ];
+
+        let currentKK = "";
+        let noUrut = 1;
+
+        for (let i = 0; i < dataToExport.length; i++) {
+            const item = dataToExport[i];
+            if (item.noKK !== '-' && item.noKK !== currentKK) {
+                if (currentKK !== "") excelRows.push([]);
+                currentKK = item.noKK;
+            }
+
+            excelRows.push([
+                noUrut++, 
+                item.dpId, 
+                item.noKK, 
+                item.nik, 
+                item.nama, 
+                item.lp,
+                item.tempatLahir, 
+                item.tglLahir, 
+                item.umur, 
+                item.rtRw, 
+                item.statusHub,
+                item.kodeCoklit, 
+                item.keterangan
+            ]);
+        }
+
+        const worksheet = XLSX.utils.aoa_to_sheet(excelRows);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Hasil Coklit");
+        XLSX.writeFile(workbook, "Hasil_Coklit_Terfilter_DPS_2026.xlsx");
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
