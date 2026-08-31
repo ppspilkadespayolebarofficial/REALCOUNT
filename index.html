@@ -19,16 +19,25 @@
         ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.05); }
         ::-webkit-scrollbar-thumb { background: rgba(220, 38, 38, 0.3); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: rgba(220, 38, 38, 0.6); }
+
+        .bg-pattern-dots {
+            background-image: radial-gradient(rgba(220, 38, 38, 0.08) 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+        }
+        .bg-map-indonesia {
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/a/a7/BlankMap-Indonesia.svg');
+            background-repeat: no-repeat;
+            background-position: center right;
+            background-size: contain;
+        }
     </style>
 </head>
-<body class="bg-slate-100 font-sans text-slate-800 antialiased">
+<body class="bg-slate-100 font-sans text-slate-800 antialiased bg-pattern-dots">
 
     <div class="flex h-screen overflow-hidden">
         
-        <!-- SIDEBAR NAVIGATION -->
         <aside class="w-64 bg-gradient-to-b from-red-950 via-red-900 to-slate-950 text-white flex flex-col justify-between overflow-y-auto shadow-2xl z-20">
             <div>
-                <!-- BRAND HEADER -->
                 <div class="p-5 border-b border-red-800/50 bg-red-950/40 backdrop-blur-sm flex items-center gap-3.5">
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-400 to-yellow-300 text-red-950 flex items-center justify-center font-black shadow-lg shadow-amber-500/20">
                         <i class="fa-solid fa-check-to-slot text-xl"></i>
@@ -39,7 +48,6 @@
                     </div>
                 </div>
 
-                <!-- NAVIGATION MENU -->
                 <nav class="p-3.5 space-y-1.5 text-sm font-medium">
                     <p class="px-3 pt-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-red-300/70">Menu Utama</p>
                     
@@ -51,7 +59,6 @@
                         <i class="fa-solid fa-users w-5 text-red-300/80"></i> Profil Calon Kades
                     </button>
 
-                    <!-- DROPDOWN DATA PEMILIH -->
                     <div>
                         <button onclick="toggleSubmenu('sub-pemilih', 'arrow-pemilih')" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-red-100/80 hover:text-white hover:bg-red-800/40 transition-all duration-200 border border-transparent">
                             <span class="flex items-center gap-3">
@@ -79,7 +86,6 @@
                         </div>
                     </div>
 
-                    <!-- DROPDOWN PANITIA & PENGAWAS -->
                     <div>
                         <button onclick="toggleSubmenu('sub-panitia', 'arrow-panitia')" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-red-100/80 hover:text-white hover:bg-red-800/40 transition-all duration-200 border border-transparent">
                             <span class="flex items-center gap-3">
@@ -128,63 +134,68 @@
             </div>
         </aside>
 
-        <!-- KONTEN UTAMA -->
-        <main class="flex-1 flex flex-col overflow-y-auto bg-slate-50">
+        <main class="flex-1 flex flex-col overflow-y-auto">
             
-            <header class="bg-white/80 backdrop-blur-md border-b border-slate-200/80 px-6 py-4 flex flex-col md:flex-row md:items-center justify-between gap-3 sticky top-0 z-10 shadow-xs">
-                <div class="space-y-0.5">
-                    <div class="flex items-center gap-2">
-                        <span class="relative flex h-2.5 w-2.5">
-                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-600"></span>
-                        </span>
-                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-red-800 bg-red-50 border border-red-200/60 px-2.5 py-0.5 rounded-full">Portal Publikasi Resmi KPU Desa</span>
-                    </div>
-                    <h1 class="text-lg md:text-xl font-black text-slate-900 tracking-tight uppercase">PEMILIHAN KEPALA DESA PAYO LEBAR</h1>
-                    <p class="text-xs font-medium text-slate-500 flex items-center gap-1.5">
-                        <i class="fa-solid fa-location-dot text-red-600"></i> Kecamatan Singkut, Kabupaten Sarolangun — Tahun 2026
-                    </p>
-                </div>
+            <header class="relative bg-gradient-to-r from-slate-900 via-red-950 to-slate-900 text-white px-8 py-6 border-b border-red-900/40 overflow-hidden shadow-md">
+                <div class="absolute inset-0 bg-map-indonesia opacity-10 pointer-events-none mix-blend-overlay"></div>
+                <div class="absolute inset-0 bg-pattern-dots opacity-20 pointer-events-none"></div>
 
-                <div class="flex items-center gap-3 bg-slate-100/80 border border-slate-200 p-2.5 rounded-2xl self-start md:self-auto shadow-inner">
-                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-red-900 to-rose-800 text-amber-300 flex items-center justify-center font-bold text-sm flex-shrink-0 shadow-md">
-                        <i class="fa-solid fa-bullhorn"></i>
+                <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-2">
+                            <span class="relative flex h-2.5 w-2.5">
+                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                            </span>
+                            <span class="text-[10px] font-extrabold uppercase tracking-widest text-amber-300 bg-red-950/80 border border-amber-400/30 px-3 py-0.5 rounded-full shadow-inner">
+                                Portal Publikasi Resmi KPU Desa
+                            </span>
+                        </div>
+                        <h1 class="text-xl md:text-2xl font-black tracking-wide text-white drop-shadow-md">
+                            PEMILIHAN KEPALA DESA PAYO LEBAR
+                        </h1>
+                        <p class="text-xs font-medium text-red-200/90 flex items-center gap-2">
+                            <i class="fa-solid fa-location-dot text-amber-400"></i> Kecamatan Singkut, Kabupaten Sarolangun — Tahun 2026
+                        </p>
                     </div>
-                    <div class="text-right text-xs">
-                        <p class="font-bold text-slate-800" id="user-status-label">Monitoring Saksi & Public</p>
-                        <p class="text-[10px] text-slate-400 font-medium">Update Terakhir: Real-Time</p>
+
+                    <div class="flex items-center gap-3 bg-red-950/60 border border-red-700/40 backdrop-blur-md px-4 py-2 rounded-2xl self-start md:self-auto shadow-lg">
+                        <img src="sarolangun.png" alt="Logo Sarolangun" class="h-10 w-auto object-contain">
+                        <div class="text-left text-xs">
+                            <p class="font-bold text-white tracking-wide">KAB. SAROLANGUN</p>
+                            <p class="text-[10px] text-amber-300 font-medium">Kecamatan Singkut</p>
+                        </div>
                     </div>
                 </div>
             </header>
 
             <div class="p-6 space-y-6">
 
-                <!-- TAB 1: LIVE REAL-COUNT -->
                 <div id="view-realcount" class="animate-fade-in space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
+                        <div class="bg-white/90 backdrop-blur-xs p-5 rounded-2xl border border-slate-200/80 shadow-sm">
                             <p class="text-xs text-slate-400 font-medium">Total DPT Desa</p>
                             <h3 class="text-2xl font-black text-slate-800 mt-0.5">1,450</h3>
                             <p class="text-[11px] text-slate-400 mt-1">Hak Pilih Terdaftar</p>
                         </div>
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
+                        <div class="bg-white/90 backdrop-blur-xs p-5 rounded-2xl border border-slate-200/80 shadow-sm">
                             <p class="text-xs text-slate-400 font-medium">Suara Masuk (Sah & Tidak)</p>
                             <h3 class="text-2xl font-black text-red-600 mt-0.5">1,120</h3>
                             <p class="text-[11px] text-red-600 font-semibold mt-1">77.2% Partisipasi Pemilih</p>
                         </div>
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
+                        <div class="bg-white/90 backdrop-blur-xs p-5 rounded-2xl border border-slate-200/80 shadow-sm">
                             <p class="text-xs text-slate-400 font-medium">Suara Tidak Sah</p>
                             <h3 class="text-2xl font-black text-rose-500 mt-0.5">24</h3>
                             <p class="text-[11px] text-slate-400 mt-1">Kerusakan / Salah Coblos</p>
                         </div>
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
+                        <div class="bg-white/90 backdrop-blur-xs p-5 rounded-2xl border border-slate-200/80 shadow-sm">
                             <p class="text-xs text-slate-400 font-medium">Progress Masuk TPS</p>
                             <h3 class="text-2xl font-black text-amber-600 mt-0.5">3 / 3 TPS</h3>
                             <p class="text-[11px] text-amber-600 font-semibold mt-1">100% data terverifikasi</p>
                         </div>
                     </div>
 
-                    <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+                    <div class="bg-white/90 backdrop-blur-xs p-6 rounded-2xl border border-slate-200/80 shadow-sm">
                         <h2 class="text-base font-bold text-slate-800 mb-5 flex items-center gap-2">
                             <i class="fa-solid fa-chart-simple text-red-600"></i> Hasil Perhitungan Suara Sementara (Real-Count)
                         </h2>
@@ -192,9 +203,8 @@
                     </div>
                 </div>
 
-                <!-- TAB 2: PROFIL CALON KADES -->
                 <div id="view-calon" class="hidden animate-fade-in space-y-6">
-                    <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+                    <div class="flex justify-between items-center bg-white/90 backdrop-blur-xs p-4 rounded-2xl border border-slate-200/80 shadow-sm">
                         <div>
                             <h2 class="text-lg font-black text-slate-800 flex items-center gap-2">
                                 <i class="fa-solid fa-users text-red-600"></i> Daftar Pasangan Calon Kades
@@ -209,9 +219,8 @@
                     <div id="grid-calon-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
                 </div>
 
-                <!-- TAB 3: DATA PEMILIH -->
                 <div id="view-pemilih" class="hidden animate-fade-in space-y-6">
-                    <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
+                    <div class="bg-white/90 backdrop-blur-xs p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
                         <h2 class="text-lg font-black text-slate-800" id="judul-tahapan-dpt">Daftar Pemilih Sementara (DPS)</h2>
                         <div class="flex gap-3">
                             <input type="text" placeholder="Cari NIK / Nama Pemilih..." class="flex-1 border border-slate-200 p-2.5 rounded-xl text-sm bg-slate-50 outline-none">
@@ -220,9 +229,8 @@
                     </div>
                 </div>
 
-                <!-- TAB 4: PANITIA PPS (BISA DIEDIT) -->
                 <div id="view-pps" class="hidden animate-fade-in space-y-6">
-                    <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+                    <div class="flex justify-between items-center bg-white/90 backdrop-blur-xs p-4 rounded-2xl border border-slate-200/80 shadow-sm">
                         <div>
                             <h2 class="text-lg font-black text-slate-800 flex items-center gap-2">
                                 <i class="fa-solid fa-user-group text-red-600"></i> Panitia Pemungutan Suara (PPS)
@@ -236,9 +244,8 @@
                     <div id="grid-pps-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
                 </div>
 
-                <!-- TAB 5: PENGAWAS BPD (BISA DIEDIT) -->
                 <div id="view-bpd" class="hidden animate-fade-in space-y-6">
-                    <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+                    <div class="flex justify-between items-center bg-white/90 backdrop-blur-xs p-4 rounded-2xl border border-slate-200/80 shadow-sm">
                         <div>
                             <h2 class="text-lg font-black text-slate-800 flex items-center gap-2">
                                 <i class="fa-solid fa-user-shield text-red-600"></i> Pengawas BPD (Badan Permusyawaratan Desa)
@@ -252,19 +259,17 @@
                     <div id="grid-bpd-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
                 </div>
 
-                <!-- TAB LAINNYA -->
-                <div id="view-dasarhukum" class="hidden animate-fade-in bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
+                <div id="view-dasarhukum" class="hidden animate-fade-in bg-white/90 backdrop-blur-xs p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
                     <h2 class="text-lg font-black text-slate-800"><i class="fa-solid fa-scale-balanced text-red-600"></i> Landasan Hukum Pilkades</h2>
                     <p class="text-xs text-slate-500">UU No. 6/2014 & Permendagri No. 112/2014</p>
                 </div>
 
-                <div id="view-layanan" class="hidden animate-fade-in bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
+                <div id="view-layanan" class="hidden animate-fade-in bg-white/90 backdrop-blur-xs p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
                     <h2 class="text-lg font-black text-slate-800"><i class="fa-solid fa-headset text-red-600"></i> Pusat Layanan Public</h2>
                     <p class="text-xs text-slate-500">Kantor Desa Payo Lebar, Kec. Singkut</p>
                 </div>
 
-                <!-- TAB INPUT SUARA TPS -->
-                <div id="view-input" class="hidden animate-fade-in max-w-2xl mx-auto bg-white rounded-2xl shadow-lg border border-slate-200/80 overflow-hidden">
+                <div id="view-input" class="hidden animate-fade-in max-w-2xl mx-auto bg-white/95 backdrop-blur-xs rounded-2xl shadow-lg border border-slate-200/80 overflow-hidden">
                     <div class="bg-gradient-to-r from-red-950 to-red-900 text-white p-5 flex items-center justify-between">
                         <div>
                             <h2 class="font-black text-lg">Input Hasil Suara TPS (Form C1)</h2>
@@ -293,7 +298,6 @@
         </main>
     </div>
 
-    <!-- MODAL POP-UP LOGIN PANITIA -->
     <div id="modalLogin" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs hidden items-center justify-center z-50 p-4">
         <div class="bg-white p-6 rounded-2xl shadow-2xl w-full max-w-md space-y-4 border border-slate-100 animate-fade-in">
             <div class="flex justify-between items-center border-b border-slate-100 pb-3">
@@ -316,7 +320,6 @@
         </div>
     </div>
 
-    <!-- MODAL EDIT / TAMBAH CALON KADES -->
     <div id="modalEditCalon" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs hidden items-center justify-center z-50 p-4">
         <div class="bg-white p-6 rounded-2xl shadow-2xl w-full max-w-lg space-y-4 border border-slate-100 animate-fade-in">
             <div class="flex justify-between items-center border-b border-slate-100 pb-3">
@@ -343,7 +346,6 @@
         </div>
     </div>
 
-    <!-- MODAL EDIT / TAMBAH ANGGOTA (PPS & PENGAWAS BPD) -->
     <div id="modalAnggota" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs hidden items-center justify-center z-50 p-4">
         <div class="bg-white p-6 rounded-2xl shadow-2xl w-full max-w-md space-y-4 border border-slate-100 animate-fade-in">
             <div class="flex justify-between items-center border-b border-slate-100 pb-3">
@@ -372,11 +374,9 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC -->
     <script>
         let isPanitiaLoggedIn = false;
 
-        // DATA CALON KADES
         let daftarCalon = [
             { no: "01", nama: "H. Ahmad Dahlan, S.Pd.", visi: "Mewujudkan Desa Payo Lebar yang Sejahtera, Transparan, dan Berbasis Teknologi Informasi.", suara: 420, persen: "37.5%" },
             { no: "02", nama: "Bambang Subianto", visi: "Pemerataan Pembangunan Infrastruktur dan Pemberdayaan Ekonomi Pertanian Desa.", suara: 310, persen: "27.6%" },
@@ -385,7 +385,6 @@
             { no: "05", nama: "M. Ridwan Al-Faruq", visi: "Tata Kelola Pemerintahan Desa yang Bersih, Religius, dan Bebas Pungutan Liar.", suara: 80, persen: "7.1%" }
         ];
 
-        // DATA PANITIA PPS
         let daftarPPS = [
             { nama: "Heryanto, S.ST", jabatan: "Ketua PPS", kontak: "0821-7788-9900" },
             { nama: "Siti Rahmawati", jabatan: "Divisi Teknis & Penyelenggaraan", kontak: "0852-1122-3344" },
@@ -394,7 +393,6 @@
             { nama: "Budi Santoso", jabatan: "Anggota Divisi Hubmas", kontak: "0853-3344-5566" }
         ];
 
-        // DATA PENGAWAS BPD
         let daftarBPD = [
             { nama: "Drs. M. Ali Akbar", jabatan: "Ketua Pengawas BPD", kontak: "0811-1234-5678" },
             { nama: "H. Ahmad Fauzi", jabatan: "Wakil Ketua BPD", kontak: "0812-2345-6789" },
@@ -404,7 +402,6 @@
             { nama: "Suryani, S.Pd", jabatan: "Pengawas Wilayah Dusun III", kontak: "0816-6789-0123" }
         ];
 
-        // RENDER DATA CALON KADES
         function renderCalon() {
             const gridContainer = document.getElementById('grid-calon-container');
             const realcountContainer = document.getElementById('realcount-bars-container');
@@ -416,7 +413,7 @@
 
             daftarCalon.forEach((calon, idx) => {
                 gridContainer.innerHTML += `
-                    <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4 hover:shadow-md transition">
+                    <div class="bg-white/90 backdrop-blur-xs p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4 hover:shadow-md transition">
                         <div class="flex items-center gap-4">
                             <div class="w-16 h-16 rounded-2xl ${idx === 0 ? 'bg-red-100 text-red-800 border-red-200' : 'bg-slate-100 text-slate-800 border-slate-200'} flex items-center justify-center font-black text-2xl border flex-shrink-0">
                                 ${calon.no}
@@ -426,7 +423,7 @@
                                 <p class="text-xs text-slate-400">Calon Kepala Desa Nomor Urut ${calon.no}</p>
                             </div>
                         </div>
-                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 text-xs space-y-1.5">
+                        <div class="p-4 bg-slate-50/80 rounded-xl border border-slate-100 text-xs space-y-1.5">
                             <p class="font-bold text-slate-700">Visi Utama:</p>
                             <p class="text-slate-600 italic">"${calon.visi}"</p>
                         </div>
@@ -461,7 +458,6 @@
             });
         }
 
-        // RENDER PPS & PENGAWAS BPD
         function renderTim(tipe) {
             const container = document.getElementById(tipe === 'pps' ? 'grid-pps-container' : 'grid-bpd-container');
             const dataList = tipe === 'pps' ? daftarPPS : daftarBPD;
@@ -469,7 +465,7 @@
 
             dataList.forEach((item, index) => {
                 container.innerHTML += `
-                    <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between gap-3">
+                    <div class="bg-white/90 backdrop-blur-xs p-4 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between gap-3">
                         <div class="flex items-center gap-3 overflow-hidden">
                             <div class="w-10 h-10 rounded-xl bg-slate-100 text-red-800 flex items-center justify-center font-bold border border-slate-200 flex-shrink-0">
                                 <i class="fa-solid ${tipe === 'pps' ? 'fa-user' : 'fa-user-shield'}"></i>
@@ -501,7 +497,6 @@
             renderTim('bpd');
         }
 
-        // SWAP TAB FUNCTION
         function switchTab(viewName) {
             const views = ['realcount', 'calon', 'pemilih', 'pps', 'bpd', 'dasarhukum', 'layanan', 'input'];
             views.forEach(v => {
@@ -527,12 +522,11 @@
             document.getElementById(arrowId).classList.toggle('rotate-180');
         }
 
-        function pilihTahapan(namaTahapan, statusText) {
+        function pilihTahapan(namaTahapan) {
             switchTab('pemilih');
             document.getElementById('judul-tahapan-dpt').innerText = `Daftar Pemilih: ${namaTahapan}`;
         }
 
-        // MODAL MANAGEMENT
         function bukaModalLogin() {
             document.getElementById('modalLogin').classList.remove('hidden');
             document.getElementById('modalLogin').classList.add('flex');
@@ -580,7 +574,6 @@
             document.getElementById('modalAnggota').classList.remove('flex');
         }
 
-        // SIMPAN & EDIT TIM / ANGGOTA
         function editAnggota(tipe, index) {
             bukaModalAnggota(tipe, index);
         }
@@ -661,14 +654,13 @@
 
             if (u === "admin" && p === "123456") {
                 isPanitiaLoggedIn = true;
-                alert("Login Panitia Berhasil! Tombol Pengeditan Calon, PPS, dan BPD Aktif.");
+                alert("Login Panitia Berhasil!");
                 tutupModalLogin();
                 
-                document.getElementById('user-status-label').innerHTML = `<span class="text-red-700 font-bold flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Panitia (P2KD)</span>`;
+                document.getElementById('user-status-label').innerHTML = `<span class="text-amber-300 font-bold flex items-center gap-1"><i class="fa-solid fa-circle-check text-green-400"></i> Panitia (P2KD)</span>`;
                 document.getElementById('lock-input').classList.add('hidden');
                 document.getElementById('lock-upload').classList.add('hidden');
                 
-                // Tampilkan semua tombol pengeditan
                 document.getElementById('btn-tambah-calon').classList.remove('hidden');
                 document.getElementById('btn-tambah-calon').classList.add('flex');
                 document.getElementById('btn-tambah-pps').classList.remove('hidden');
@@ -693,7 +685,6 @@
             switchTab('realcount');
         }
 
-        // INISIALISASI
         renderSemuaData();
     </script>
 </body>
