@@ -7,7 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- ANIMASI DEDIKASI UNTUK UI PROFESIONAL -->
     <style>
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(6px); }
@@ -16,131 +15,139 @@
         .animate-fade-in {
             animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.05);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(16, 185, 129, 0.3);
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(16, 185, 129, 0.6);
-        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.05); }
+        ::-webkit-scrollbar-thumb { background: rgba(220, 38, 38, 0.3); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(220, 38, 38, 0.6); }
     </style>
 </head>
 <body class="bg-slate-100 font-sans text-slate-800 antialiased">
 
     <div class="flex h-screen overflow-hidden">
         
-        <!-- SIDEBAR NAVIGATION (GRADIENT ELEGAN & ANIMATED MENU) -->
-        <aside class="w-64 bg-gradient-to-b from-emerald-950 via-emerald-900 to-slate-950 text-white flex flex-col justify-between overflow-y-auto shadow-2xl z-20">
+        <!-- SIDEBAR NAVIGATION -->
+        <aside class="w-64 bg-gradient-to-b from-red-950 via-red-900 to-slate-950 text-white flex flex-col justify-between overflow-y-auto shadow-2xl z-20">
             <div>
                 <!-- BRAND HEADER -->
-                <div class="p-5 border-b border-emerald-800/50 bg-emerald-950/40 backdrop-blur-sm flex items-center gap-3.5">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-400 to-yellow-300 text-emerald-950 flex items-center justify-center font-black shadow-lg shadow-amber-500/20">
+                <div class="p-5 border-b border-red-800/50 bg-red-950/40 backdrop-blur-sm flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-400 to-yellow-300 text-red-950 flex items-center justify-center font-black shadow-lg shadow-amber-500/20">
                         <i class="fa-solid fa-check-to-slot text-xl"></i>
                     </div>
                     <div>
-                        <h1 class="font-black text-base tracking-wide leading-tight bg-gradient-to-r from-white via-emerald-100 to-emerald-300 bg-clip-text text-transparent">Pilkades Digital</h1>
-                        <p class="text-[11px] font-medium text-emerald-300/80">Desa Payo Lebar 2026</p>
+                        <h1 class="font-black text-base tracking-wide leading-tight bg-gradient-to-r from-white via-red-100 to-amber-200 bg-clip-text text-transparent">Pilkades Digital</h1>
+                        <p class="text-[11px] font-medium text-amber-300/80">Desa Payo Lebar 2026</p>
                     </div>
                 </div>
 
-                <!-- MAIN MENU -->
+                <!-- NAVIGATION MENU -->
                 <nav class="p-3.5 space-y-1.5 text-sm font-medium">
-                    <p class="px-3 pt-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-emerald-400/70">Menu Utama</p>
+                    <p class="px-3 pt-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-red-300/70">Menu Utama</p>
                     
-                    <button id="btn-menu-realcount" onclick="switchTab('realcount')" class="menu-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold shadow-lg shadow-emerald-900/40 border border-emerald-400/30 transition-all duration-200">
-                        <i class="fa-solid fa-chart-line w-5 text-emerald-200"></i> Live Real-Count
+                    <button id="nav-realcount" onclick="switchTab('realcount')" class="menu-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 text-white font-semibold shadow-lg shadow-red-950/50 border border-red-400/30 transition-all duration-200">
+                        <i class="fa-solid fa-chart-line w-5 text-red-200"></i> Live Real-Count
                     </button>
                     
-                    <button id="btn-menu-calon" onclick="switchTab('calon')" class="menu-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-emerald-100/80 hover:text-white hover:bg-emerald-800/40 hover:translate-x-1 transition-all duration-200 border border-transparent">
-                        <i class="fa-solid fa-users w-5 text-emerald-400/80"></i> Profil Calon Kades
+                    <button id="nav-calon" onclick="switchTab('calon')" class="menu-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-red-100/80 hover:text-white hover:bg-red-800/40 hover:translate-x-1 transition-all duration-200 border border-transparent">
+                        <i class="fa-solid fa-users w-5 text-red-300/80"></i> Profil Calon Kades
                     </button>
 
-                    <!-- DROPDOWN MENU: DATA PEMILIH (TAHAPAN) -->
-                    <div class="pt-1">
-                        <button onclick="toggleSubmenu('submenu-pemilih')" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-emerald-100/80 hover:text-white hover:bg-emerald-800/40 transition-all duration-200 border border-transparent">
+                    <!-- DROPDOWN DATA PEMILIH -->
+                    <div>
+                        <button onclick="toggleSubmenu('sub-pemilih', 'arrow-pemilih')" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-red-100/80 hover:text-white hover:bg-red-800/40 transition-all duration-200 border border-transparent">
                             <span class="flex items-center gap-3">
-                                <i class="fa-solid fa-id-card w-5 text-emerald-400/80"></i> Data Pemilih
+                                <i class="fa-solid fa-id-card w-5 text-red-300/80"></i> Data Pemilih
                             </span>
-                            <i id="arrow-pemilih" class="fa-solid fa-chevron-down text-xs text-emerald-400 transition-transform duration-300"></i>
+                            <i id="arrow-pemilih" class="fa-solid fa-chevron-down text-xs text-amber-400 transition-transform duration-300"></i>
                         </button>
-
-                        <!-- LIST SUB-MENU TAHAPAN -->
-                        <div id="submenu-pemilih" class="hidden pl-4 pr-1 py-1.5 space-y-1 mt-1 bg-emerald-950/60 rounded-xl border border-emerald-800/40 backdrop-blur-md transition-all">
-                            <button onclick="pilihTahapan('DPT Awal KPU', 'Selesai')" class="w-full text-left py-2 px-3 text-xs text-emerald-200/80 hover:text-white hover:bg-emerald-800/40 rounded-lg flex items-center justify-between transition-colors">
+                        <div id="sub-pemilih" class="hidden pl-4 pr-1 py-1.5 space-y-1 mt-1 bg-red-950/70 rounded-xl border border-red-800/40 backdrop-blur-md">
+                            <button onclick="pilihTahapan('DPT Awal KPU', 'Selesai')" class="w-full text-left py-2 px-3 text-xs text-red-200/80 hover:text-white hover:bg-red-800/40 rounded-lg flex items-center justify-between">
                                 <span>1. DPT Awal KPU</span>
-                                <span class="text-[9px] bg-emerald-800/60 text-emerald-200 px-1.5 py-0.5 rounded border border-emerald-700/50">Selesai</span>
+                                <span class="text-[9px] bg-red-900/80 text-red-200 px-1.5 py-0.5 rounded">Selesai</span>
                             </button>
-                            <button onclick="pilihTahapan('DPS (Sementara)', 'Berjalan')" class="w-full text-left py-2 px-3 text-xs text-amber-200 hover:text-white hover:bg-emerald-800/50 rounded-lg flex items-center justify-between font-semibold transition-colors">
+                            <button onclick="pilihTahapan('DPS (Sementara)', 'Berjalan')" class="w-full text-left py-2 px-3 text-xs text-amber-300 hover:text-white hover:bg-red-800/50 rounded-lg flex items-center justify-between font-semibold">
                                 <span>2. DPS (Sementara)</span>
-                                <span class="text-[9px] bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 px-2 py-0.5 rounded-full font-bold shadow-sm">Aktif</span>
+                                <span class="text-[9px] bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 px-2 py-0.5 rounded-full font-bold">Aktif</span>
                             </button>
-                            <button onclick="pilihTahapan('DPTam (Tambahan)', 'Mendatang')" class="w-full text-left py-2 px-3 text-xs text-emerald-300/50 hover:text-white hover:bg-emerald-800/40 rounded-lg flex items-center justify-between transition-colors">
+                            <button onclick="pilihTahapan('DPTam (Tambahan)', 'Mendatang')" class="w-full text-left py-2 px-3 text-xs text-red-300/50 hover:text-white hover:bg-red-800/40 rounded-lg flex items-center justify-between">
                                 <span>3. DPTam (Tambahan)</span>
                                 <span class="text-[9px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded">Pending</span>
                             </button>
-                            <button onclick="pilihTahapan('DPT (Tetap)', 'Penetapan Akhir')" class="w-full text-left py-2 px-3 text-xs text-emerald-300/50 hover:text-white hover:bg-emerald-800/40 rounded-lg flex items-center justify-between transition-colors">
+                            <button onclick="pilihTahapan('DPT (Tetap)', 'Penetapan Akhir')" class="w-full text-left py-2 px-3 text-xs text-red-300/50 hover:text-white hover:bg-red-800/40 rounded-lg flex items-center justify-between">
                                 <span>4. DPT (Tetap)</span>
                                 <span class="text-[9px] bg-slate-800 text-slate-400 px-1.5 py-0.5 rounded">Final</span>
                             </button>
                         </div>
                     </div>
 
-                    <div class="pt-2">
-                        <p class="px-3 pt-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-emerald-400/70">Panitia P2KD</p>
+                    <!-- DROPDOWN PANITIA & PENGAWAS -->
+                    <div>
+                        <button onclick="toggleSubmenu('sub-panitia', 'arrow-panitia')" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-red-100/80 hover:text-white hover:bg-red-800/40 transition-all duration-200 border border-transparent">
+                            <span class="flex items-center gap-3">
+                                <i class="fa-solid fa-sitemap w-5 text-red-300/80"></i> Panitia & Pengawas
+                            </span>
+                            <i id="arrow-panitia" class="fa-solid fa-chevron-down text-xs text-amber-400 transition-transform duration-300"></i>
+                        </button>
+                        <div id="sub-panitia" class="hidden pl-4 pr-1 py-1.5 space-y-1 mt-1 bg-red-950/70 rounded-xl border border-red-800/40 backdrop-blur-md">
+                            <button id="nav-pps" onclick="switchTab('pps')" class="menu-btn w-full text-left py-2 px-3 text-xs text-red-100 hover:text-white hover:bg-red-800/40 rounded-lg flex items-center gap-2">
+                                <i class="fa-solid fa-user-group text-amber-400 text-[10px]"></i> PPS (Panitia Pemungutan)
+                            </button>
+                            <button id="nav-bpd" onclick="switchTab('bpd')" class="menu-btn w-full text-left py-2 px-3 text-xs text-red-100 hover:text-white hover:bg-red-800/40 rounded-lg flex items-center gap-2">
+                                <i class="fa-solid fa-user-shield text-amber-400 text-[10px]"></i> Pengawas BPD
+                            </button>
+                        </div>
                     </div>
 
-                    <!-- MENU KHUSUS PANITIA (DENGAN PROTEKSI LOCK) -->
-                    <button onclick="aksesAksiPanitia('input')" class="menu-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-emerald-100/80 hover:text-white hover:bg-emerald-800/40 hover:translate-x-1 transition-all duration-200 border border-transparent">
-                        <span class="flex items-center gap-3"><i class="fa-solid fa-file-invoice w-5 text-emerald-400/80"></i> Input Suara TPS</span>
+                    <button id="nav-dasarhukum" onclick="switchTab('dasarhukum')" class="menu-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-red-100/80 hover:text-white hover:bg-red-800/40 hover:translate-x-1 transition-all duration-200 border border-transparent">
+                        <i class="fa-solid fa-scale-balanced w-5 text-red-300/80"></i> Dasar Hukum
+                    </button>
+
+                    <button id="nav-layanan" onclick="switchTab('layanan')" class="menu-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-red-100/80 hover:text-white hover:bg-red-800/40 hover:translate-x-1 transition-all duration-200 border border-transparent">
+                        <i class="fa-solid fa-headset w-5 text-red-300/80"></i> Layanan Public
+                    </button>
+
+                    <div class="pt-2">
+                        <p class="px-3 pt-2 pb-1 text-[10px] font-bold uppercase tracking-wider text-red-300/70">Panitia P2KD</p>
+                    </div>
+
+                    <button id="nav-input" onclick="aksesAksiPanitia('input')" class="menu-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-red-100/80 hover:text-white hover:bg-red-800/40 hover:translate-x-1 transition-all duration-200 border border-transparent">
+                        <span class="flex items-center gap-3"><i class="fa-solid fa-file-invoice w-5 text-red-300/80"></i> Input Suara TPS</span>
                         <i id="lock-input" class="fa-solid fa-lock text-xs text-amber-400 bg-amber-400/10 p-1.5 rounded-lg border border-amber-400/20"></i>
                     </button>
-                    <button onclick="aksesAksiPanitia('upload')" class="menu-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-emerald-100/80 hover:text-white hover:bg-emerald-800/40 hover:translate-x-1 transition-all duration-200 border border-transparent">
-                        <span class="flex items-center gap-3"><i class="fa-solid fa-camera w-5 text-emerald-400/80"></i> Upload Form C1</span>
+                    <button id="nav-upload" onclick="aksesAksiPanitia('upload')" class="menu-btn w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-red-100/80 hover:text-white hover:bg-red-800/40 hover:translate-x-1 transition-all duration-200 border border-transparent">
+                        <span class="flex items-center gap-3"><i class="fa-solid fa-camera w-5 text-red-300/80"></i> Upload Form C1</span>
                         <i id="lock-upload" class="fa-solid fa-lock text-xs text-amber-400 bg-amber-400/10 p-1.5 rounded-lg border border-amber-400/20"></i>
                     </button>
                 </nav>
             </div>
 
-            <!-- FOOTER SIDEBAR & TOMBOL LOGIN -->
-            <div class="p-4 border-t border-emerald-800/40 bg-emerald-950/60 backdrop-blur-sm space-y-3 text-center">
-                <button onclick="bukaModalLogin()" id="btn-auth" class="w-full py-2.5 px-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/50 active:scale-95 border border-emerald-400/30">
+            <div class="p-4 border-t border-red-800/40 bg-red-950/60 backdrop-blur-sm space-y-3 text-center">
+                <button onclick="bukaModalLogin()" id="btn-auth" class="w-full py-2.5 px-4 bg-gradient-to-r from-red-700 to-rose-700 hover:from-red-600 hover:to-rose-600 text-white rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-red-950/60 border border-red-400/30">
                     <i class="fa-solid fa-user-shield text-amber-300"></i> Login Panitia (P2KD)
                 </button>
-                <p class="text-[10px] text-emerald-300/60 font-medium">Panitia Pemilihan Desa (P2KD)<br>&copy; 2026 Payo Lebar</p>
+                <p class="text-[10px] text-red-200/60 font-medium">Panitia Pemilihan Desa (P2KD)<br>&copy; 2026 Payo Lebar</p>
             </div>
         </aside>
 
         <!-- KONTEN UTAMA -->
         <main class="flex-1 flex flex-col overflow-y-auto bg-slate-50">
             
-            <!-- HEADER DASHBOARD UTAMA (GLASSMORPHISM MODERN) -->
             <header class="bg-white/80 backdrop-blur-md border-b border-slate-200/80 px-6 py-4 flex flex-col md:flex-row md:items-center justify-between gap-3 sticky top-0 z-10 shadow-xs">
                 <div class="space-y-0.5">
                     <div class="flex items-center gap-2">
                         <span class="relative flex h-2.5 w-2.5">
-                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-600"></span>
                         </span>
-                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-emerald-800 bg-emerald-50 border border-emerald-200/60 px-2.5 py-0.5 rounded-full">Portal Publikasi Resmi</span>
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-red-800 bg-red-50 border border-red-200/60 px-2.5 py-0.5 rounded-full">Portal Publikasi Resmi KPU Desa</span>
                     </div>
-                    <h1 class="text-lg md:text-xl font-black text-slate-900 tracking-tight uppercase">
-                        PEMILIHAN KEPALA DESA PAYO LEBAR
-                    </h1>
+                    <h1 class="text-lg md:text-xl font-black text-slate-900 tracking-tight uppercase">PEMILIHAN KEPALA DESA PAYO LEBAR</h1>
                     <p class="text-xs font-medium text-slate-500 flex items-center gap-1.5">
-                        <i class="fa-solid fa-location-dot text-emerald-600"></i>
-                        Kecamatan Singkut, Kabupaten Sarolangun — Tahun 2026
+                        <i class="fa-solid fa-location-dot text-red-600"></i> Kecamatan Singkut, Kabupaten Sarolangun — Tahun 2026
                     </p>
                 </div>
 
                 <div class="flex items-center gap-3 bg-slate-100/80 border border-slate-200 p-2.5 rounded-2xl self-start md:self-auto shadow-inner">
-                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-900 to-teal-800 text-amber-300 flex items-center justify-center font-bold text-sm flex-shrink-0 shadow-md">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-red-900 to-rose-800 text-amber-300 flex items-center justify-center font-bold text-sm flex-shrink-0 shadow-md">
                         <i class="fa-solid fa-bullhorn"></i>
                     </div>
                     <div class="text-right text-xs">
@@ -155,244 +162,128 @@
                 <!-- TAB 1: LIVE REAL-COUNT -->
                 <div id="view-realcount" class="animate-fade-in space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
                             <p class="text-xs text-slate-400 font-medium">Total DPT Desa</p>
                             <h3 class="text-2xl font-black text-slate-800 mt-0.5">1,450</h3>
                             <p class="text-[11px] text-slate-400 mt-1">Hak Pilih Terdaftar</p>
                         </div>
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
                             <p class="text-xs text-slate-400 font-medium">Suara Masuk (Sah & Tidak)</p>
-                            <h3 class="text-2xl font-black text-emerald-600 mt-0.5">1,120</h3>
-                            <p class="text-[11px] text-emerald-600 font-semibold mt-1">77.2% Partisipasi Pemilih</p>
+                            <h3 class="text-2xl font-black text-red-600 mt-0.5">1,120</h3>
+                            <p class="text-[11px] text-red-600 font-semibold mt-1">77.2% Partisipasi Pemilih</p>
                         </div>
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
                             <p class="text-xs text-slate-400 font-medium">Suara Tidak Sah</p>
                             <h3 class="text-2xl font-black text-rose-500 mt-0.5">24</h3>
                             <p class="text-[11px] text-slate-400 mt-1">Kerusakan / Salah Coblos</p>
                         </div>
-                        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm">
                             <p class="text-xs text-slate-400 font-medium">Progress Masuk TPS</p>
-                            <h3 class="text-2xl font-black text-teal-600 mt-0.5">3 / 3 TPS</h3>
-                            <p class="text-[11px] text-teal-600 font-semibold mt-1">100% data terverifikasi</p>
+                            <h3 class="text-2xl font-black text-amber-600 mt-0.5">3 / 3 TPS</h3>
+                            <p class="text-[11px] text-amber-600 font-semibold mt-1">100% data terverifikasi</p>
                         </div>
                     </div>
 
-                    <!-- HASIL E-COUNT BAR -->
                     <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
                         <h2 class="text-base font-bold text-slate-800 mb-5 flex items-center gap-2">
-                            <i class="fa-solid fa-chart-simple text-emerald-600"></i> Hasil Perhitungan Suara Sementara (Real-Count)
+                            <i class="fa-solid fa-chart-simple text-red-600"></i> Hasil Perhitungan Suara Sementara (Real-Count)
                         </h2>
-                        <div class="space-y-6">
-                            <div>
-                                <div class="flex justify-between items-center mb-2">
-                                    <div class="flex items-center gap-3">
-                                        <span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-800 font-black flex items-center justify-center text-xs shadow-xs">01</span>
-                                        <div>
-                                            <h4 class="font-bold text-slate-800">H. Ahmad Dahlan, S.Pd.</h4>
-                                            <p class="text-xs text-slate-400">Perolehan: 640 Suara</p>
-                                        </div>
-                                    </div>
-                                    <span class="text-lg font-black text-emerald-600">58.4%</span>
-                                </div>
-                                <div class="w-full bg-slate-100 rounded-full h-3.5 overflow-hidden p-0.5 border border-slate-200/60">
-                                    <div class="bg-gradient-to-r from-emerald-500 to-teal-500 h-2.5 rounded-full transition-all duration-1000" style="width: 58.4%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between items-center mb-2">
-                                    <div class="flex items-center gap-3">
-                                        <span class="w-8 h-8 rounded-xl bg-slate-100 text-slate-700 font-black flex items-center justify-center text-xs border border-slate-200">02</span>
-                                        <div>
-                                            <h4 class="font-bold text-slate-800">Bambang Subianto</h4>
-                                            <p class="text-xs text-slate-400">Perolehan: 456 Suara</p>
-                                        </div>
-                                    </div>
-                                    <span class="text-lg font-black text-slate-700">41.6%</span>
-                                </div>
-                                <div class="w-full bg-slate-100 rounded-full h-3.5 overflow-hidden p-0.5 border border-slate-200/60">
-                                    <div class="bg-gradient-to-r from-slate-400 to-slate-600 h-2.5 rounded-full transition-all duration-1000" style="width: 41.6%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- TABEL HASIL PER TPS -->
-                    <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
-                        <div class="p-5 border-b border-slate-100 font-bold text-slate-800 text-sm flex items-center justify-between">
-                            <span>Rincian Perolehan per TPS</span>
-                            <span class="text-xs text-slate-400 font-normal">3 TPS Terdata</span>
-                        </div>
-                        <div class="overflow-x-auto">
-                            <table class="w-full text-sm text-left text-slate-600">
-                                <thead class="bg-slate-50 text-slate-500 uppercase text-[11px] tracking-wider border-b border-slate-100 font-semibold">
-                                    <tr>
-                                        <th class="px-6 py-3.5">Nama TPS</th>
-                                        <th class="px-6 py-3.5">Calon 01</th>
-                                        <th class="px-6 py-3.5">Calon 02</th>
-                                        <th class="px-6 py-3.5">Tidak Sah</th>
-                                        <th class="px-6 py-3.5">Status Lampiran Form C1</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-slate-100">
-                                    <tr class="hover:bg-slate-50/80 transition-colors">
-                                        <td class="px-6 py-4 font-semibold text-slate-800">TPS 01 - Dusun I</td>
-                                        <td class="px-6 py-4 text-emerald-600 font-black">220</td>
-                                        <td class="px-6 py-4 font-medium">140</td>
-                                        <td class="px-6 py-4 text-rose-500 font-medium">8</td>
-                                        <td class="px-6 py-4"><span class="bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-full text-xs font-bold inline-flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-emerald-500 text-[10px]"></i> Verified</span></td>
-                                    </tr>
-                                    <tr class="hover:bg-slate-50/80 transition-colors">
-                                        <td class="px-6 py-4 font-semibold text-slate-800">TPS 02 - Dusun II</td>
-                                        <td class="px-6 py-4 text-emerald-600 font-black">210</td>
-                                        <td class="px-6 py-4 font-medium">160</td>
-                                        <td class="px-6 py-4 text-rose-500 font-medium">10</td>
-                                        <td class="px-6 py-4"><span class="bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-full text-xs font-bold inline-flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-emerald-500 text-[10px]"></i> Verified</span></td>
-                                    </tr>
-                                    <tr class="hover:bg-slate-50/80 transition-colors">
-                                        <td class="px-6 py-4 font-semibold text-slate-800">TPS 03 - Dusun III</td>
-                                        <td class="px-6 py-4 text-emerald-600 font-black">210</td>
-                                        <td class="px-6 py-4 font-medium">156</td>
-                                        <td class="px-6 py-4 text-rose-500 font-medium">6</td>
-                                        <td class="px-6 py-4"><span class="bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-full text-xs font-bold inline-flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-emerald-500 text-[10px]"></i> Verified</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <div id="realcount-bars-container" class="space-y-5"></div>
                     </div>
                 </div>
 
-                <!-- TAB 2: DATA PEMILIH (SESUAI SUB-MENU TAHAPAN) -->
+                <!-- TAB 2: PROFIL CALON KADES -->
+                <div id="view-calon" class="hidden animate-fade-in space-y-6">
+                    <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+                        <div>
+                            <h2 class="text-lg font-black text-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-users text-red-600"></i> Daftar Pasangan Calon Kades
+                            </h2>
+                            <p class="text-xs text-slate-500">Profil resmi Calon Kepala Desa Payo Lebar Tahun 2026</p>
+                        </div>
+                        <button id="btn-tambah-calon" onclick="bukaModalEditCalon()" class="hidden bg-gradient-to-r from-red-700 to-rose-700 text-white px-4 py-2 rounded-xl font-bold text-xs hover:from-red-600 transition items-center gap-2 shadow-sm">
+                            <i class="fa-solid fa-plus"></i> Tambah / Edit Calon
+                        </button>
+                    </div>
+
+                    <div id="grid-calon-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                </div>
+
+                <!-- TAB 3: DATA PEMILIH -->
                 <div id="view-pemilih" class="hidden animate-fade-in space-y-6">
-                    
-                    <!-- STEPPER MONITORING TAHAPAN -->
-                    <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
-                        <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2">
-                            <i class="fa-solid fa-list-check text-emerald-600"></i> Monitoring Tahapan Pemutakhiran Data Pemilih
-                        </h2>
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-center text-xs font-semibold">
-                            <div class="p-3 rounded-xl bg-emerald-50/60 border border-emerald-200/70 text-emerald-900">
-                                <span class="block font-bold">1. DPT Awal KPU</span>
-                                <span class="text-[10px] text-emerald-600 font-medium">20 Jul - 19 Agst 2026</span>
-                            </div>
-                            <div class="p-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-900/20 ring-2 ring-emerald-400/50">
-                                <span class="block font-bold">2. DPS (Sementara)</span>
-                                <span class="text-[10px] text-emerald-100 font-medium">20 Agst - 10 Sept 2026</span>
-                            </div>
-                            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-400">
-                                <span class="block font-bold">3. DPTam (Tambahan)</span>
-                                <span class="text-[10px] font-medium">11 - 20 Sept 2026</span>
-                            </div>
-                            <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-400">
-                                <span class="block font-bold">4. DPT (Tetap)</span>
-                                <span class="text-[10px] font-medium">21 - 25 Sept 2026</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- DASHBOARD TABEL DATA PEMILIH -->
                     <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
-                        <div class="flex justify-between items-center border-b border-slate-100 pb-4">
-                            <div>
-                                <h2 class="text-lg font-black text-slate-800" id="judul-tahapan-dpt">Daftar Pemilih Sementara (DPS)</h2>
-                                <p class="text-xs text-slate-400">Status Tahapan: <span id="status-tahapan-badge" class="font-bold text-amber-600 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md text-[10px]">Berjalan</span></p>
-                            </div>
-                            
-                            <!-- TOMBOL KHUSUS PANITIA (DILINDUNGI HAK AKSES) -->
-                            <div class="panel-admin hidden flex gap-2">
-                                <button onclick="alert('Buka Form Tambah Data')" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition shadow-xs">
-                                    <i class="fa-solid fa-plus"></i> Tambah Data Pemilih
-                                </button>
-                                <button onclick="alert('Buka Fitur Import Excel')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition shadow-xs">
-                                    <i class="fa-solid fa-file-excel"></i> Import Excel
-                                </button>
-                            </div>
-                        </div>
-
-                        <!-- SEARCH FILTER -->
+                        <h2 class="text-lg font-black text-slate-800" id="judul-tahapan-dpt">Daftar Pemilih Sementara (DPS)</h2>
                         <div class="flex gap-3">
-                            <input type="text" placeholder="Cari NIK / Nama Pemilih..." class="flex-1 border border-slate-200 p-2.5 rounded-xl text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:bg-white transition-all">
-                            <select class="border border-slate-200 p-2.5 rounded-xl text-sm bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500/50">
-                                <option value="">Semua Dusun / TPS</option>
-                                <option value="1">TPS 01 - Dusun I</option>
-                                <option value="2">TPS 02 - Dusun II</option>
-                                <option value="3">TPS 03 - Dusun III</option>
-                            </select>
-                            <button class="bg-emerald-700 hover:bg-emerald-800 text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-xs transition-colors">Cari</button>
-                        </div>
-
-                        <!-- TABEL PEMILIH -->
-                        <div class="overflow-x-auto rounded-xl border border-slate-100">
-                            <table class="w-full text-sm text-left text-slate-600">
-                                <thead class="bg-slate-50 text-slate-500 uppercase text-[11px] font-semibold">
-                                    <tr>
-                                        <th class="p-3 border-b">No</th>
-                                        <th class="p-3 border-b">NIK / NKK</th>
-                                        <th class="p-3 border-b">Nama Lengkap</th>
-                                        <th class="p-3 border-b">L/P</th>
-                                        <th class="p-3 border-b">Alamat / RT</th>
-                                        <th class="p-3 border-b">Status Kawin</th>
-                                        <th class="p-3 border-b kolom-admin hidden text-center">Aksi Panitia</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="hover:bg-slate-50 border-b border-slate-100">
-                                        <td class="p-3">1</td>
-                                        <td class="p-3 font-mono text-xs text-slate-500">150305...</td>
-                                        <td class="p-3 font-semibold text-slate-800">Ahmad Subagja</td>
-                                        <td class="p-3">L</td>
-                                        <td class="p-3">RT 01 / Dusun I</td>
-                                        <td class="p-3"><span class="bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded text-xs font-bold">Kawin</span></td>
-                                        <td class="p-3 text-center kolom-admin hidden">
-                                            <button onclick="alert('Edit Data Pemilih')" class="bg-amber-500 text-white px-2 py-1 rounded-lg text-xs"><i class="fa-solid fa-pen"></i></button>
-                                            <button onclick="confirm('Hapus data pemilih ini?')" class="bg-rose-600 text-white px-2 py-1 rounded-lg text-xs"><i class="fa-solid fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <input type="text" placeholder="Cari NIK / Nama Pemilih..." class="flex-1 border border-slate-200 p-2.5 rounded-xl text-sm bg-slate-50 outline-none">
+                            <button class="bg-red-700 text-white px-5 py-2.5 rounded-xl font-bold text-sm">Cari</button>
                         </div>
                     </div>
                 </div>
 
-                <!-- TAB 3: INPUT SUARA TPS (KHUSUS PANITIA) -->
+                <!-- TAB 4: PANITIA PPS (BISA DIEDIT) -->
+                <div id="view-pps" class="hidden animate-fade-in space-y-6">
+                    <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+                        <div>
+                            <h2 class="text-lg font-black text-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-user-group text-red-600"></i> Panitia Pemungutan Suara (PPS)
+                            </h2>
+                            <p class="text-xs text-slate-500">Struktur Penyelenggara Pemilihan Desa Payo Lebar</p>
+                        </div>
+                        <button id="btn-tambah-pps" onclick="bukaModalAnggota('pps')" class="hidden bg-gradient-to-r from-red-700 to-rose-700 text-white px-4 py-2 rounded-xl font-bold text-xs hover:from-red-600 transition items-center gap-2 shadow-sm">
+                            <i class="fa-solid fa-user-plus"></i> Tambah Panitia PPS
+                        </button>
+                    </div>
+                    <div id="grid-pps-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+                </div>
+
+                <!-- TAB 5: PENGAWAS BPD (BISA DIEDIT) -->
+                <div id="view-bpd" class="hidden animate-fade-in space-y-6">
+                    <div class="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm">
+                        <div>
+                            <h2 class="text-lg font-black text-slate-800 flex items-center gap-2">
+                                <i class="fa-solid fa-user-shield text-red-600"></i> Pengawas BPD (Badan Permusyawaratan Desa)
+                            </h2>
+                            <p class="text-xs text-slate-500">Tim Pengawas Independen Pilkades Payo Lebar</p>
+                        </div>
+                        <button id="btn-tambah-bpd" onclick="bukaModalAnggota('bpd')" class="hidden bg-gradient-to-r from-red-700 to-rose-700 text-white px-4 py-2 rounded-xl font-bold text-xs hover:from-red-600 transition items-center gap-2 shadow-sm">
+                            <i class="fa-solid fa-user-plus"></i> Tambah Pengawas BPD
+                        </button>
+                    </div>
+                    <div id="grid-bpd-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+                </div>
+
+                <!-- TAB LAINNYA -->
+                <div id="view-dasarhukum" class="hidden animate-fade-in bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
+                    <h2 class="text-lg font-black text-slate-800"><i class="fa-solid fa-scale-balanced text-red-600"></i> Landasan Hukum Pilkades</h2>
+                    <p class="text-xs text-slate-500">UU No. 6/2014 & Permendagri No. 112/2014</p>
+                </div>
+
+                <div id="view-layanan" class="hidden animate-fade-in bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4">
+                    <h2 class="text-lg font-black text-slate-800"><i class="fa-solid fa-headset text-red-600"></i> Pusat Layanan Public</h2>
+                    <p class="text-xs text-slate-500">Kantor Desa Payo Lebar, Kec. Singkut</p>
+                </div>
+
+                <!-- TAB INPUT SUARA TPS -->
                 <div id="view-input" class="hidden animate-fade-in max-w-2xl mx-auto bg-white rounded-2xl shadow-lg border border-slate-200/80 overflow-hidden">
-                    <div class="bg-gradient-to-r from-emerald-950 to-emerald-900 text-white p-5 flex items-center justify-between">
+                    <div class="bg-gradient-to-r from-red-950 to-red-900 text-white p-5 flex items-center justify-between">
                         <div>
                             <h2 class="font-black text-lg">Input Hasil Suara TPS (Form C1)</h2>
-                            <p class="text-xs text-emerald-300">Akses Terotorisasi Panitia P2KD</p>
+                            <p class="text-xs text-red-200">Akses Terotorisasi Panitia P2KD</p>
                         </div>
                         <i class="fa-solid fa-file-signature text-2xl text-amber-400"></i>
                     </div>
                     <form onsubmit="simpanData(event)" class="p-6 space-y-5">
                         <div>
                             <label class="block text-xs font-semibold text-slate-700 mb-2">Pilih TPS</label>
-                            <select required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-emerald-500/50">
+                            <select required class="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm outline-none">
                                 <option value="">-- Pilih TPS --</option>
                                 <option value="TPS 01">TPS 01 - Dusun I</option>
                                 <option value="TPS 02">TPS 02 - Dusun II</option>
                                 <option value="TPS 03">TPS 03 - Dusun III</option>
                             </select>
                         </div>
-                        <div class="space-y-3 pt-2 border-t border-slate-100">
-                            <div class="flex items-center justify-between p-3.5 bg-emerald-50/50 rounded-xl border border-emerald-100">
-                                <span class="font-bold text-slate-800 text-sm">01. H. Ahmad Dahlan</span>
-                                <input type="number" min="0" required placeholder="0" class="w-32 p-2 border border-slate-300 rounded-lg text-center font-bold text-emerald-800 bg-white focus:ring-2 focus:ring-emerald-500 outline-none">
-                            </div>
-                            <div class="flex items-center justify-between p-3.5 bg-emerald-50/50 rounded-xl border border-emerald-100">
-                                <span class="font-bold text-slate-800 text-sm">02. Bambang Subianto</span>
-                                <input type="number" min="0" required placeholder="0" class="w-32 p-2 border border-slate-300 rounded-lg text-center font-bold text-emerald-800 bg-white focus:ring-2 focus:ring-emerald-500 outline-none">
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-2 gap-4 pt-2 border-t border-slate-100">
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1">Suara Tidak Sah</label>
-                                <input type="number" min="0" required placeholder="0" class="w-full p-2.5 border border-rose-200 rounded-xl text-sm bg-rose-50/50 text-rose-700 font-bold focus:ring-2 focus:ring-rose-400 outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-semibold text-slate-600 mb-1">Upload Form C1</label>
-                                <input type="file" accept="image/*" required class="w-full text-xs text-slate-500 file:mr-2 file:py-2 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-100 file:text-emerald-800 hover:file:bg-emerald-200">
-                            </div>
-                        </div>
-                        <button type="submit" class="w-full py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl font-bold transition-all shadow-md shadow-emerald-900/20 active:scale-98">
+                        <div id="form-input-calon-container" class="space-y-3 pt-2 border-t border-slate-100"></div>
+                        <button type="submit" class="w-full py-3 bg-gradient-to-r from-red-700 to-rose-700 text-white rounded-xl font-bold">
                             Simpan Hasil Perhitungan
                         </button>
                     </form>
@@ -406,70 +297,242 @@
     <div id="modalLogin" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs hidden items-center justify-center z-50 p-4">
         <div class="bg-white p-6 rounded-2xl shadow-2xl w-full max-w-md space-y-4 border border-slate-100 animate-fade-in">
             <div class="flex justify-between items-center border-b border-slate-100 pb-3">
-                <h3 class="font-bold text-slate-800 text-base flex items-center gap-2"><i class="fa-solid fa-user-shield text-emerald-800"></i> Otorisasi Akses Panitia</h3>
+                <h3 class="font-bold text-slate-800 text-base flex items-center gap-2"><i class="fa-solid fa-user-shield text-red-700"></i> Otorisasi Akses Panitia</h3>
                 <button onclick="tutupModalLogin()" class="text-slate-400 hover:text-slate-600 font-bold text-lg">&times;</button>
             </div>
             <form onsubmit="prosesLogin(event)" class="space-y-4">
                 <div>
                     <label class="block text-xs font-semibold text-slate-600 mb-1">Username Panitia</label>
-                    <input type="text" id="username" required placeholder="Masukkan username" class="w-full p-2.5 border border-slate-200 rounded-xl text-sm bg-slate-50 outline-none focus:ring-2 focus:ring-emerald-500/50">
+                    <input type="text" id="username" required placeholder="Masukkan username" class="w-full p-2.5 border border-slate-200 rounded-xl text-sm bg-slate-50 outline-none">
                 </div>
                 <div>
                     <label class="block text-xs font-semibold text-slate-600 mb-1">Password</label>
-                    <input type="password" id="password" required placeholder="••••••••" class="w-full p-2.5 border border-slate-200 rounded-xl text-sm bg-slate-50 outline-none focus:ring-2 focus:ring-emerald-500/50">
+                    <input type="password" id="password" required placeholder="••••••••" class="w-full p-2.5 border border-slate-200 rounded-xl text-sm bg-slate-50 outline-none">
                 </div>
-                <button type="submit" class="w-full py-2.5 bg-gradient-to-r from-emerald-700 to-teal-700 hover:from-emerald-600 hover:to-teal-600 text-white font-bold rounded-xl text-sm transition-all shadow-md active:scale-98">
+                <button type="submit" class="w-full py-2.5 bg-gradient-to-r from-red-700 to-rose-700 text-white font-bold rounded-xl text-sm">
                     Masuk Mode Admin
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- LOGIC JAVASCRIPT MEMILIKI ANIMASI KE INTEGRASI TAB -->
+    <!-- MODAL EDIT / TAMBAH CALON KADES -->
+    <div id="modalEditCalon" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs hidden items-center justify-center z-50 p-4">
+        <div class="bg-white p-6 rounded-2xl shadow-2xl w-full max-w-lg space-y-4 border border-slate-100 animate-fade-in">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                <h3 class="font-bold text-slate-800 text-base flex items-center gap-2"><i class="fa-solid fa-user-pen text-red-700"></i> Form Update Data Calon Kades</h3>
+                <button onclick="tutupModalEditCalon()" class="text-slate-400 hover:text-slate-600 font-bold text-lg">&times;</button>
+            </div>
+            <form onsubmit="simpanProfilCalon(event)" class="space-y-3 text-xs">
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Nomor Urut</label>
+                    <input type="number" id="input-no-urut" min="1" max="99" required placeholder="Contoh: 01" class="w-full p-2.5 border border-slate-200 rounded-xl bg-slate-50">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Nama Lengkap & Gelar</label>
+                    <input type="text" id="input-nama-calon" required placeholder="Contoh: H. Ahmad Dahlan, S.Pd." class="w-full p-2.5 border border-slate-200 rounded-xl bg-slate-50">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Visi Utama</label>
+                    <textarea id="input-visi-calon" rows="3" required placeholder="Tuliskan visi singkat calon..." class="w-full p-2.5 border border-slate-200 rounded-xl bg-slate-50"></textarea>
+                </div>
+                <button type="submit" class="w-full py-2.5 bg-gradient-to-r from-red-700 to-rose-700 text-white font-bold rounded-xl text-sm shadow-md">
+                    Simpan & Perbarui Data
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL EDIT / TAMBAH ANGGOTA (PPS & PENGAWAS BPD) -->
+    <div id="modalAnggota" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs hidden items-center justify-center z-50 p-4">
+        <div class="bg-white p-6 rounded-2xl shadow-2xl w-full max-w-md space-y-4 border border-slate-100 animate-fade-in">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                <h3 id="modal-anggota-title" class="font-bold text-slate-800 text-base flex items-center gap-2"><i class="fa-solid fa-user-gear text-red-700"></i> Form Data Anggota</h3>
+                <button onclick="tutupModalAnggota()" class="text-slate-400 hover:text-slate-600 font-bold text-lg">&times;</button>
+            </div>
+            <form onsubmit="simpanAnggota(event)" class="space-y-3 text-xs">
+                <input type="hidden" id="input-anggota-index">
+                <input type="hidden" id="input-anggota-tipe">
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Nama Lengkap</label>
+                    <input type="text" id="input-nama-anggota" required placeholder="Masukkan nama lengkap" class="w-full p-2.5 border border-slate-200 rounded-xl bg-slate-50">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Jabatan / Peran</label>
+                    <input type="text" id="input-jabatan-anggota" required placeholder="Contoh: Ketua / Anggota Divisi Logistik" class="w-full p-2.5 border border-slate-200 rounded-xl bg-slate-50">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Nomor Kontak / WA</label>
+                    <input type="text" id="input-kontak-anggota" placeholder="Contoh: 081234567890" class="w-full p-2.5 border border-slate-200 rounded-xl bg-slate-50">
+                </div>
+                <button type="submit" class="w-full py-2.5 bg-gradient-to-r from-red-700 to-rose-700 text-white font-bold rounded-xl text-sm shadow-md">
+                    Simpan Data Anggota
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
     <script>
         let isPanitiaLoggedIn = false;
 
-        // Navigasi Tab dengan Efek Tombol Aktif (Glowing & Gradient Pill)
+        // DATA CALON KADES
+        let daftarCalon = [
+            { no: "01", nama: "H. Ahmad Dahlan, S.Pd.", visi: "Mewujudkan Desa Payo Lebar yang Sejahtera, Transparan, dan Berbasis Teknologi Informasi.", suara: 420, persen: "37.5%" },
+            { no: "02", nama: "Bambang Subianto", visi: "Pemerataan Pembangunan Infrastruktur dan Pemberdayaan Ekonomi Pertanian Desa.", suara: 310, persen: "27.6%" },
+            { no: "03", nama: "H. Suryadi, S.E.", visi: "Penguatan Badan Usaha Milik Desa (BUMDes) dan Kemandirian Ekonomi Pemuda.", suara: 200, persen: "17.8%" },
+            { no: "04", nama: "Dra. Hj. Nurjanah", visi: "Peningkatan Pelayanan Kesehatan, Pendidikan Anak, dan Kesejahteraan Perempuan.", suara: 110, persen: "9.8%" },
+            { no: "05", nama: "M. Ridwan Al-Faruq", visi: "Tata Kelola Pemerintahan Desa yang Bersih, Religius, dan Bebas Pungutan Liar.", suara: 80, persen: "7.1%" }
+        ];
+
+        // DATA PANITIA PPS
+        let daftarPPS = [
+            { nama: "Heryanto, S.ST", jabatan: "Ketua PPS", kontak: "0821-7788-9900" },
+            { nama: "Siti Rahmawati", jabatan: "Divisi Teknis & Penyelenggaraan", kontak: "0852-1122-3344" },
+            { nama: "Andi Saputra", jabatan: "Divisi Data & Pemutakhiran", kontak: "0813-4455-6677" },
+            { nama: "Nur Hidayah, A.Md", jabatan: "Divisi Keuangan & Logistik", kontak: "0812-9900-1122" },
+            { nama: "Budi Santoso", jabatan: "Anggota Divisi Hubmas", kontak: "0853-3344-5566" }
+        ];
+
+        // DATA PENGAWAS BPD
+        let daftarBPD = [
+            { nama: "Drs. M. Ali Akbar", jabatan: "Ketua Pengawas BPD", kontak: "0811-1234-5678" },
+            { nama: "H. Ahmad Fauzi", jabatan: "Wakil Ketua BPD", kontak: "0812-2345-6789" },
+            { nama: "Mustofa, S.P.", jabatan: "Sekretaris Pengawas", kontak: "0813-3456-7890" },
+            { nama: "Zulkifli Mansur", jabatan: "Pengawas Wilayah Dusun I", kontak: "0814-4567-8901" },
+            { nama: "Rahmat Hidayat", jabatan: "Pengawas Wilayah Dusun II", kontak: "0815-5678-9012" },
+            { nama: "Suryani, S.Pd", jabatan: "Pengawas Wilayah Dusun III", kontak: "0816-6789-0123" }
+        ];
+
+        // RENDER DATA CALON KADES
+        function renderCalon() {
+            const gridContainer = document.getElementById('grid-calon-container');
+            const realcountContainer = document.getElementById('realcount-bars-container');
+            const inputContainer = document.getElementById('form-input-calon-container');
+
+            gridContainer.innerHTML = '';
+            realcountContainer.innerHTML = '';
+            inputContainer.innerHTML = '';
+
+            daftarCalon.forEach((calon, idx) => {
+                gridContainer.innerHTML += `
+                    <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm space-y-4 hover:shadow-md transition">
+                        <div class="flex items-center gap-4">
+                            <div class="w-16 h-16 rounded-2xl ${idx === 0 ? 'bg-red-100 text-red-800 border-red-200' : 'bg-slate-100 text-slate-800 border-slate-200'} flex items-center justify-center font-black text-2xl border flex-shrink-0">
+                                ${calon.no}
+                            </div>
+                            <div class="overflow-hidden">
+                                <h3 class="text-base font-black text-slate-800 truncate">${calon.nama}</h3>
+                                <p class="text-xs text-slate-400">Calon Kepala Desa Nomor Urut ${calon.no}</p>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-100 text-xs space-y-1.5">
+                            <p class="font-bold text-slate-700">Visi Utama:</p>
+                            <p class="text-slate-600 italic">"${calon.visi}"</p>
+                        </div>
+                        ${isPanitiaLoggedIn ? `<button onclick="editCalonSpesifik(${idx})" class="w-full py-1.5 bg-slate-100 hover:bg-red-50 text-slate-700 hover:text-red-700 rounded-lg text-xs font-bold border border-slate-200 transition">Edit Data Calon Ini</button>` : ''}
+                    </div>
+                `;
+
+                realcountContainer.innerHTML += `
+                    <div>
+                        <div class="flex justify-between items-center mb-1.5">
+                            <div class="flex items-center gap-3">
+                                <span class="w-7 h-7 rounded-lg ${idx === 0 ? 'bg-red-100 text-red-800' : 'bg-slate-100 text-slate-700'} font-black flex items-center justify-center text-xs border border-slate-200">${calon.no}</span>
+                                <div>
+                                    <h4 class="font-bold text-slate-800 text-sm">${calon.nama}</h4>
+                                    <p class="text-[11px] text-slate-400">Perolehan: ${calon.suara} Suara</p>
+                                </div>
+                            </div>
+                            <span class="text-base font-black ${idx === 0 ? 'text-red-600' : 'text-slate-700'}">${calon.persen}</span>
+                        </div>
+                        <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden p-0.5 border border-slate-200/60">
+                            <div class="${idx === 0 ? 'bg-gradient-to-r from-red-600 to-rose-600' : 'bg-slate-400'} h-2 rounded-full transition-all duration-1000" style="width: ${calon.persen}"></div>
+                        </div>
+                    </div>
+                `;
+
+                inputContainer.innerHTML += `
+                    <div class="flex items-center justify-between p-3 bg-red-50/50 rounded-xl border border-red-100">
+                        <span class="font-bold text-slate-800 text-xs">${calon.no}. ${calon.nama}</span>
+                        <input type="number" min="0" value="${calon.suara}" required class="w-28 p-1.5 border border-slate-300 rounded-lg text-center font-bold text-red-800 bg-white text-xs outline-none focus:ring-2 focus:ring-red-500">
+                    </div>
+                `;
+            });
+        }
+
+        // RENDER PPS & PENGAWAS BPD
+        function renderTim(tipe) {
+            const container = document.getElementById(tipe === 'pps' ? 'grid-pps-container' : 'grid-bpd-container');
+            const dataList = tipe === 'pps' ? daftarPPS : daftarBPD;
+            container.innerHTML = '';
+
+            dataList.forEach((item, index) => {
+                container.innerHTML += `
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-sm flex items-center justify-between gap-3">
+                        <div class="flex items-center gap-3 overflow-hidden">
+                            <div class="w-10 h-10 rounded-xl bg-slate-100 text-red-800 flex items-center justify-center font-bold border border-slate-200 flex-shrink-0">
+                                <i class="fa-solid ${tipe === 'pps' ? 'fa-user' : 'fa-user-shield'}"></i>
+                            </div>
+                            <div class="overflow-hidden">
+                                <h4 class="font-bold text-xs text-slate-800 truncate">${item.nama}</h4>
+                                <p class="text-[11px] font-semibold text-red-700 truncate">${item.jabatan}</p>
+                                <p class="text-[10px] text-slate-400 font-medium">${item.kontak || '-'}</p>
+                            </div>
+                        </div>
+                        ${isPanitiaLoggedIn ? `
+                            <div class="flex items-center gap-1 flex-shrink-0">
+                                <button onclick="editAnggota('${tipe}', ${index})" class="w-7 h-7 bg-slate-100 hover:bg-amber-100 text-slate-600 hover:text-amber-800 rounded-lg flex items-center justify-center text-xs border border-slate-200">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                                <button onclick="hapusAnggota('${tipe}', ${index})" class="w-7 h-7 bg-slate-100 hover:bg-rose-100 text-slate-600 hover:text-rose-700 rounded-lg flex items-center justify-center text-xs border border-slate-200">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            });
+        }
+
+        function renderSemuaData() {
+            renderCalon();
+            renderTim('pps');
+            renderTim('bpd');
+        }
+
+        // SWAP TAB FUNCTION
         function switchTab(viewName) {
-            document.getElementById('view-realcount').classList.add('hidden');
-            document.getElementById('view-pemilih').classList.add('hidden');
-            document.getElementById('view-input').classList.add('hidden');
-            
-            const selectedTab = document.getElementById(`view-${viewName}`);
-            selectedTab.classList.remove('hidden');
+            const views = ['realcount', 'calon', 'pemilih', 'pps', 'bpd', 'dasarhukum', 'layanan', 'input'];
+            views.forEach(v => {
+                const el = document.getElementById(`view-${v}`);
+                if (el) el.classList.add('hidden');
+            });
 
-            // Reset Kelas Tombol Navigasi Utama
-            const btnRealcount = document.getElementById('btn-menu-realcount');
-            const btnCalon = document.getElementById('btn-menu-calon');
-            
-            const activeClass = "bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-semibold shadow-lg shadow-emerald-900/40 border-emerald-400/30";
-            const inactiveClass = "text-emerald-100/80 hover:text-white hover:bg-emerald-800/40 border-transparent";
+            const targetView = document.getElementById(`view-${viewName}`);
+            if (targetView) targetView.classList.remove('hidden');
 
-            if (viewName === 'realcount') {
-                btnRealcount.className = `menu-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all duration-200 border ${activeClass}`;
-                btnCalon.className = `menu-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all duration-200 border ${inactiveClass}`;
-            } else if (viewName === 'calon') {
-                btnCalon.className = `menu-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all duration-200 border ${activeClass}`;
-                btnRealcount.className = `menu-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all duration-200 border ${inactiveClass}`;
+            document.querySelectorAll('.menu-btn').forEach(btn => {
+                btn.className = "menu-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-red-100/80 hover:text-white hover:bg-red-800/40 hover:translate-x-1 transition-all duration-200 border border-transparent";
+            });
+
+            const activeBtn = document.getElementById(`nav-${viewName}`);
+            if (activeBtn) {
+                activeBtn.className = "menu-btn w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 text-white font-semibold shadow-lg shadow-red-950/50 border border-red-400/30 transition-all duration-200";
             }
         }
 
-        // Toggle Submenu Accordion
-        function toggleSubmenu(id) {
-            const submenu = document.getElementById(id);
-            const arrow = document.getElementById('arrow-pemilih');
-            submenu.classList.toggle('hidden');
-            arrow.classList.toggle('rotate-180');
+        function toggleSubmenu(menuId, arrowId) {
+            document.getElementById(menuId).classList.toggle('hidden');
+            document.getElementById(arrowId).classList.toggle('rotate-180');
         }
 
-        // Pilih Tahapan DPT dari Sub-Menu
         function pilihTahapan(namaTahapan, statusText) {
             switchTab('pemilih');
             document.getElementById('judul-tahapan-dpt').innerText = `Daftar Pemilih: ${namaTahapan}`;
-            document.getElementById('status-tahapan-badge').innerText = statusText;
         }
 
-        // Modal Login
+        // MODAL MANAGEMENT
         function bukaModalLogin() {
             document.getElementById('modalLogin').classList.remove('hidden');
             document.getElementById('modalLogin').classList.add('flex');
@@ -480,10 +543,111 @@
             document.getElementById('modalLogin').classList.remove('flex');
         }
 
-        // Hak Akses Panitia
+        function bukaModalEditCalon() {
+            document.getElementById('modalEditCalon').classList.remove('hidden');
+            document.getElementById('modalEditCalon').classList.add('flex');
+        }
+
+        function tutupModalEditCalon() {
+            document.getElementById('modalEditCalon').classList.add('hidden');
+            document.getElementById('modalEditCalon').classList.remove('flex');
+        }
+
+        function bukaModalAnggota(tipe, index = null) {
+            document.getElementById('input-anggota-tipe').value = tipe;
+            document.getElementById('input-anggota-index').value = index !== null ? index : '';
+            
+            const title = document.getElementById('modal-anggota-title');
+            title.innerHTML = index !== null ? `<i class="fa-solid fa-user-pen text-red-700"></i> Edit Data ${tipe.toUpperCase()}` : `<i class="fa-solid fa-user-plus text-red-700"></i> Tambah Anggota ${tipe.toUpperCase()}`;
+
+            if (index !== null) {
+                const data = (tipe === 'pps' ? daftarPPS : daftarBPD)[index];
+                document.getElementById('input-nama-anggota').value = data.nama;
+                document.getElementById('input-jabatan-anggota').value = data.jabatan;
+                document.getElementById('input-kontak-anggota').value = data.kontak || '';
+            } else {
+                document.getElementById('input-nama-anggota').value = '';
+                document.getElementById('input-jabatan-anggota').value = '';
+                document.getElementById('input-kontak-anggota').value = '';
+            }
+
+            document.getElementById('modalAnggota').classList.remove('hidden');
+            document.getElementById('modalAnggota').classList.add('flex');
+        }
+
+        function tutupModalAnggota() {
+            document.getElementById('modalAnggota').classList.add('hidden');
+            document.getElementById('modalAnggota').classList.remove('flex');
+        }
+
+        // SIMPAN & EDIT TIM / ANGGOTA
+        function editAnggota(tipe, index) {
+            bukaModalAnggota(tipe, index);
+        }
+
+        function hapusAnggota(tipe, index) {
+            if (confirm("Apakah Anda yakin ingin menghapus data anggota ini?")) {
+                if (tipe === 'pps') {
+                    daftarPPS.splice(index, 1);
+                } else {
+                    daftarBPD.splice(index, 1);
+                }
+                renderTim(tipe);
+            }
+        }
+
+        function simpanAnggota(e) {
+            e.preventDefault();
+            const tipe = document.getElementById('input-anggota-tipe').value;
+            const index = document.getElementById('input-anggota-index').value;
+            const nama = document.getElementById('input-nama-anggota').value;
+            const jabatan = document.getElementById('input-jabatan-anggota').value;
+            const kontak = document.getElementById('input-kontak-anggota').value;
+
+            const targetArray = tipe === 'pps' ? daftarPPS : daftarBPD;
+
+            if (index !== '') {
+                targetArray[index] = { nama, jabatan, kontak };
+            } else {
+                targetArray.push({ nama, jabatan, kontak });
+            }
+
+            renderTim(tipe);
+            tutupModalAnggota();
+            alert("Data Anggota berhasil tersimpan!");
+        }
+
+        function editCalonSpesifik(index) {
+            const c = daftarCalon[index];
+            document.getElementById('input-no-urut').value = c.no;
+            document.getElementById('input-nama-calon').value = c.nama;
+            document.getElementById('input-visi-calon').value = c.visi;
+            bukaModalEditCalon();
+        }
+
+        function simpanProfilCalon(e) {
+            e.preventDefault();
+            const no = document.getElementById('input-no-urut').value.padStart(2, '0');
+            const nama = document.getElementById('input-nama-calon').value;
+            const visi = document.getElementById('input-visi-calon').value;
+
+            const idx = daftarCalon.findIndex(c => c.no === no);
+            if (idx !== -1) {
+                daftarCalon[idx].nama = nama;
+                daftarCalon[idx].visi = visi;
+            } else {
+                daftarCalon.push({ no: no, nama: nama, visi: visi, suara: 0, persen: "0%" });
+                daftarCalon.sort((a,b) => parseInt(a.no) - parseInt(b.no));
+            }
+
+            renderCalon();
+            tutupModalEditCalon();
+            alert("Data Profil Calon Kades Berhasil Diperbarui!");
+        }
+
         function aksesAksiPanitia(targetView) {
             if (!isPanitiaLoggedIn) {
-                alert("Akses Terkunci! Hanya Panitia (P2KD) yang dapat mengakses fitur ini.");
+                alert("Akses Terkunci! Silakan Login Panitia (P2KD) terlebih dahulu.");
                 bukaModalLogin();
             } else {
                 switchTab(targetView);
@@ -497,22 +661,27 @@
 
             if (u === "admin" && p === "123456") {
                 isPanitiaLoggedIn = true;
-                alert("Login Panitia Berhasil! Mode Pengeditan Data Aktif.");
+                alert("Login Panitia Berhasil! Tombol Pengeditan Calon, PPS, dan BPD Aktif.");
                 tutupModalLogin();
                 
-                // Aktifkan UI Panitia
-                document.getElementById('user-status-label').innerHTML = `<span class="text-emerald-700 font-bold flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Panitia (P2KD)</span>`;
+                document.getElementById('user-status-label').innerHTML = `<span class="text-red-700 font-bold flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Panitia (P2KD)</span>`;
                 document.getElementById('lock-input').classList.add('hidden');
                 document.getElementById('lock-upload').classList.add('hidden');
                 
-                document.querySelectorAll('.panel-admin').forEach(el => el.classList.remove('hidden'));
-                document.querySelectorAll('.kolom-admin').forEach(el => el.classList.remove('hidden'));
-                
+                // Tampilkan semua tombol pengeditan
+                document.getElementById('btn-tambah-calon').classList.remove('hidden');
+                document.getElementById('btn-tambah-calon').classList.add('flex');
+                document.getElementById('btn-tambah-pps').classList.remove('hidden');
+                document.getElementById('btn-tambah-pps').classList.add('flex');
+                document.getElementById('btn-tambah-bpd').classList.remove('hidden');
+                document.getElementById('btn-tambah-bpd').classList.add('flex');
+
                 const btnAuth = document.getElementById('btn-auth');
                 btnAuth.innerHTML = `<i class="fa-solid fa-right-from-bracket"></i> Logout Panitia`;
-                btnAuth.className = "w-full py-2.5 px-4 bg-gradient-to-r from-rose-700 to-red-700 hover:from-rose-600 hover:to-red-600 text-white rounded-xl text-xs font-bold transition-all duration-200 flex items-center justify-center gap-2 shadow-lg shadow-rose-950/50 active:scale-95 border border-rose-400/30";
+                btnAuth.className = "w-full py-2.5 px-4 bg-slate-900 text-white rounded-xl text-xs font-bold transition-all shadow-lg border border-slate-700";
                 btnAuth.onclick = () => location.reload();
 
+                renderSemuaData();
             } else {
                 alert("Username atau Password Panitia salah!");
             }
@@ -520,9 +689,12 @@
 
         function simpanData(e) {
             e.preventDefault();
-            alert("Hasil suara berhasil disimpan!");
+            alert("Hasil suara TPS berhasil tersimpan!");
             switchTab('realcount');
         }
+
+        // INISIALISASI
+        renderSemuaData();
     </script>
 </body>
 </html>
