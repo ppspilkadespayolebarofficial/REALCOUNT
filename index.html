@@ -3,2778 +3,614 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PILKADES PAYO LEBAR 2026</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Real Count Pilkades Desa Payo Lebar 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root {
-            --kpu-primary: #580c1f;
-            --kpu-secondary: #8b1531;
-            --kpu-accent: #f59e0b;
-            --kpu-bg: #fdf2f4;
-            --kpu-gradient: linear-gradient(145deg, #580c1f 0%, #350511 100%);
-            --kpu-card-bg: #ffffff;
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap');
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--kpu-bg);
-            background-image: radial-gradient(rgba(88, 12, 31, 0.04) 1px, transparent 1px), radial-gradient(rgba(88, 12, 31, 0.04) 1px, var(--kpu-bg) 1px);
-            background-size: 60px 60px;
-            background-position: 0 0, 20px 20px;
-            color: #1e293b;
-            overflow-x: hidden;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
-
-        .sidebar {
-            min-height: 100vh;
-            background: var(--kpu-gradient);
-            color: #fff;
-            box-shadow: 8px 0 40px rgba(88, 12, 31, 0.15);
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            overflow-y: auto;
-            border-right: 2px solid rgba(245, 158, 11, 0.2);
+        .progress-bar-fill {
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        .sidebar .brand-box {
-            padding: 24px 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            background: rgba(0, 0, 0, 0.2);
+        /* Efek 3D Kartu & Shadow Custom */
+        .card-3d {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
         }
-
-        .sidebar .menu-category-header {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            color: #fbbf24;
-            padding: 14px 16px 8px 16px;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            transition: background 0.2s;
-            border-radius: 8px;
-            margin: 4px 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border-left: 3px solid #fbbf24;
+        .card-3d:hover {
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 20px 35px -10px rgba(15, 23, 42, 0.15), 0 10px 15px -5px rgba(15, 23, 42, 0.08);
         }
-
-        .sidebar .menu-category-header:hover {
-            background: rgba(255, 255, 255, 0.12);
-            color: #fff;
+        /* Frame Foto 3D Depth */
+        .photo-3d-box {
+            box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
         }
-
-        .sidebar .menu-category-header i.chevron-icon {
-            transition: transform 0.3s ease;
-            font-size: 0.75rem;
-        }
-
-        .sidebar .menu-category-header.expanded i.chevron-icon {
-            transform: rotate(180deg);
-        }
-
-        .sidebar .collapsible-submenu {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            padding-left: 8px;
-        }
-
-        .sidebar .collapsible-submenu.show {
-            max-height: 400px;
-        }
-
-        .sidebar .nav-link {
-            color: #f1f5f9;
-            padding: 9px 16px;
-            margin: 3px 12px 3px 20px;
-            border-radius: 8px;
-            font-weight: 500;
-            font-size: 0.85rem;
-            transition: all 0.25s ease;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .sidebar .nav-link i {
-            margin-right: 10px;
-            font-size: 0.95rem;
-            color: #cbd5e1;
-        }
-
-        .sidebar .nav-link:hover {
-            color: #fff;
-            background-color: rgba(139, 21, 49, 0.6);
-            transform: translateX(3px);
-        }
-
-        .sidebar .nav-link:hover i {
-            color: #fbbf24;
-        }
-
-        .sidebar .nav-link.active {
-            color: #fff;
-            background: linear-gradient(135deg, #b91c3c 0%, #8b1531 100%);
-            box-shadow: 0 4px 15px rgba(185, 28, 60, 0.4);
-            font-weight: 600;
-            border-left: 3px solid #fbbf24;
-        }
-
-        .sidebar .nav-link.active i {
-            color: #fbbf24;
-        }
-
-        .portal-header {
-            background: linear-gradient(135deg, #700f26 0%, #40030d 100%);
-            color: white;
-            border-radius: 16px;
-            padding: 32px 36px;
-            box-shadow: 0 10px 30px rgba(112, 15, 38, 0.25);
-            margin-bottom: 24px;
-            border: 1px solid rgba(245, 158, 11, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .portal-header::after {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 200px;
-            height: 200px;
-            background: rgba(245, 158, 11, 0.08);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .portal-header h2 {
-            font-size: 2.1rem !important;
-            font-weight: 800 !important;
-            letter-spacing: -0.5px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            text-transform: uppercase;
-        }
-
-        .card-custom {
-            border: none;
-            border-radius: 16px;
-            box-shadow: 0 6px 20px rgba(112, 15, 38, 0.06);
-            background: var(--kpu-card-bg);
-            border: 1px solid rgba(112, 15, 38, 0.08);
-        }
-
-        .card-custom-rekap {
-            background: linear-gradient(135deg, #ffffff 0%, #fffbf0 100%);
-            border: 2px solid rgba(245, 158, 11, 0.35);
-            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.12);
-        }
-
-        .rekap-title-header {
-            background: linear-gradient(135deg, #580c1f 0%, #8b1531 100%);
-            color: #ffffff;
-            padding: 14px 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(88, 12, 31, 0.2);
-        }
-
-        .stat-card {
-            border-radius: 12px;
-            padding: 18px;
-            color: white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            transition: transform 0.2s, box-shadow 0.2s;
-            border-bottom: 4px solid rgba(0,0,0,0.2);
-        }
-        .stat-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 22px rgba(0,0,0,0.15);
-        }
-
-        .stat-card-1 {
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
-            border-bottom-color: #93c5fd;
-        }
-        .stat-card-2 {
-            background: linear-gradient(135deg, #065f46 0%, #047857 100%);
-            border-bottom-color: #6ee7b7;
-        }
-        .stat-card-3 {
-            background: linear-gradient(135deg, #b45309 0%, #d97706 100%);
-            border-bottom-color: #fde68a;
-        }
-        .stat-card-4 {
-            background: linear-gradient(135deg, #6b21a8 0%, #7e22ce 100%);
-            border-bottom-color: #d8b4fe;
-        }
-
-        .table-scroll-container {
-            width: 100%;
-            max-height: 50vh;
-            overflow-y: auto;
-            overflow-x: auto;
-            position: relative;
-        }
-
-        .sheet-table {
-            width: 100% !important;
-            font-size: 0.80rem;
-            margin-bottom: 0;
-            border-collapse: separate;
-            border-spacing: 0;
-        }
-
-        .sheet-table th {
-            position: sticky;
-            top: 0;
-            background-color: #700f26 !important;
-            color: #ffffff;
-            font-weight: 700 !important;
-            text-align: center;
-            padding: 7px 8px;
-            border-bottom: 2px solid #580c1f !important;
-            white-space: nowrap;
-            z-index: 10;
-        }
-
-        .sheet-table td {
-            border: 1px solid #f1d3d8 !important;
-            vertical-align: middle;
-            padding: 5px 7px;
-            text-align: center;
-            color: #334155;
-        }
-
-        .sheet-table tr:hover td {
-            background-color: #fae8ec !important;
-        }
-
-        .sheet-table td.align-left, 
-        .sheet-table th.align-left {
-            text-align: left !important;
-        }
-
-        .tms-row {
-            background-color: #fde8e8 !important;
-        }
-        .tms-row td {
-            color: #9b1c1c !important;
-        }
-
-        .border-top-family td {
-            border-top: 3px solid #b91c3c !important;
-        }
-
-        .row-index {
-            background-color: #f8fafc;
-            color: #64748b;
-            text-align: center;
-            font-weight: 600;
-            width: 45px;
-            white-space: nowrap;
-            position: sticky;
-            left: 0;
-            z-index: 5;
-        }
-
-        .sheet-table th.row-index {
-            z-index: 15;
-            background-color: #580c1f !important;
-            color: #fff;
-        }
-
-        #statusToast {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            z-index: 1050;
-            display: none;
-            border-radius: 10px;
-        }
-
-        .chart-container {
-            position: relative;
-            height: 280px;
-            width: 100%;
-        }
-
-        .chart-section-box {
-            animation: fadeIn 0.3s ease-in-out;
-        }
-
-        .realtime-clock-box-bottom {
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            padding: 8px 18px;
-            border-radius: 12px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #fef08a;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            backdrop-filter: blur(5px);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ===== FORMAT CETAK  FOLIO ===== */
-        #PrintContainer { display:none; }
-        @media print {
-            @page { size: 330mm 215mm; margin: 4mm 5mm; }
-            body.printing- #printableArea {
-                position: static !important; width: 100% !important; padding: 0 !important;
-                margin: 0 !important; border: 0 !important; box-shadow: none !important;
-            }
-            body.printing- #dpsPrintContainer {
-                display: block !important; width: 100%; margin: 0; padding: 0;
-                font-family: Arial, Helvetica, sans-serif; color: #000;
-            }
-            body.printing-dps #dpsPrintContainer .dps-first-page-title {
-                text-align:center; font-weight:700; font-size:17px; line-height:1.1;
-                margin: 0 0 2.5mm 0; text-transform:uppercase;
-            }
-            body.printing-dps #dpsPrintContainer .dps-meta {
-                display:grid; grid-template-columns:1fr 1fr; column-gap:16mm;
-                font-size:10px; line-height:1.15; font-weight:700; margin-bottom:2.5mm;
-            }
-            body.printing-dps #dpsPrintContainer table {
-                width:100%; border-collapse:collapse; table-layout:fixed;
-                font-size:9.2px; line-height:1.05; margin:0;
-            }
-            body.printing-dps #dpsPrintContainer thead { display:table-header-group; }
-            body.printing-dps #dpsPrintContainer tr { break-inside:avoid; page-break-inside:avoid; }
-            body.printing-dps #dpsPrintContainer th {
-                border:1px solid #000; padding:2.2px 2px; text-align:center;
-                vertical-align:middle; font-weight:700; height:8mm;
-            }
-            body.printing-dps #dpsPrintContainer td {
-                border:1px solid #000; padding:2.0px 2.5px; vertical-align:middle;
-                height:5.8mm; overflow:hidden;
-            }
-            body.printing-dps #dpsPrintContainer .c-no { width:4%; text-align:center; }
-            body.printing-dps #dpsPrintContainer .c-nik { width:13%; text-align:center; white-space:nowrap; }
-            body.printing-dps #dpsPrintContainer .c-nama { width:17%; }
-            body.printing-dps #dpsPrintContainer .c-tempat { width:9%; }
-            body.printing-dps #dpsPrintContainer .c-tgl { width:9%; text-align:center; }
-            body.printing-dps #dpsPrintContainer .c-umur { width:6%; text-align:center; }
-            body.printing-dps #dpsPrintContainer .c-kawin { width:8%; text-align:center; }
-            body.printing-dps #dpsPrintContainer .c-jk { width:6%; text-align:center; }
-            body.printing-dps #dpsPrintContainer .c-alamat { width:21%; }
-            body.printing-dps #dpsPrintContainer .c-ket { width:7%; }
-            body.printing-dps #dpsPrintContainer .dps-summary {
-                display:grid; grid-template-columns:1fr 1fr 1fr; gap:8mm;
-                font-size:9.5px; font-weight:700; margin-top:2.5mm;
-            }
-            body.printing-dps #dpsPrintContainer .dps-notes {
-                font-size:9px; line-height:1.2; margin-top:2mm;
-            }
-            body.printing-dps #dpsPrintContainer .dps-signature {
-                break-inside:avoid; page-break-inside:avoid; margin-top:4mm;
-                font-size:9.5px; font-weight:700; text-align:center;
-            }
-            body.printing-dps #dpsPrintContainer .dps-sign-grid {
-                display:grid; grid-template-columns:repeat(4,1fr); gap:12mm; margin-top:2mm;
-            }
-            body.printing-dps #dpsPrintContainer .dps-sign-space { height:12mm; }
-            body.printing-dps #dpsPrintContainer .dps-sign-line {
-                border-top:1px solid #000; padding-top:1mm; font-size:9px;
-            }
-            body.printing-dps #dpsPrintContainer .dps-page-note {
-                text-align:right; font-size:7.5px; margin-top:1mm;
-            }
-            body.printing-dps #tableScrollContainer,
-            body.printing-dps #printHeader { display:none !important; }
-        }
-
-        @media print {
-            body * { visibility: hidden; }
-            #printableArea, #printableArea * { visibility: visible; }
-            #printableArea { position: absolute; left: 0; top: 0; width: 100%; }
-            .no-print { display: none !important; }
-            .table-scroll-container { max-height: none !important; overflow: visible !important; }
-
-            #printableArea .sheet-table {
-                font-size: 8px !important;
-                line-height: 1.05 !important;
-            }
-            #printableArea .sheet-table th {
-                padding: 4px 5px !important;
-                line-height: 1.05 !important;
-            }
-            #printableArea .sheet-table td {
-                padding: 3px 5px !important;
-                line-height: 1.05 !important;
-            }
-            #printableArea .row-index {
-                width: 32px !important;
-            }
+        .bg-pattern {
+            background-image: radial-gradient(rgba(225, 29, 72, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
         }
     </style>
+</head>
+<body class="bg-gradient-to-br from-slate-100 via-rose-50/40 to-amber-50/30 bg-pattern font-sans text-slate-800 antialiased min-h-screen flex flex-col">
 
-<style id="adminTransitionStyles">
-#adminTransitionOverlay{position:fixed;inset:0;z-index:99999;display:none;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 35%,rgba(150,15,50,.96),rgba(45,0,18,.99));backdrop-filter:blur(5px);}
-#adminTransitionOverlay.show{display:flex;animation:adminFadeIn .25s ease-out;}
-.admin-transition-card{text-align:center;color:#fff;width:min(430px,90vw);padding:34px 28px;border-radius:24px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);box-shadow:0 25px 80px rgba(0,0,0,.35);overflow:hidden;}
-.admin-transition-icon{font-size:54px;color:#ffd400;animation:adminPulse 1s infinite;}
-.admin-transition-title{font-weight:800;font-size:25px;margin-top:15px;text-transform:uppercase;}
-.admin-transition-subtitle{opacity:.82;margin-top:8px;}
-.admin-slides{position:relative;height:7px;margin-top:25px;border-radius:10px;background:rgba(255,255,255,.16);overflow:hidden;}
-.admin-slides:after{content:"";position:absolute;left:0;top:0;height:100%;width:35%;background:#ffd400;border-radius:10px;animation:adminSlide 1.15s ease-in-out infinite;}
-@keyframes adminFadeIn{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:scale(1)}}
-@keyframes adminPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.12);opacity:.78}}
-@keyframes adminSlide{0%{left:-35%}100%{left:100%}}
-</style>
-<style id="compactMenuFinalStyles">
-#sidebar{position:fixed!important;left:0!important;top:0!important;bottom:0!important;width:238px!important;max-width:86vw!important;z-index:3000!important;transform:translateX(-105%);transition:transform .25s ease;box-shadow:10px 0 30px rgba(0,0,0,.22)}
-#sidebar.menu-visible{transform:translateX(0)}
-#sidebar + main, main.col-md-9, main.col-lg-10{width:100%!important;max-width:100%!important;flex:0 0 100%!important;margin-left:0!important}
-#menuToggleButton{position:fixed;left:12px;top:12px;z-index:3100;border:0;border-radius:10px;padding:9px 13px;font-weight:800;background:#ffd400;color:#5a0920;box-shadow:0 4px 14px rgba(0,0,0,.22);cursor:pointer}
-#menuBackdrop{display:none;position:fixed;inset:0;z-index:2999;background:rgba(0,0,0,.28)}
-#menuBackdrop.show{display:block}
-.chart-container{height:210px!important;min-height:210px!important}
-</style></head>
-<body><button id="menuToggleButton" type="button" aria-label="Tampilkan menu" aria-expanded="false" onclick="toggleHiddenMenu()"><i class="fas fa-bars me-1"></i> MENU</button><div id="menuBackdrop" onclick="toggleHiddenMenu(false)"></div>
-
-<div class="container-fluid">
-    <div class="row">
-        <!-- Sidebar Menu -->
-        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar p-0 no-print">
-            <div class="brand-box">
-                <i class="fas fa-landmark fa-2x text-warning mb-2"></i>
-                <h5 class="text-white fw-bold mb-0 fs-20">PILKADES</h5>
-                <small class="text-warning fw-semibold" style="font-size: 0.75rem;">PAYO LEBAR 2026</small>
-            </div>
-            
-            <div class="py-2" id="menuList">
-                <div class="menu-category-header expanded" onclick="toggleSubMenu('subCategoryUtama', this)">
-                    <span><i class="fas fa-bars me-2"></i> Menu Utama</span>
-                    <i class="fas fa-chevron-down chevron-icon"></i>
+    <!-- Header / Navbar -->
+    <header class="bg-gradient-to-r from-red-950 via-rose-900 to-red-900 text-white shadow-xl border-b-4 border-amber-500 sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3.5 flex flex-col md:flex-row justify-between items-center gap-3">
+            <div class="flex items-center space-x-3.5">
+                <div class="w-11 h-11 bg-gradient-to-br from-amber-400 to-amber-600 rounded-2xl flex items-center justify-center text-red-950 font-black text-2xl shadow-lg shadow-amber-500/20 border border-amber-300/50">
+                    <i class="fa-solid fa-box-archive"></i>
                 </div>
-                <div class="collapsible-submenu show" id="subCategoryUtama">
-                    <a class="nav-link active" onclick="loadSheetData('INPUT SUARA', this)"><i class="fas fa-chart-line"></i>Live Real-Count</a>
-                    <a class="nav-link" onclick="loadSheetData('PROFIL CALON KADES', this)"><i class="fas fa-user-tie"></i>Profil Calon Kades</a>
-                    <a class="nav-link" onclick="loadTahapanPilkades(this)"><i class="fas fa-calendar-alt"></i>Tahapan Pilkades</a>
-                </div>
-
-                <div class="menu-category-header" onclick="toggleSubMenu('subCategoryPemilih', this)">
-                    <span><i class="fas fa-users-cog me-2"></i> Data Pemilih</span>
-                    <i class="fas fa-chevron-down chevron-icon"></i>
-                </div>
-                <div class="collapsible-submenu" id="subCategoryPemilih">
-                    <a class="nav-link" onclick="loadSheetData('DPT AWAL (PMD)', this)"><i class="fas fa-users"></i>DPT AWAL (PMD)</a>
-                    <a class="nav-link" onclick="loadSheetData('DPS (SEMENTARA)', this)"><i class="fas fa-user-clock"></i>DPS (AWAL)</a>
-                    <a class="nav-link" onclick="loadSheetData('DPS', this)"><i class="fas fa-chart-pie"></i>DPS</a>
-                    <a class="nav-link" onclick="loadSheetData('DPTAM (TAMBAHAN)', this)"><i class="fas fa-user-plus"></i>DPTAM (TAMBAHAN)</a>
-                    <a class="nav-link" onclick="loadSheetData('DPT (TETAP)', this)"><i class="fas fa-address-book"></i>DPT (TETAP)</a>
-                    <a class="nav-link d-none admin-only-menu" id="addVoterMenuLink" onclick="openAddVoterModal()"><i class="fas fa-user-plus"></i>Tambah Pemilih Baru</a>
-                </div>
-
-                <div class="menu-category-header" onclick="toggleSubMenu('subCategoryPanitia', this)">
-                    <span><i class="fas fa-user-shield me-2"></i> Panitia & Pengawas</span>
-                    <i class="fas fa-chevron-down chevron-icon"></i>
-                </div>
-                <div class="collapsible-submenu" id="subCategoryPanitia">
-                    <a class="nav-link" onclick="loadSheetData('PANITIA PEMUNGUTAN SUARA (PPS)', this)"><i class="fas fa-id-badge"></i>PANITIA PEMUNGUTAN SUARA (PPS)</a>
-                    <a class="nav-link" onclick="loadSheetData('PENGAWAS (BPD)', this)"><i class="fas fa-shield-alt"></i>PENGAWAS (BPD)</a>
-                    <a class="nav-link" onclick="loadSheetData('KPPS TPS 01', this)"><i class="fas fa-vote-yea"></i>KPPS TPS 01</a>
-                    <a class="nav-link" onclick="loadSheetData('KPPS TPS 02', this)"><i class="fas fa-vote-yea"></i>KPPS TPS 02</a>
-                </div>
-
-                <div class="menu-category-header" onclick="toggleSubMenu('subCategoryLayanan', this)">
-                    <span><i class="fas fa-headset me-2"></i> Pengaduan & Layanan</span>
-                    <i class="fas fa-chevron-down chevron-icon"></i>
-                </div>
-                <div class="collapsible-submenu" id="subCategoryLayanan">
-                    <a class="nav-link" onclick="loadPengaduanForm(this)"><i class="fas fa-comment-dots"></i>Buat Pengaduan</a>
-                </div>
-            </div>
-        </nav>
-
-        <!-- Area Konten Utama -->
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
-            <div class="portal-header no-print">
-                <div class="row align-items-center">
-                    <div class="col-lg-7 mb-3 mb-lg-0">
-                        <span class="badge bg-warning text-dark mb-2 px-2 py-1 fw-bold shadow-sm" style="font-size: 0.75rem;">PORTAL PUBLIKASI RESMI PILKADES</span>
-                        <h2 class="text-white mb-2">PEMILIHAN KEPALA DESA PAYO LEBAR</h2>
-                        <p class="text-light opacity-85 mb-0 fw-medium text-uppercase" style="font-size: 0.95rem;">
-                            <i class="fas fa-map-marker-alt text-warning me-2"></i> Kecamatan Singkut &bull; Kabupaten Sarolangun &bull; Provinsi Jambi &bull; Tahun 2026
-                        </p>
-                    </div>
-                    
-                    <div class="col-lg-5 text-lg-end d-flex justify-content-lg-end align-items-center gap-2 flex-wrap" id="headerActionButtonsContainer">
-                        <button class="btn btn-warning btn-sm px-3 fw-bold text-dark shadow-sm" id="toggleChartBtn" onclick="toggleChartSection()">
-                            <i class="fas fa-chart-pie me-1" id="chartToggleIcon"></i> <span id="chartToggleText">Tampilkan Akumulasi & Grafik</span>
-                        </button>
-                        <button class="btn btn-light btn-sm px-3 fw-bold text-danger shadow-sm" onclick="refreshData()">
-                            <i class="fas fa-sync-alt me-1"></i> Refresh Cache
-                        </button>
-                        <div id="authArea">
-                            <button class="btn btn-outline-light btn-sm px-3 fw-bold" data-bs-toggle="modal" data-bs-target="#loginModal">
-                                <i class="fas fa-lock me-1"></i> Login Admin
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row mt-4 pt-3 border-top border-light border-opacity-10 align-items-center justify-content-between">
-                    <div class="col-md-auto mb-2 mb-md-0">
-                        <div class="realtime-clock-box-bottom">
-                            <i class="fas fa-clock text-warning"></i>
-                            <span id="realtimeClockDisplay">Memuat waktu...</span>
-                        </div>
-                    </div>
-                    <div class="col-md-auto">
-                        <span class="badge bg-dark text-warning border border-warning px-3 py-2 fw-bold" style="font-size: 0.85rem; letter-spacing: 0.5px;">#PpsPilkadesPayoLebar2026</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Panel Akumulasi & Grafik -->
-            <div class="card card-custom card-custom-rekap p-4 mb-3 chart-section-box no-print" id="directChartSection">
-                <div class="rekap-title-header d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
-                    <h5 class="fw-bold mb-0 fs-6 text-white text-uppercase"><i class="fas fa-chart-bar me-2 text-warning"></i> AKUMULASI DATA & GRAFIK REKAPITULASI: <span id="directChartTitle" class="text-warning">INPUT SUARA</span></h5>
-                    <button class="btn btn-light btn-sm text-dark fw-bold shadow-sm" onclick="toggleChartSection()" title="Tutup Grafik"><i class="fas fa-times me-1"></i> Tutup</button>
-                </div>
-
-                <div class="row g-3 mb-4" id="summaryAccumulationCards">
-                    <div class="col-md-3">
-                        <div class="stat-card stat-card-1">
-                            <div class="small fw-semibold text-white-50 text-uppercase" id="cardLabel1">Total Entri / Pemilih</div>
-                            <h3 class="fw-bold mb-0 text-warning" id="accTotalCount">0</h3>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="stat-card stat-card-2">
-                            <div class="small fw-semibold text-white-50 text-uppercase" id="cardLabel2">MS / Suara Sah</div>
-                            <h3 class="fw-bold mb-0 text-warning" id="accMsCount">0</h3>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="stat-card stat-card-3">
-                            <div class="small fw-semibold text-white-50 text-uppercase" id="cardLabel3">TMS / Suara Tidak Sah</div>
-                            <h3 class="fw-bold mb-0 text-warning" id="accTmsCount">0</h3>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="stat-card stat-card-4">
-                            <div class="small fw-semibold text-white-50 text-uppercase" id="cardLabel4">Total Suara Masuk</div>
-                            <h3 class="fw-bold mb-0 text-warning" id="accOtherCount">0</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row g-4">
-                    <div class="col-lg-6">
-                        <div class="p-3 border rounded-3 bg-white shadow-sm">
-                            <h6 class="fw-bold text-center mb-3 text-uppercase" style="color: var(--kpu-secondary);" id="chartTitleLeft">Proporsi Status Utama</h6>
-                            <div class="chart-container">
-                                <canvas id="msTmsChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="p-3 border rounded-3 bg-white shadow-sm">
-                            <h6 class="fw-bold text-center mb-3 text-uppercase" style="color: var(--kpu-secondary);" id="chartTitleRight">Rincian Lengkap / Perbandingan Suara Kandidat</h6>
-                            <div class="chart-container">
-                                <canvas id="detailedCoklitChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Panel Filter & Aksi -->
-            <div class="d-flex align-items-center justify-content-between mb-3 px-1 flex-wrap gap-2 no-print" id="filterAndActionContainer">
                 <div>
-                    <h4 class="fw-bold text-uppercase fs-5 mb-0" id="currentTitle" style="color: var(--kpu-primary);">INPUT SUARA</h4>
+                    <span class="text-[10px] font-black tracking-widest text-amber-400 uppercase block">HITUNG CEPAT (REAL COUNT)</span>
+                    <h1 class="text-lg md:text-xl font-black tracking-tight leading-none text-white drop-shadow-sm">PILKADES DESA PAYO LEBAR 2026</h1>
                 </div>
-                
-                <div class="d-flex gap-2 align-items-center flex-wrap">
-                    <div class="d-flex gap-2 align-items-center flex-wrap" id="filterControlsBox">
-                        <div class="input-group input-group-sm shadow-sm" style="width: 200px;" id="filterKeywordWrapper">
-                            <span class="input-group-text bg-light text-secondary"><i class="fas fa-search"></i></span>
-                            <input type="text" id="filterKeyword" class="form-control" placeholder="Cari NKK / NIK / Nama..." oninput="applyFilters()">
-                        </div>
+            </div>
+            <div class="flex items-center space-x-2 bg-red-950/60 p-1.5 rounded-2xl border border-red-700/50 backdrop-blur-md">
+                <button onclick="switchMode('public')" id="btnPublic" class="bg-gradient-to-r from-amber-400 to-amber-500 text-red-950 px-4 py-1.5 rounded-xl text-xs font-extrabold transition shadow-md flex items-center gap-1.5">
+                    <i class="fa-solid fa-globe"></i> Mode Publik
+                </button>
+                <button onclick="switchMode('admin')" id="btnAdmin" class="text-red-200 hover:text-white hover:bg-red-800/60 px-4 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-lock"></i> Mode Admin PPS
+                </button>
+            </div>
+        </div>
+    </header>
 
-                        <select id="filterCoklit" class="form-select form-select-sm fw-semibold shadow-sm" style="width: 175px;" onchange="applyFilters()">
-                            <option value="">-- Semua Coklit --</option>
-                            <option value="0">0 - Aktif (MS)</option>
-                            <option value="6">6 - Pindah Dalam Desa (MS)</option>
-                            <option value="7">7 - Pisah KK (MS)</option>
-                            <option value="U">U - Ubah (MS)</option>
-                            <option value="B">B - Baru (MS)</option>
-                            <option value="1">1 - Meninggal (TMS)</option>
-                            <option value="2">2 - Ganda (TMS)</option>
-                            <option value="3">3 - TNI (TMS)</option>
-                            <option value="4">4 - Polisi (TMS)</option>
-                            <option value="5">5 - Pindah Luar Desa (TMS)</option>
-                            <option value="8">8 - Lainnya (TMS)</option>
-                        </select>
+    <!-- Main Content Container -->
+    <main class="container mx-auto px-4 py-6 flex-grow max-w-7xl">
 
-                        <select id="filterRt" class="form-select form-select-sm fw-semibold shadow-sm" style="width: 140px;" onchange="applyFilters()">
-                            <option value="">-- Semua RT (1-36) --</option>
-                        </select>
-
-                        <button class="btn btn-outline-secondary btn-sm shadow-sm" type="button" onclick="resetFilter()" title="Reset Semua Filter"><i class="fas fa-redo"></i></button>
-                    </div>
-
-                    <div id="adminActionButtons" class="d-none gap-2 flex-wrap">
-                        <button class="btn btn-primary btn-sm fw-bold px-3 shadow-sm" onclick="openAddVoterModal()">
-                            <i class="fas fa-user-plus me-1"></i> Tambah Pemilih Baru
-                        </button>
-                        <button class="btn btn-success btn-sm fw-bold px-3 shadow-sm" onclick="exportToExcel()">
-                            <i class="fas fa-file-excel me-1"></i> Ekstrak Excel
-                        </button>
-                        <button class="btn btn-dark btn-sm fw-bold px-3 shadow-sm" onclick="printFolioLandscape()">
-                            <i class="fas fa-print me-1"></i> Cetak Lanskap
-                        </button>
-                    </div>
+        <!-- STATS CARDS WITH 3D DEPTH -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5 mb-8">
+            <div class="bg-white/90 backdrop-blur-md p-4 md:p-5 rounded-2xl border border-white/80 shadow-md card-3d flex flex-col justify-between relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-16 h-16 bg-slate-100 rounded-bl-full -mr-4 -mt-4 opacity-50"></div>
+                <div class="flex justify-between items-center text-slate-400 mb-2 relative z-10">
+                    <span class="text-[11px] font-black uppercase tracking-wider text-slate-500">Total DPT</span>
+                    <div class="w-8 h-8 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center text-xs font-bold"><i class="fa-solid fa-users"></i></div>
+                </div>
+                <div class="relative z-10">
+                    <h3 class="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">4.185</h3>
+                    <p class="text-[11px] text-slate-500 mt-0.5 font-medium">TPS 01 (2.113) • TPS 02 (2.072)</p>
                 </div>
             </div>
 
-            <!-- Printable Area -->
-            <div class="card card-custom p-3" id="printableArea">
-                <div class="text-center d-none" id="printHeader">
-                    <h4 class="fw-bold text-uppercase mb-1">PEMILIHAN KEPALA DESA PAYO LEBAR 2026</h4>
-                    <p class="text-muted small mb-3 text-uppercase">Laporan Dokumen Resmi - <span id="printSheetName"></span></p>
+            <div class="bg-white/90 backdrop-blur-md p-4 md:p-5 rounded-2xl border border-white/80 shadow-md card-3d flex flex-col justify-between relative overflow-hidden">
+                <div class="flex justify-between items-center text-slate-400 mb-2 relative z-10">
+                    <span class="text-[11px] font-black uppercase tracking-wider text-slate-500">Suara Masuk</span>
+                    <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xs font-bold"><i class="fa-solid fa-inbox"></i></div>
+                </div>
+                <div class="relative z-10">
+                    <h3 id="statTotalMasuk" class="text-2xl md:text-3xl font-black text-emerald-600 tracking-tight">0</h3>
+                    <p class="text-[11px] text-slate-500 mt-0.5 font-medium">Akumulasi TPS 01 & 02</p>
+                </div>
+            </div>
+
+            <div class="bg-white/90 backdrop-blur-md p-4 md:p-5 rounded-2xl border border-white/80 shadow-md card-3d flex flex-col justify-between relative overflow-hidden">
+                <div class="flex justify-between items-center text-slate-400 mb-2 relative z-10">
+                    <span class="text-[11px] font-black uppercase tracking-wider text-slate-500">Sah / Tidak Sah</span>
+                    <div class="w-8 h-8 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold"><i class="fa-solid fa-square-check"></i></div>
+                </div>
+                <div class="relative z-10">
+                    <h3 class="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
+                        <span id="statSah" class="text-emerald-600">0</span> <span class="text-slate-300">/</span> <span id="statTidakSah" class="text-rose-500">0</span>
+                    </h3>
+                    <p class="text-[11px] text-slate-500 mt-0.5 font-medium">Suara Sah / Rusak</p>
+                </div>
+            </div>
+
+            <div class="bg-white/90 backdrop-blur-md p-4 md:p-5 rounded-2xl border border-white/80 shadow-md card-3d flex flex-col justify-between relative overflow-hidden">
+                <div class="flex justify-between items-center text-slate-400 mb-2 relative z-10">
+                    <span class="text-[11px] font-black uppercase tracking-wider text-slate-500">Partisipasi</span>
+                    <div class="w-8 h-8 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xs font-bold"><i class="fa-solid fa-chart-pie"></i></div>
+                </div>
+                <div class="relative z-10">
+                    <h3 id="statTurnout" class="text-2xl md:text-3xl font-black text-amber-600 tracking-tight">0.0%</h3>
+                    <p class="text-[11px] text-slate-500 mt-0.5 font-medium">Tingkat Kehadiran DPT</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- PUBLIC VIEW -->
+        <div id="viewPublic" class="space-y-8">
+            <div class="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white p-5 md:p-8">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8 pb-5 border-b border-slate-200/80">
+                    <div>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black bg-rose-100 text-rose-700 border border-rose-200/80 mb-2 shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-rose-600 animate-ping"></span> PEMANTAUAN REAL TIME
+                        </span>
+                        <h2 class="text-xl md:text-2xl font-black text-slate-900 tracking-tight">
+                            Perolehan Suara Calon Kepala Desa
+                        </h2>
+                    </div>
+                    <button onclick="loadVotesFromSheet()" class="w-full sm:w-auto text-xs font-black bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-xl transition shadow-lg shadow-slate-900/20 active:scale-95 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-arrows-rotate text-amber-400"></i> Refresh Data
+                    </button>
                 </div>
                 
-                <div class="table-scroll-container" id="tableScrollContainer">
-                    <table class="table sheet-table align-middle" id="dataTable">
-                        <tbody>
-                            <tr><td class="text-center py-5 text-muted"><i class="fas fa-spinner fa-spin fa-2x mb-3 text-danger"></i><p>Memuat database server...</p></td></tr>
+                <div id="candidateResultsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    <!-- Ditampilkan via JavaScript -->
+                </div>
+            </div>
+
+            <!-- Rekapitulasi per TPS -->
+            <div class="bg-white/95 backdrop-blur-md rounded-3xl shadow-xl border border-white p-5 md:p-8 overflow-hidden">
+                <div class="flex items-center justify-between mb-5">
+                    <h2 class="text-lg font-black text-slate-900 flex items-center gap-2.5">
+                        <span class="w-9 h-9 rounded-xl bg-red-100 text-red-800 flex items-center justify-center text-base"><i class="fa-solid fa-list-check"></i></span> 
+                        Rincian Rekapitulasi Suara Per TPS
+                    </h2>
+                </div>
+                <div class="overflow-x-auto -mx-5 md:mx-0 rounded-2xl border border-slate-200">
+                    <table class="w-full text-left border-collapse text-xs md:text-sm">
+                        <thead>
+                            <tr class="bg-slate-900 text-white font-black uppercase tracking-wider text-[11px]">
+                                <th class="p-4 pl-5">No & Nama Paslon</th>
+                                <th class="p-4 text-center">TPS 01 (Padepokan PSHT)</th>
+                                <th class="p-4 text-center">TPS 02 (GOR KUD)</th>
+                                <th class="p-4 text-center pr-5 bg-slate-800 text-amber-400 font-black">Total Suara</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recapTableBody" class="divide-y divide-slate-200 bg-white">
+                            <!-- Ditampilkan via JavaScript -->
                         </tbody>
                     </table>
                 </div>
-                
-                <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top no-print flex-wrap gap-2" id="paginationContainer">
-                    <div class="d-flex align-items-center gap-2">
-                        <small class="text-muted" id="pageInfo">Menampilkan data...</small>
-                        <select id="rowsPerPageSelect" class="form-select form-select-sm fw-semibold" style="width: 110px;" onchange="changeRowsPerPage()">
-                            <option value="50" selected>50 baris</option>
-                            <option value="100">100 baris</option>
-                            <option value="500">500 baris</option>
-                            <option value="1000">1000 baris</option>
-                            <option value="5000">5000 baris</option>
-                        </select>
-                    </div>
-                    <nav>
-                        <ul class="pagination pagination-sm mb-0" id="paginationList"></ul>
-                    </nav>
-                </div>
             </div>
-        </main>
-    </div>
-</div>
+        </div>
 
-<!-- Modal Sambutan -->
-<div class="modal fade" id="welcomePopupModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg rounded-4 text-center p-3" style="background: linear-gradient(145deg, #ffffff 0%, #fdf2f4 100%); border-top: 5px solid var(--kpu-primary) !important;">
-            <div class="modal-body p-4">
-                <div class="mb-3 text-warning">
-                    <i class="fas fa-landmark fa-3x p-3 rounded-circle shadow-sm" style="background: var(--kpu-primary);"></i>
+        <!-- ADMIN VIEW -->
+        <div id="viewAdmin" class="hidden space-y-6">
+            <div id="adminLoginBox" class="bg-white/95 backdrop-blur-md max-w-md mx-auto rounded-3xl shadow-xl border border-white p-6 md:p-8">
+                <div class="text-center mb-6">
+                    <div class="w-14 h-14 bg-amber-100 text-amber-700 rounded-2xl flex items-center justify-center mx-auto mb-3 text-2xl font-black shadow-inner">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <h2 class="text-xl font-black text-slate-900">Akses Masuk Admin PPS</h2>
+                    <p class="text-xs text-slate-500 mt-1">Silakan masukkan PIN keamanan untuk memperbarui data suara.</p>
                 </div>
-                <h4 class="fw-bold mb-2 text-uppercase" style="color: var(--kpu-primary);">SELAMAT DATANG</h4>
-                <p class="text-muted small fw-semibold mb-3 text-uppercase">Di Portal Resmi Publikasi Pilkades</p>
-                <div class="alert alert-light border shadow-sm py-3 px-3 mb-4 rounded-3 text-dark fw-bold text-uppercase" style="font-size: 0.95rem;">
-                    "SELAMAT DATANG DI PORTAL RESMI PILKADES PAYO LEBAR TAHUN 2026"
-                </div>
-                <p class="text-secondary small mb-4">Silakan pilih akses masuk ke dalam portal:</p>
-                
-                <div class="d-grid gap-2">
-                    <button type="button" class="btn btn-danger btn-lg fw-bold shadow" data-bs-dismiss="modal" style="background: var(--kpu-secondary);">
-                        <i class="fas fa-users me-2"></i> MASUK SEBAGAI PUBLIK
-                    </button>
-                    <button type="button" class="btn btn-warning btn-lg fw-bold text-dark shadow-sm" onclick="openAdminLoginFromPopup()">
-                        <i class="fas fa-lock me-2"></i> MASUK SEBAGAI ADMIN
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">PIN Akses Admin</label>
+                        <input type="password" id="adminPinInput" class="w-full px-4 py-3 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-800 text-base font-extrabold tracking-widest text-center" placeholder="••••••">
+                    </div>
+                    <button onclick="handleAdminLogin()" id="btnLogin" class="w-full bg-gradient-to-r from-red-800 to-rose-900 hover:from-red-900 hover:to-rose-950 text-white font-black py-3 rounded-xl text-sm transition shadow-lg shadow-red-900/30">
+                        Masuk ke Panel Input Data
                     </button>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
 
-<!-- Modal Edit & Tambah Data -->
-<div class="modal fade" id="adminRowEditModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg rounded-4">
-            <div class="modal-header text-white" style="background: var(--kpu-primary);">
-                <h5 class="modal-title fw-bold fs-6 text-uppercase"><i class="fas fa-user-edit me-2"></i> Edit Data & Aksi Coklit Pemilih</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-4">
-                <form id="formRowEditAction" onsubmit="event.preventDefault(); executeRowEditAction();">
-                    <div class="mb-3" id="rowEditCoklitSection">
-                        <label class="form-label fw-bold text-secondary small text-uppercase">Status / Kode Coklit:</label>
-                        <select id="rowEditCoklitType" class="form-select fw-semibold" onchange="toggleRowEditFields()">
-                            <option value="0">0 - Aktif (MS)</option>
-                            <option value="1">1 - Meninggal (TMS)</option>
-                            <option value="2">2 - Ganda (TMS)</option>
-                            <option value="3">3 - TNI (TMS)</option>
-                            <option value="4">4 - Polisi (TMS)</option>
-                            <option value="5">5 - Pindah domisili Luar Desa (TMS)</option>
-                            <option value="8">8 - Lainnya (TMS)</option>
-                            <option value="6">6 - Pindah Domisili Dalam Desa (Pindah RT 1 s.d 36)</option>
-                            <option value="7">7 - Pisah KK (Buat NKK & Anggota Keluarga Baru)</option>
-                            <option value="U">U - Ubah</option>
-                            <option value="B">B - Baru</option>
-                        </select>
+            <div id="adminEditorPanel" class="hidden space-y-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 rounded-2xl border border-slate-200 shadow-md gap-3">
+                    <div class="flex items-center space-x-3">
+                        <span class="w-3.5 h-3.5 bg-emerald-500 rounded-full animate-ping"></span>
+                        <span class="font-extrabold text-xs md:text-sm text-slate-800">Panel Terhubung ke Google Spreadsheet</span>
                     </div>
-
-                    <div class="p-3 bg-light rounded-3 mb-3 border" id="selectedRowTargetInfo"></div>
-
-                    <div id="panelRowUbah" class="border-top pt-3 d-none">
-                        <h6 class="fw-bold text-primary mb-3 text-uppercase"><i class="fas fa-edit me-1"></i> Form Edit Kolom Data Pemilih</h6>
-                        <div id="dynamicRowEditFieldsContainer" class="row g-3"></div>
-                    </div>
-
-                    <div id="panelRowPindahLuar" class="border-top pt-3 d-none">
-                        <h6 class="fw-bold text-danger mb-3 text-uppercase"><i class="fas fa-external-link-alt me-1"></i> Detail Pindah Domisili Luar Desa</h6>
-                        <div class="row g-3">
-                            <div class="col-md-12">
-                                <label class="form-label small fw-bold text-uppercase">Keterangan Tujuan Pindah:</label>
-                                <input type="text" id="targetRowPindahLuarInput" class="form-control form-control-sm" placeholder="Contoh: Pindah ke Kota Jambi...">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="panelRowPindahDalam" class="border-top pt-3 d-none">
-                        <h6 class="fw-bold text-danger mb-3 text-uppercase"><i class="fas fa-exchange-alt me-1"></i> Pindah Domisili Dalam Desa (Pilih RT 1 s.d 36)</h6>
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label small fw-bold text-uppercase">Pindah Ke RT Tujuan (1 - 36):</label>
-                                <select id="targetRowRtSelect" class="form-select form-select-sm"></select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="panelRowPisahKK" class="border-top pt-3 d-none">
-                        <h6 class="fw-bold text-danger mb-3 text-uppercase"><i class="fas fa-house-user me-1"></i> Form Pisah KK (Usia terhitung s.d 29 Okt 2026)</h6>
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label small fw-bold text-uppercase">Nomor Kartu Keluarga (NKK) Baru:</label>
-                                <input type="text" id="rowNewNkkInput" class="form-control form-control-sm" placeholder="16 digit NKK baru...">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label small fw-bold text-uppercase">NIK Anggota Keluarga Baru:</label>
-                                <input type="text" id="rowNewNikInput" class="form-control form-control-sm" placeholder="NIK baru...">
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label small fw-bold text-uppercase">Nama Lengkap:</label>
-                                <input type="text" id="rowNewNamaInput" class="form-control form-control-sm" placeholder="Nama lengkap...">
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label small fw-bold text-uppercase">Tempat Lahir:</label>
-                                <input type="text" id="rowNewTempatLahirInput" class="form-control form-control-sm" placeholder="Kota kelahiran...">
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label small fw-bold text-uppercase">Tanggal Lahir:</label>
-                                <input type="date" id="rowNewTglLahirInput" class="form-control form-control-sm" onchange="calculateRowAutoAge()">
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label small fw-bold text-uppercase">Usia (Otomatis per 29 Okt 2026):</label>
-                                <input type="text" id="rowCalculatedAgeOutput" class="form-control form-control-sm bg-white" readonly placeholder="Otomatis...">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-4 text-end">
-                        <button type="button" class="btn btn-secondary btn-sm px-3" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-danger btn-sm px-4 fw-bold" id="btnSubmitRowEdit">Simpan Perubahan</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Tambah Pemilih Baru -->
-<div class="modal fade" id="addVoterModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content border-0 shadow-lg rounded-4">
-            <div class="modal-header text-white" style="background: var(--kpu-primary);">
-                <div>
-                    <h5 class="modal-title fw-bold text-uppercase"><i class="fas fa-user-plus me-2"></i>Tambah Pemilih Baru</h5>
-                    <small class="text-warning fw-semibold">Biodata mengikuti kolom yang tersedia pada tabel Google Sheet</small>
+                    <button onclick="handleAdminLogout()" class="text-xs bg-rose-50 hover:bg-rose-100 text-rose-700 font-black px-4 py-2 rounded-xl border border-rose-200 transition">
+                        Keluar Mode Admin
+                    </button>
                 </div>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-4">
-                <div class="alert alert-warning border-0 shadow-sm small mb-3">
-                    <i class="fas fa-info-circle me-2"></i>
-                    <b>Admin:</b> data NKK/NIK di form ini tampil lengkap. Nomor urut dibuat otomatis. Jika NKK sudah ada, pemilih baru akan ditempatkan setelah anggota terakhir pada KK tersebut di Google Sheet.
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-3xl shadow-md border border-slate-200 p-6">
+                        <h3 class="font-black text-slate-900 mb-1 flex items-center justify-between">
+                            TPS 01 - Padepokan PSHT
+                            <span class="text-[11px] font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-lg">DPT: 2.113</span>
+                        </h3>
+                        <hr class="my-4 border-slate-100">
+                        <div id="formTps1" class="space-y-3.5"></div>
+                    </div>
+
+                    <div class="bg-white rounded-3xl shadow-md border border-slate-200 p-6">
+                        <h3 class="font-black text-slate-900 mb-1 flex items-center justify-between">
+                            TPS 02 - GOR KUD
+                            <span class="text-[11px] font-bold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-lg">DPT: 2.072</span>
+                        </h3>
+                        <hr class="my-4 border-slate-100">
+                        <div id="formTps2" class="space-y-3.5"></div>
+                    </div>
                 </div>
-                <form id="formAddVoter" onsubmit="event.preventDefault(); saveNewVoter();">
-                    <div class="row g-3" id="addVoterFieldsContainer"></div>
-                    <div class="mt-3 p-3 rounded-3 border bg-light">
-                        <div class="row g-2 small">
-                            <div class="col-md-6"><b>Sheet tujuan:</b> <span id="addVoterTargetSheet">DPS (SEMENTARA)</span></div>
-                            <div class="col-md-6"><b>Posisi otomatis:</b> <span id="addVoterInsertInfo">Menentukan berdasarkan NKK</span></div>
-                        </div>
-                    </div>
-                    <div class="mt-4 text-end">
-                        <button type="button" class="btn btn-secondary btn-sm px-3" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary btn-sm px-4 fw-bold" id="btnSaveNewVoter"><i class="fas fa-save me-1"></i>Simpan Pemilih Baru</button>
-                    </div>
-                </form>
+
+                <div class="flex justify-end space-x-3 pt-2">
+                    <button onclick="resetDataLocal()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-5 py-3 rounded-xl text-xs font-black transition">
+                        Reset Formulir
+                    </button>
+                    <button onclick="saveVotesToSheet()" id="btnSave" class="bg-gradient-to-r from-red-800 to-rose-900 hover:from-red-900 hover:to-rose-950 text-white px-7 py-3 rounded-xl text-xs font-black transition shadow-lg shadow-red-900/30">
+                        Simpan & Sinkronkan ke Spreadsheet
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
-<!-- Popup Berhasil Simpan -->
-<div class="modal fade" id="saveSuccessModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-sm">
-        <div class="modal-content border-0 shadow-lg rounded-4 text-center p-4">
-            <div class="mb-3"><i class="fas fa-check-circle text-success" style="font-size: 3.5rem;"></i></div>
-            <h5 class="fw-bold mb-2">Perubahan Berhasil Disimpan</h5>
-            <p class="text-muted small mb-4" id="saveSuccessMessage">Data sudah tersimpan ke Google Sheet.</p>
-            <button type="button" class="btn btn-success fw-bold px-4" data-bs-dismiss="modal">Tutup</button>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200/80 py-6 text-center text-xs text-slate-500 mt-auto">
+        <div class="container mx-auto px-4">
+            <p class="font-extrabold text-slate-800">Panitia Pemilihan Kepala Desa (PPS) Payo Lebar 2026</p>
+            <p class="text-[11px] text-slate-400 mt-1 font-medium">Sistem Rekapitulasi Real Count Resmi & Transparan</p>
         </div>
-    </div>
-</div>
-
-<!-- Modal Login Admin -->
-<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-sm modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg rounded-4">
-            <div class="modal-header text-white" style="background: var(--kpu-primary);">
-                <h5 class="modal-title fw-bold fs-6 text-uppercase"><i class="fas fa-lock me-2"></i> Login Panitia / Admin</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-4">
-                <form onsubmit="event.preventDefault(); processLogin();">
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold fs-7 text-uppercase">Password Admin</label>
-                        <input type="password" id="adminPassword" class="form-control" placeholder="Masukkan password..." required>
-                    </div>
-                    <button type="submit" class="btn btn-danger w-100 fw-bold text-uppercase" style="background: var(--kpu-secondary);">Masuk sebagai Admin</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Toast Notifikasi -->
-<div id="statusToast" class="toast align-items-center text-white bg-success border-0 p-2 shadow" role="alert">
-    <div class="d-flex">
-        <div class="toast-body fw-medium" id="toastMessage">
-            <i class="fas fa-check-circle me-2"></i> Berhasil.
-        </div>
-        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-    </div>
-</div>
-
-<!-- Bootstrap JS & Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-<script>
-    let activeSheet = 'INPUT SUARA';
-    let currentRawData = [];
-    let filteredData = [];
-    let msTmsChartInstance = null;
-    let detailChartInstance = null;
-    let isAdmin = false;
-    let adminToken = sessionStorage.getItem('pilkades_admin_token') || ''; 
-    let currentPage = 1;
-    let rowsPerPage = 50; 
-    let editingTargetRowIndex = null;
-    let editingTargetRowData = null;
-    let dpsSheetDataCache = null; 
-    
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzqLHfzqRu5g5znrLsCdxDU3FpwKywaO9ds2UuoRhsm3zChuKyRy-7-XybQ8kYdzELfvg/exec';
-
-    const coklitMap = {
-        "0": "Aktif (MS)",
-        "1": "Meninggal (TMS)",
-        "2": "Ganda (TMS)",
-        "3": "TNI (TMS)",
-        "4": "Polisi (TMS)",
-        "5": "Pindah Luar Desa (TMS)",
-        "8": "Lainnya (TMS)",
-        "6": "Pindah Dalam Desa (MS)",
-        "7": "Pisah KK (MS)",
-        "U": "Ubah (MS)",
-        "B": "Baru (MS)"
-    };
-
-    const tmsCodes = ["1", "2", "3", "4", "5", "8"];
-    const msCodes = ["0", "6", "7", "U", "B"];
-    const committeeSheets = ['PANITIA PEMUNGUTAN SUARA (PPS)', 'PENGAWAS (BPD)', 'KPPS TPS 01', 'KPPS TPS 02'];
-    const voterSheets = ['DPT AWAL (PMD)', 'DPS (SEMENTARA)', 'DPS', 'DPTAM (TAMBAHAN)', 'DPT (TETAP)', 'TAMBAH PEMILIH BARU'];
-    const noFilterSheets = ['INPUT SUARA', 'PROFIL CALON KADES', 'TAHAPAN PILKADES', 'PENGADUAN DAN LAYANAN'];
-
-    function toggleSubMenu(submenuId, headerEl) {
-        const submenu = document.getElementById(submenuId);
-        const isExpanded = submenu.classList.contains('show');
-        
-        document.querySelectorAll('.collapsible-submenu').forEach(el => el.classList.remove('show'));
-        document.querySelectorAll('.menu-category-header').forEach(el => el.classList.remove('expanded'));
-
-        if (!isExpanded) {
-            submenu.classList.add('show');
-            headerEl.classList.add('expanded');
-        }
-    }
-
-    function updateRealtimeClock() {
-        const now = new Date();
-        const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-        let dayName = days[now.getDay()];
-        let day = String(now.getDate()).padStart(2, '0');
-        let month = String(now.getMonth() + 1).padStart(2, '0');
-        let year = now.getFullYear();
-        let hours = String(now.getHours()).padStart(2, '0');
-        let minutes = String(now.getMinutes()).padStart(2, '0');
-        let seconds = String(now.getSeconds()).padStart(2, '0');
-        
-        let clockString = `${dayName}, ${day}/${month}/${year} — ${hours}:${minutes}:${seconds} WIB`;
-        const clockElement = document.getElementById('realtimeClockDisplay');
-        if (clockElement) clockElement.innerText = clockString;
-    }
-
-    function formatDate(val) {
-        if (val === null || val === undefined || val === "") return "";
-        let strVal = String(val).trim();
-        if (strVal.match(/^\d{4}-\d{2}-\d{2}/)) {
-            try {
-                let parts = strVal.split('T')[0].split('-');
-                if (parts.length === 3) return `${parts[2]}/${parts[1]}/${parts[0]}`;
-            } catch (e) { return strVal; }
-        }
-        return strVal;
-    }
-
-    function formatCoklitCode(colName, val) {
-        if (val === null || val === undefined || val === "") return "";
-        let cName = String(colName).toUpperCase();
-        let sVal = String(val).trim();
-        if ((cName.includes('KODE') || cName.includes('STATUS') || cName.includes('COKLIT')) && coklitMap.hasOwnProperty(sVal)) {
-            return `${sVal} - ${coklitMap[sVal]}`;
-        }
-        return sVal;
-    }
-
-    function maskSensitiveData(colName, val, forceMask = false) {
-        if (val === null || val === undefined || val === "") return "";
-        if (isAdmin && !forceMask) return val;
-
-        const cName = String(colName || "").toUpperCase().trim();
-        const sVal = String(val).trim();
-
-        const isNkk = cName.includes('NKK') ||
-                      cName.includes('NO KK') ||
-                      cName.includes('NOMOR KARTU KELUARGA');
-
-        const isNik = cName.includes('NIK') ||
-                      cName.includes('NO KTP') ||
-                      cName.includes('NOMOR INDUK KEPENDUDUKAN');
-
-        if (isNkk || isNik) {
-            if (sVal.length > 10) {
-                return sVal.substring(0, 6) + 'XXXXXX' + sVal.substring(sVal.length - 4);
-            }
-            if (sVal.length > 4) {
-                return sVal.substring(0, Math.min(4, sVal.length - 1)) +
-                       'XXXX' +
-                       sVal.substring(sVal.length - 2);
-            }
-        }
-
-        const isTempatLahir =
-            cName.includes('TEMPAT LAHIR') ||
-            cName.includes('TEMPAT KELAHIRAN') ||
-            cName === 'TTL TEMPAT';
-
-        const isTanggalLahir =
-            cName.includes('TANGGAL LAHIR') ||
-            cName.includes('TGL LAHIR') ||
-            cName.includes('DATE OF BIRTH') ||
-            cName === 'TTL TANGGAL';
-
-        if (isTempatLahir) {
-            if (sVal.length <= 2) return 'XX';
-            if (sVal.length <= 4) return sVal.charAt(0) + 'XX';
-            return sVal.charAt(0) + 'XXXX' + sVal.charAt(sVal.length - 1);
-        }
-
-        if (isTanggalLahir) {
-            return 'XX/XX/XXXX';
-        }
-
-        return sVal;
-    }
-
-    function calculateRowAutoAge() {
-        const tglLhrVal = document.getElementById('rowNewTglLahirInput').value;
-        if (!tglLhrVal) return;
-        let birthDate = new Date(tglLhrVal);
-        let targetDate = new Date('2026-10-29');
-        let age = targetDate.getFullYear() - birthDate.getFullYear();
-        let m = targetDate.getMonth() - birthDate.getMonth();
-        if (m < 0 || (m === 0 && targetDate.getDate() < birthDate.getDate())) age--;
-        document.getElementById('rowCalculatedAgeOutput').value = age >= 0 ? `${age} Tahun (s.d 29 Okt 2026)` : '0 Tahun';
-    }
-
-    function loadTahapanPilkades(element) {
-        activeSheet = 'TAHAPAN PILKADES';
-        document.getElementById('currentTitle').innerText = 'TAHAPAN PILKADES';
-        document.getElementById('directChartTitle').innerText = 'TAHAPAN PILKADES';
-
-        if (element) {
-            document.querySelectorAll('.sidebar .nav-link').forEach(el => el.classList.remove('active'));
-            element.classList.add('active');
-        }
-
-        document.getElementById('filterControlsBox').classList.add('d-none');
-        document.getElementById('toggleChartBtn').classList.add('d-none');
-        document.getElementById('directChartSection').classList.add('d-none');
-
-        const table = document.getElementById('dataTable');
-        let html = `
-            <thead>
-                <tr>
-                    <th class="row-index">#</th>
-                    <th class="align-left">URAIAN KEGIATAN</th>
-                    <th>WAKTU</th>
-                    <th>TANGGAL</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="table-secondary fw-bold"><td colspan="4" class="text-start text-uppercase ps-3">-- TAHAPAN BAGIAN 1 (PERSIAPAN S.D. PENETAPAN CALON KEPALA DESA) --</td></tr>
-                <tr><td class="row-index">1</td><td class="align-left fw-bold">PERSIAPAN</td><td>-</td><td>-</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">Sosialisasi Tingkat Kabupaten</td><td>1 hari</td><td>21 Mei 2026</td></tr>
-                <tr><td class="row-index">2</td><td class="align-left fw-bold">PEMBENTUKAN PANITIA</td><td>-</td><td>-</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">a. Pembentukan Panitia Tk.Kecamatan</td><td>10 hari</td><td>1-10 Juni 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">b. PPS</td><td>10 hari</td><td>11-20 Juni 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">c. KPPS</td><td>5 hari</td><td>21-26 Juni 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">d. Perekrutan Pantarlih</td><td>5 hari</td><td>26-30 Juni 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">e. pembentukan Petugas Linmas</td><td>5 hari</td><td>1-5 Juli 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">f. Sosialisasi Rencana dan Tahapan Pilkades oleh Panitia Kabupaten</td><td>14 hari</td><td>6-19 Juli 2026</td></tr>
-                <tr><td class="row-index">3</td><td class="align-left fw-bold">DPT awal dari KPU Kab.Sarolangun</td><td>-</td><td>-</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">a. Penyampaian DPT awal dari KPU ke DPMD</td><td>16 hari</td><td>20 Juli - 4 Agustus 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">b. Penyerahan DPT awal dari PMD ke Camat</td><td>9 hari</td><td>5-13 Agustus 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">c. Penyerahan DPT awal dari Camat ke Pemerintah Desa</td><td>4 hari</td><td>14-17 Agust 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">d. Penyerahan DPT awal dari Pemdes ke PPS</td><td>2 hari</td><td>18 - 19 Agust 2026</td></tr>
-                <tr><td class="row-index">4</td><td class="align-left fw-bold">PENDATAAN DAFTAR PEMILIH SEMENTARA (DPS)</td><td>-</td><td>-</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">a. Pendataan, pencocokan dan penelitian oleh Pantarlih</td><td>14 hari</td><td>20 Agust - 3 Sept 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">b. Penyusunan dan perbaikan DPS hasil pendataan</td><td>3 hari</td><td>4-6 Sept 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">c. Pencetakan dan Penetapan DPS oleh PPS</td><td>1 hari</td><td>7 Sept 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">d. Pengumuman dan tanggapan Masyarakat terhadap DPS</td><td>3 hari</td><td>8-10 Sept 2026</td></tr>
-                <tr><td class="row-index">5</td><td class="align-left fw-bold">PENDATAAN DAFTAR PEMILIH TAMBAHAN (DPTam)</td><td>-</td><td>-</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">a. Pendataan, dan pendaftaran DPTam</td><td>3 hari</td><td>11-13 Sept 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">b. Penyusunan dan perbaikan DPTam hasil Pemutakhiran</td><td>3 hari</td><td>14-16 Sept 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">c. Pencetakan dan Penetapan DPTam oleh PPS</td><td>1 hari</td><td>17 Sept 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">d. Pengumuman dan tanggapan Masyarakat terhadap DPTam</td><td>3 hari</td><td>18-20 Sept 2026</td></tr>
-                <tr><td class="row-index">6</td><td class="align-left fw-bold">PENETAPAN DAFTAR PEMILIH TETAP (DPT)</td><td>-</td><td>-</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">a. Penetapan DPTam menjadi DPT oleh PPS</td><td>1 hari</td><td>21 Sept 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">b. Pencetakan DPT oleh PPS</td><td>1 hari</td><td>22 Sept 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">c. Pengumuman DPT oleh KPPS</td><td>3 hari</td><td>23-25 Sept 2026</td></tr>
-                <tr><td class="row-index">7</td><td class="align-left fw-bold">PENJARINGAN CALON KADES</td><td>-</td><td>-</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">a. Pengumuman dan Pendaftaran Bakal Calon</td><td>9 hari</td><td>20-28 Juli 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">b. Perpanjangan waktu pendaftaran jika calon tunggal</td><td>15 hari</td><td>29 Juli - 12 Agst 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">c. Perpanjangan waktu pendaftaran jika masih calon tunggal</td><td>10 hari</td><td>13-22 Agst 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">d. Penelitian kelengkapan dan keabsahan berkas pendaftaran disertai klarifikasi</td><td>17 hari</td><td>23 Agst - 8 Sept 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">e. Pengumuman bakal calon yang telah memenuhi kelengkapan administrasi</td><td>2 hari</td><td>9-10 Sept 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">f. Jadwal khusus, (seleksi Tambahan/uji kompetensi jika Bakal calon lebih dari 5 (lima) orang</td><td>5 hari</td><td>11-15 Sept 2026</td></tr>
-                <tr><td class="row-index">8</td><td class="align-left fw-bold">PENETAPAN CALON KEPALA DESA</td><td>-</td><td>-</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">a. Penetapan bakal calon Kepala Desa menjadi Calon Kepala Desa serta penetapan dan pengambilan Nomor Urut Calon</td><td>2 hari</td><td>16-17 Sept 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">b. Pengumuman Calon Kepala Desa berdasarkan No.Urut</td><td>1 hari</td><td>18 Sept 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">c. Penyampaian Data (Photo dan CD) Calon Kepala Desa ke Dinas PMD Kab.Sarolangun</td><td>3 hari</td><td>19-21 Sept 2026</td></tr>
-
-                <tr class="table-secondary fw-bold"><td colspan="4" class="text-start text-uppercase ps-3">-- TAHAPAN BAGIAN 2 (PENCETAKAN SURAT SUARA S.D. PENETAPAN KEPALA DESA TERPILIH) --</td></tr>
-                <tr><td class="row-index">9</td><td class="align-left fw-bold">PENCETAKAN SURAT SUARA</td><td>-</td><td>-</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">- Persiapan Pencetakan Surat Suara</td><td>29 hari</td><td>22 Sept - 20 Okt 2026</td></tr>
-                <tr><td class="row-index">10</td><td class="align-left fw-bold">KAMPANYE</td><td>-</td><td>-</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">a. Deklarasi/Penandatanganan Pernyataan Pilkades Damai</td><td>1 hari</td><td>21 Okt 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">b. Penyampaian visi dan misi/Rapat/Pertemuan/dialog, melalui media massa (cetak/elektronik)</td><td>3 hari</td><td>22-24 Okt 2026</td></tr>
-                <tr><td class="row-index">11</td><td class="align-left fw-bold">MASA TENANG</td><td>-</td><td>-</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">- Masa tenang dan pembersihan alat peraga</td><td>3 hari</td><td>25-27 Okt 2026</td></tr>
-                <tr><td class="row-index">12</td><td class="align-left fw-bold">DISTRIBUSI ALAT PEMILIHAN</td><td>-</td><td>-</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">a. Pembuatan TPS</td><td>-</td><td>-</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">b. Distribusi Surat Suara</td><td>-</td><td>-</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">c. Serah terima Surat Suara dari Panitia Kabupaten/Tim Pemantau ke PPS, dan dari PPS ke KPPS langsung dimasukkan ke Kotak Suara dengan disaksikan oleh Panitia Kab./tim Pemantau, Kepala Desa dan BPD</td><td>1 hari</td><td>28 Oktober 2026</td></tr>
-                <tr><td class="row-index">13</td><td class="align-left fw-bold">PEMUNGUTAN DAN PENGHITUNGAN SURAT SUARA</td><td>-</td><td>-</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">a. Pemungutan dan Penghitungan Surat Suara di TPS</td><td>1 hari</td><td>29 Oktober 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">b. Pleno Penghitungan Surat Suara</td><td>1 hari</td><td>29 Oktober 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">c. Penyerahan Penghitungan Suara oleh PPS ke BPD untuk di tetapkan.</td><td>3 hari</td><td>30 Okt - 2 Nov 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">d. Penyampaian Laporan BPD kepada Bupati melalui Camat untuk di sahkan</td><td>7 hari</td><td>3-9 Nov 2026</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">e. Penyampaian hasil pemilihan Kepala Desa terpilih oleh Camat kepada Bupati untuk disahkan menjadi Kepala Desa</td><td>7 hari</td><td>10-16 Nov 2026</td></tr>
-                <tr><td class="row-index">14</td><td class="align-left fw-bold">PENETAPAN KEPALA DESA TERPILIH</td><td>-</td><td>-</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">a. Penetapan Keputusan Bupati tentang Pengesahan Kepala Desa terpilih</td><td>Maksimal 30 hari setelah menerima laporan dari BPD/Camat</td><td>-</td></tr>
-                <tr><td class="row-index">.</td><td class="align-left ps-4">b. Persiapan dan Pelantikan Kepala Desa terpilih</td><td>Maksimal 30 hari terhitung sejak diterbitkannya SK Bupati</td><td>-</td></tr>
-            </tbody>
-        `;
-        table.innerHTML = html;
-        document.getElementById('pageInfo').innerText = 'Menampilkan seluruh rincian tahapan Pilkades Payo Lebar 2026';
-        document.getElementById('paginationList').innerHTML = '';
-    }
-
-    function loadPengaduanForm(element) {
-        activeSheet = 'PENGADUAN DAN LAYANAN';
-        document.getElementById('currentTitle').innerText = 'LAYANAN PENGADUAN MASYARAKAT';
-        document.getElementById('directChartTitle').innerText = 'PENGADUAN';
-
-        if (element) {
-            document.querySelectorAll('.sidebar .nav-link').forEach(el => el.classList.remove('active'));
-            element.classList.add('active');
-        }
-
-        document.getElementById('filterControlsBox').classList.add('d-none');
-        document.getElementById('toggleChartBtn').classList.add('d-none');
-        document.getElementById('directChartSection').classList.add('d-none');
-
-        const table = document.getElementById('dataTable');
-        let html = `
-            <thead>
-                <tr>
-                    <th class="align-left">FORMULIR PENGADUAN & LAYANAN MASYARAKAT</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="align-left p-4">
-                        <div class="alert alert-warning mb-4" role="alert">
-                            <i class="fas fa-info-circle me-2"></i> Silakan isi formulir di bawah ini dengan data yang valid untuk menyampaikan pengaduan atau laporan terkait pelaksanaan Pilkades Payo Lebar 2026.
-                        </div>
-                        <form onsubmit="event.preventDefault(); submitPengaduanForm();">
-                            <div class="mb-3">
-                                <label class="form-label fw-bold text-uppercase small">Nama Pengadu:</label>
-                                <input type="text" id="pengaduNama" class="form-control" placeholder="Masukkan nama lengkap Anda..." required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-bold text-uppercase small">Alamat:</label>
-                                <textarea id="pengaduAlamat" class="form-control" rows="2" placeholder="Masukkan alamat lengkap / RT Anda..." required></textarea>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-bold text-uppercase small">Nomor HP / WhatsApp:</label>
-                                <input type="tel" id="pengaduHp" class="form-control" placeholder="Contoh: 081234567890..." required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-bold text-uppercase small">Jenis Pengaduan:</label>
-                                <select id="pengaduJenis" class="form-select" required>
-                                    <option value="">-- Pilih Jenis Pengaduan --</option>
-                                    <option value="Data Pemilih / DPT">Data Pemilih / DPT</option>
-                                    <option value="Panitia / Penyelenggara">Panitia / Penyelenggara</option>
-                                    <option value="Kampanye / Kecurangan">Kampanye / Kecurangan</option>
-                                    <option value="Lainnya">Lainnya</option>
-                                </select>
-                            </div>
-                            <div class="mb-4">
-                                <label class="form-label fw-bold text-uppercase small">Upload Bukti Pengaduan (Foto / Dokumen):</label>
-                                <input type="file" id="pengaduBukti" class="form-control" accept="image/*,.pdf" required>
-                                <div class="form-text">Format yang didukung: Gambar (JPG/PNG) atau PDF.</div>
-                            </div>
-                            <button type="submit" class="btn btn-danger px-4 fw-bold text-uppercase" style="background: var(--kpu-secondary);">
-                                <i class="fas fa-paper-plane me-2"></i> Kirim Pengaduan
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            </tbody>
-        `;
-        table.innerHTML = html;
-        document.getElementById('pageInfo').innerText = 'Formulir Layanan Pengaduan Aktif';
-        document.getElementById('paginationList').innerHTML = '';
-    }
-
-    function submitPengaduanForm() {
-        let nama = document.getElementById('pengaduNama').value;
-        let hp = document.getElementById('pengaduHp').value;
-        if(!nama || !hp) {
-            showToast("Harap lengkapi formulir pengaduan dengan benar.", "bg-danger");
-            return;
-        }
-        showToast("Pengaduan Anda berhasil dikirim dan akan segera ditinjau oleh panitia!", "bg-success");
-        setTimeout(() => {
-            loadPengaduanForm();
-        }, 1500);
-    }
-
-    const LOCAL_DB_PREFIX = 'pilkades_db_v2_';
-    const LOCAL_DB_META = 'pilkades_db_meta_v2';
-    const LOCAL_DB_VERSION_PREFIX = 'pilkades_db_version_v1_';
-
-    function saveLocalSheetData(sheetName, data, version) {
-        try {
-            localStorage.setItem(LOCAL_DB_PREFIX + sheetName, JSON.stringify(data));
-            sessionStorage.setItem('cache_' + sheetName, JSON.stringify(data));
-            if (version) localStorage.setItem(LOCAL_DB_VERSION_PREFIX + sheetName, String(version));
-            return true;
-        } catch (err) {
-            console.error('Gagal menyimpan cache lokal:', err);
-            showToast('Cache lokal penuh. Data server tetap aman.', 'bg-warning');
-            return false;
-        }
-    }
-
-    function getLocalSheetVersion(sheetName) {
-        return localStorage.getItem(LOCAL_DB_VERSION_PREFIX + sheetName) || '';
-    }
-
-    function deleteLocalSheetData(sheetName) {
-        localStorage.removeItem(LOCAL_DB_PREFIX + sheetName);
-        localStorage.removeItem(LOCAL_DB_VERSION_PREFIX + sheetName);
-        sessionStorage.removeItem('cache_' + sheetName);
-    }
-
-    function getLocalSheetData(sheetName) {
-        try {
-            const raw = localStorage.getItem(LOCAL_DB_PREFIX + sheetName);
-            return raw ? JSON.parse(raw) : null;
-        } catch (err) {
-            console.error('Gagal membaca cache lokal:', err);
-            return null;
-        }
-    }
-
-    function renderLoadedSheetData(sheetName, data, isCommittee, sourceLabel, serverVersion) {
-        currentRawData = Array.isArray(data) ? data : [];
-        filteredData = currentRawData;
-        currentPage = 1;
-
-        if (sheetName === 'DPS (SEMENTARA)' || sheetName === 'DPS') {
-            dpsSheetDataCache = currentRawData;
-        }
-
-        saveLocalSheetData(sheetName, currentRawData, serverVersion);
-        renderTablePage();
-        populateRtDropdown();
-        populateRowRtSelect();
-
-        if (!isCommittee && sheetName !== 'TAHAPAN PILKADES' && sheetName !== 'PENGADUAN DAN LAYANAN') {
-            generateCustomChartsAndAccumulation();
-        }
-
-        if (sourceLabel) {
-            console.log(`Data ${sheetName} dimuat dari ${sourceLabel}.`);
-        }
-    }
-
-    function updateLocalRow(sheetName, rowIndex, values) {
-        const data = getLocalSheetData(sheetName);
-        if (!data || rowIndex < 0) return false;
-        data[rowIndex] = [...values];
-        return saveLocalSheetData(sheetName, data);
-    }
-
-    function insertLocalRow(sheetName, insertIndex, values) {
-        const data = getLocalSheetData(sheetName);
-        if (!data) return false;
-        data.splice(Math.max(1, insertIndex), 0, [...values]);
-        return saveLocalSheetData(sheetName, data);
-    }
-
-    function removeLocalRow(sheetName, rowIndex) {
-        const data = getLocalSheetData(sheetName);
-        if (!data || rowIndex <= 0 || rowIndex >= data.length) return false;
-        data.splice(rowIndex, 1);
-        return saveLocalSheetData(sheetName, data);
-    }
-
-    function loadSheetData(sheetName, element, forceRefresh = false, preserveView = false) {
-        activeSheet = sheetName;
-        document.getElementById('currentTitle').innerText = sheetName;
-        document.getElementById('directChartTitle').innerText = sheetName;
-
-        if (!preserveView) {
-            document.getElementById('filterKeyword').value = '';
-            document.getElementById('filterCoklit').value = '';
-            document.getElementById('filterRt').value = '';
-        }
-
-        if (element) {
-            document.querySelectorAll('.sidebar .nav-link').forEach(el => el.classList.remove('active'));
-            element.classList.add('active');
-        }
-
-        const isCommittee = committeeSheets.includes(sheetName);
-        const isNoFilter = noFilterSheets.includes(sheetName);
-        const filterControlsBox = document.getElementById('filterControlsBox');
-        const toggleChartBtn = document.getElementById('toggleChartBtn');
-        const directChartSection = document.getElementById('directChartSection');
-        const filterKeywordWrapper = document.getElementById('filterKeywordWrapper');
-        const filterCoklitEl = document.getElementById('filterCoklit');
-        const filterRtEl = document.getElementById('filterRt');
-
-        if (isCommittee) {
-            if (filterControlsBox) filterControlsBox.classList.add('d-none');
-            if (toggleChartBtn) toggleChartBtn.classList.add('d-none');
-            if (directChartSection) directChartSection.classList.add('d-none');
-        } else {
-            if (filterControlsBox) filterControlsBox.classList.remove('d-none');
-            if (toggleChartBtn) toggleChartBtn.classList.remove('d-none');
-            if (directChartSection) directChartSection.classList.remove('d-none');
-            if (isNoFilter) {
-                if (filterKeywordWrapper) filterKeywordWrapper.classList.add('d-none');
-                if (filterCoklitEl) filterCoklitEl.classList.add('d-none');
-                if (filterRtEl) filterRtEl.classList.add('d-none');
-            } else {
-                if (filterKeywordWrapper) filterKeywordWrapper.classList.remove('d-none');
-                if (filterCoklitEl) filterCoklitEl.classList.remove('d-none');
-                if (filterRtEl) filterRtEl.classList.remove('d-none');
-            }
-        }
-
-        const table = document.getElementById('dataTable');
-        const localData = getLocalSheetData(sheetName);
-
-        if (!forceRefresh && localData) {
-            renderLoadedSheetData(sheetName, localData, isCommittee, 'cache lokal');
-            refreshSheetIfChanged(sheetName, isCommittee, localData);
-            return;
-        }
-
-        table.innerHTML = '<tr><td class="text-center py-5 text-muted"><i class="fas fa-spinner fa-spin fa-2x mb-3 text-danger"></i><p>Mengambil data terbaru...</p></td></tr>';
-        fetchSheetFromServer(sheetName, isCommittee, preserveView);
-    }
-
-    function fetchSheetFromServer(sheetName, isCommittee, preserveView = true) {
-        const savedView = preserveView ? captureCurrentViewState() : null;
-        const url = `${WEB_APP_URL}?action=getData&sheet=${encodeURIComponent(sheetName)}&t=${Date.now()}`;
-
-        fetch(url, { cache: 'no-store' })
-            .then(response => {
-                if (!response.ok) throw new Error(`Server HTTP ${response.status}`);
-                return response.json();
-            })
-            .catch(firstError => {
-                const fallbackUrl = `${WEB_APP_URL}?sheet=${encodeURIComponent(sheetName)}&t=${Date.now()}`;
-                return fetch(fallbackUrl, { cache: 'no-store' })
-                    .then(response => {
-                        if (!response.ok) throw firstError;
-                        return response.json();
-                    });
-            })
-            .then(data => {
-                if (!Array.isArray(data)) throw new Error('Format data server tidak valid.');
-                renderLoadedSheetData(sheetName, data, isCommittee, 'Google Sheet');
-                if (savedView) restoreCurrentViewState(savedView);
-                if (window.__pendingRestoreView && sheetName === activeSheet) {
-                    const pending = window.__pendingRestoreView;
-                    window.__pendingRestoreView = null;
-                    restoreCurrentViewState(pending);
-                }
-            })
-            .catch(error => {
-                console.error('Error mengambil data server:', error);
-                const localData = getLocalSheetData(sheetName);
-                if (localData) {
-                    renderLoadedSheetData(sheetName, localData, isCommittee, 'cache lokal (fallback)');
-                    showToast('Server belum merespons. Data terakhir tetap ditampilkan.', 'bg-warning');
-                } else {
-                    document.getElementById('dataTable').innerHTML = '<tr><td class="text-center text-danger py-4">Gagal memuat data dari Google Sheet. Pastikan Web App Apps Script sudah dideploy sebagai versi terbaru.</td></tr>';
-                }
-            });
-    }
-
-    async function refreshSheetIfChanged(sheetName, isCommittee, localData) {
-        try {
-            const versionUrl = `${WEB_APP_URL}?action=version&sheet=${encodeURIComponent(sheetName)}&t=${Date.now()}`;
-            const response = await fetch(versionUrl, { cache: 'no-store' });
-            if (!response.ok) return;
-            const result = await response.json();
-            if (result.status !== 'success' || !result.version) return;
-
-            const localVersion = getLocalSheetVersion(sheetName);
-            if (localVersion && localVersion === String(result.version)) return;
-
-            if (activeSheet === sheetName) {
-                const savedView = captureCurrentViewState();
-                fetchSheetFromServer(sheetName, isCommittee, true);
-                window.__pendingRestoreView = savedView;
-            } else {
-                fetch(`${WEB_APP_URL}?action=getData&sheet=${encodeURIComponent(sheetName)}&t=${Date.now()}`, { cache: 'no-store' })
-                    .then(r => r.json())
-                    .then(data => { if (Array.isArray(data)) saveLocalSheetData(sheetName, data, result.version); })
-                    .catch(() => {});
-            }
-        } catch (err) {
-            console.warn('Pengecekan versi server dilewati:', err);
-        }
-    }
-
-    function populateRtDropdown() {
-        if (committeeSheets.includes(activeSheet) || activeSheet === 'TAHAPAN PILKADES' || activeSheet === 'PENGADUAN DAN LAYANAN') return;
-        const rtSelect = document.getElementById('filterRt');
-        rtSelect.innerHTML = '<option value="">-- Semua RT (1-36) --</option>';
-        for (let i = 1; i <= 36; i++) {
-            let opt = document.createElement('option');
-            opt.value = String(i);
-            opt.text = `RT ${String(i).padStart(2, '0')}`;
-            rtSelect.appendChild(opt);
-        }
-    }
-
-    function populateRowRtSelect() {
-        const rtSelect = document.getElementById('targetRowRtSelect');
-        if (!rtSelect) return;
-        rtSelect.innerHTML = '';
-        for (let i = 1; i <= 36; i++) {
-            let opt = document.createElement('option');
-            opt.value = String(i);
-            opt.text = `RT ${String(i).padStart(2, '0')}`;
-            rtSelect.appendChild(opt);
-        }
-    }
-
-    function applyFilters() {
-        if (committeeSheets.includes(activeSheet) || noFilterSheets.includes(activeSheet)) return;
-        if (!currentRawData || currentRawData.length <= 1) return;
-
-        const headers = currentRawData[0];
-        const rows = currentRawData.slice(1);
-        const keyword = document.getElementById('filterKeyword').value.toLowerCase().trim();
-        const selectedCoklit = document.getElementById('filterCoklit').value;
-        const selectedRt = document.getElementById('filterRt').value;
-
-        let coklitIdx = headers.findIndex(h => String(h).toUpperCase().includes('KODE COKLIT') || String(h).toUpperCase().includes('COKLIT'));
-        let rtIdx = headers.findIndex(h => String(h).toUpperCase().includes('RT'));
-        let nkkIdx = headers.findIndex(h => String(h).toUpperCase().includes('NKK') || String(h).toUpperCase().includes('NO KK'));
-
-        const matchedRows = rows.filter(row => {
-            let matchKeyword = keyword === "" || row.some(cell => String(cell || '').toLowerCase().includes(keyword));
-            let matchCoklit = selectedCoklit === "" || (coklitIdx !== -1 && String(row[coklitIdx] || '').trim() === selectedCoklit);
-            let matchRt = selectedRt === "" || (rtIdx !== -1 && String(row[rtIdx] || '').trim() === selectedRt);
-            return matchKeyword && matchCoklit && matchRt;
-        });
-
-        if (selectedRt !== "" && nkkIdx !== -1) {
-            matchedRows.sort((a, b) => String(a[nkkIdx] || '').trim().localeCompare(String(b[nkkIdx] || '').trim()));
-        }
-
-        filteredData = [headers, ...matchedRows];
-        currentPage = 1;
-        renderTablePage();
-        generateCustomChartsAndAccumulation();
-    }
-
-    function resetFilter() {
-        document.getElementById('filterKeyword').value = '';
-        document.getElementById('filterCoklit').value = '';
-        document.getElementById('filterRt').value = '';
-        filteredData = currentRawData;
-        currentPage = 1;
-        renderTablePage();
-        generateCustomChartsAndAccumulation();
-    }
-
-    function changeRowsPerPage() {
-        rowsPerPage = parseInt(document.getElementById('rowsPerPageSelect').value);
-        currentPage = 1;
-        renderTablePage();
-    }
-
-    function renderTablePage() {
-        if (activeSheet === 'TAHAPAN PILKADES' || activeSheet === 'PENGADUAN DAN LAYANAN') return;
-        const table = document.getElementById('dataTable');
-        if (!currentRawData || currentRawData.length === 0) {
-            table.innerHTML = '<tr><td colspan="100" class="text-center py-4 text-muted">Belum ada data tersedia.</td></tr>';
-            document.getElementById('paginationList').innerHTML = '';
-            document.getElementById('pageInfo').innerText = 'Tidak ada data';
-            return;
-        }
-
-        const headers = currentRawData[0];
-        const rows = filteredData.slice(1);
-        const totalPages = Math.ceil(rows.length / rowsPerPage) || 1;
-        if (currentPage > totalPages) currentPage = totalPages;
-        
-        const startIdx = (currentPage - 1) * rowsPerPage;
-        const endIdx = startIdx + rowsPerPage;
-        const paginatedRows = rows.slice(startIdx, endIdx);
-
-        let coklitColIdx = headers.findIndex(h => String(h).toUpperCase().includes('KODE COKLIT') || String(h).toUpperCase().includes('COKLIT'));
-        let nkkIdx = headers.findIndex(h => String(h).toUpperCase().includes('NKK') || String(h).toUpperCase().includes('NO KK'));
-
-        let headerHtml = '<thead><tr><th class="row-index">#</th>';
-        if (isAdmin) headerHtml += '<th class="no-print text-center" style="width: 90px;">AKSI</th>';
-        headers.forEach((col) => {
-            let isLeftCol = String(col).toUpperCase().includes('NAMA') || String(col).toUpperCase().includes('ALAMAT') || String(col).toUpperCase().includes('DUSUN') || String(col).toUpperCase().includes('KETERANGAN') || String(col).toUpperCase().includes('PROFIL') || String(col).toUpperCase().includes('KANDIDAT') || String(col).toUpperCase().includes('VISI');
-            headerHtml += `<th class="${isLeftCol ? 'align-left' : ''}">${col}</th>`;
-        });
-        headerHtml += '</tr></thead>';
-
-        let bodyHtml = '<tbody id="tableBody">';
-        if (paginatedRows.length === 0) {
-            bodyHtml += `<tr><td colspan="${headers.length + (isAdmin ? 2 : 1)}" class="text-center py-4 text-muted">Data tidak ditemukan.</td></tr>`;
-        } else {
-            paginatedRows.forEach((row, idx) => {
-                const absoluteIndex = startIdx + idx + 1;
-                let originalRowIndex = currentRawData.findIndex(r => r === row);
-                let rowCoklitVal = coklitColIdx !== -1 ? String(row[coklitColIdx] || '').trim() : '';
-                let isTms = tmsCodes.includes(rowCoklitVal);
-                let rowClass = isTms ? 'tms-row' : '';
-
-                let isNewFamily = false;
-                if (nkkIdx !== -1 && idx > 0) {
-                    let prevNkk = String(paginatedRows[idx - 1][nkkIdx] || '').trim();
-                    let currNkk = String(row[nkkIdx] || '').trim();
-                    if (prevNkk !== currNkk && prevNkk !== "" && currNkk !== "") isNewFamily = true;
-                }
-                if (isNewFamily) rowClass += ' border-top-family';
-
-                bodyHtml += `<tr class="${rowClass}">`;
-                bodyHtml += `<td class="row-index">${absoluteIndex}</td>`;
-                
-                if (isAdmin) {
-                    bodyHtml += `<td class="no-print text-center">
-                        <button class="btn btn-warning btn-sm px-2 py-0 text-dark fw-bold me-1" title="Edit Baris" onclick="openRowEditModal(${originalRowIndex})"><i class="fas fa-edit"></i></button>
-                        <button class="btn btn-danger btn-sm px-2 py-0 text-white fw-bold" title="Hapus Baris" onclick="deleteRowData(${originalRowIndex})"><i class="fas fa-trash-alt"></i></button>
-                    </td>`;
-                }
-
-                row.forEach((cell, j) => {
-                    let colNameUpper = String(headers[j]).toUpperCase();
-                    let isLeftCol = colNameUpper.includes('NAMA') || colNameUpper.includes('ALAMAT') || colNameUpper.includes('DUSUN') || colNameUpper.includes('KETERANGAN') || colNameUpper.includes('VISI');
-                    let displayCell = maskSensitiveData(headers[j], formatCoklitCode(headers[j], formatDate(cell)));
-                    bodyHtml += `<td class="${isLeftCol ? 'align-left' : ''}">${displayCell}</td>`;
-                });
-                bodyHtml += `</tr>`;
-            });
-        }
-        bodyHtml += '</tbody>';
-
-        table.innerHTML = headerHtml + bodyHtml;
-        document.getElementById('pageInfo').innerText = `Menampilkan ${rows.length > 0 ? startIdx + 1 : 0} - ${Math.min(endIdx, rows.length)} dari ${rows.length} data`;
-        renderPaginationControls(totalPages);
-    }
-
-    function renderPaginationControls(totalPages) {
-        const pagList = document.getElementById('paginationList');
-        let html = `<li class="page-item ${currentPage === 1 ? 'disabled' : ''}"><a class="page-link" href="#" onclick="changePage(${currentPage - 1}); return false;">Sebelumnya</a></li>`;
-        let startP = Math.max(1, currentPage - 2);
-        let endP = Math.min(totalPages, startP + 4);
-        for (let p = startP; p <= endP; p++) {
-            html += `<li class="page-item ${p === currentPage ? 'active' : ''}"><a class="page-link" href="#" onclick="changePage(${p}); return false;">${p}</a></li>`;
-        }
-        html += `<li class="page-item ${currentPage === totalPages || totalPages === 0 ? 'disabled' : ''}"><a class="page-link" href="#" onclick="changePage(${currentPage + 1}); return false;">Selanjutnya</a></li>`;
-        pagList.innerHTML = html;
-    }
-
-    function changePage(page) {
-        currentPage = page;
-        renderTablePage();
-        document.querySelector('.table-scroll-container').scrollTop = 0;
-    }
-
-    function openRowEditModal(originalRowIndex) {
-        if (!isAdmin) return;
-        editingTargetRowIndex = originalRowIndex;
-        let rowData = currentRawData[originalRowIndex];
-        editingTargetRowData = rowData;
-
-        const headers = currentRawData[0];
-        const isVoterSheet = voterSheets.includes(activeSheet);
-        const coklitSection = document.getElementById('rowEditCoklitSection');
-        const coklitSelect = document.getElementById('rowEditCoklitType');
-        const modalTitle = document.querySelector('#adminRowEditModal .modal-title');
-
-        if (coklitSection) coklitSection.classList.toggle('d-none', !isVoterSheet);
-        if (modalTitle) {
-            modalTitle.innerHTML = isVoterSheet
-                ? '<i class="fas fa-user-edit me-2"></i> Edit Data & Aksi Coklit Pemilih'
-                : '<i class="fas fa-edit me-2"></i> Edit Data Sesuai Kolom';
-        }
-
-        if (isVoterSheet) {
-            let coklitColIdx = headers.findIndex(h => String(h).toUpperCase().includes('KODE COKLIT') || String(h).toUpperCase().includes('COKLIT'));
-            let currentCoklit = coklitColIdx !== -1 ? String(rowData[coklitColIdx] || '0').trim() : '0';
-            coklitSelect.value = coklitMap.hasOwnProperty(currentCoklit) ? currentCoklit : '0';
-        } else {
-            coklitSelect.value = 'U';
-        }
-
-        document.getElementById('selectedRowTargetInfo').innerHTML = `
-            <div class="small fw-bold text-success"><i class="fas fa-table me-1"></i> ${isVoterSheet ? 'Baris Pemilih' : 'Baris Data'} Sheet #${originalRowIndex + 1} Terpilih:</div>
-            <div class="small text-dark">Data Baris: <b>${rowData[1] || rowData[0] || '-'}</b></div>
-        `;
-
-        toggleRowEditFields();
-        buildDynamicRowEditFields();
-        new bootstrap.Modal(document.getElementById('adminRowEditModal')).show();
-    }
-
-    function toggleRowEditFields() {
-        const isVoterSheet = voterSheets.includes(activeSheet);
-        const val = isVoterSheet ? document.getElementById('rowEditCoklitType').value : 'U';
-        document.getElementById('panelRowUbah').classList.toggle('d-none', val !== 'U');
-        document.getElementById('panelRowPindahLuar').classList.toggle('d-none', !isVoterSheet || val !== '5');
-        document.getElementById('panelRowPindahDalam').classList.toggle('d-none', !isVoterSheet || val !== '6');
-        document.getElementById('panelRowPisahKK').classList.toggle('d-none', !isVoterSheet || val !== '7');
-    }
-
-    function buildDynamicRowEditFields() {
-        const container = document.getElementById('dynamicRowEditFieldsContainer');
-        container.innerHTML = '';
-        currentRawData[0].forEach((header, idx) => {
-            let colName = String(header);
-            let val = editingTargetRowData ? (editingTargetRowData[idx] || '') : '';
-            let colDiv = document.createElement('div');
-            colDiv.className = 'col-md-6';
-            colDiv.innerHTML = `<label class="form-label small fw-bold text-uppercase">${colName}:</label><input type="text" class="form-control form-control-sm dynamic-row-edit-input" data-col-index="${idx}" value="${val}">`;
-            container.appendChild(colDiv);
-        });
-    }
-
-    function captureCurrentViewState() {
-        return {
-            keyword: document.getElementById('filterKeyword')?.value || '',
-            coklit: document.getElementById('filterCoklit')?.value || '',
-            rt: document.getElementById('filterRt')?.value || '',
-            page: currentPage
-        };
-    }
-
-    function restoreCurrentViewState(view) {
-        if (!view) return;
-        const keyword = document.getElementById('filterKeyword');
-        const coklit = document.getElementById('filterCoklit');
-        const rt = document.getElementById('filterRt');
-        if (keyword) keyword.value = view.keyword;
-        if (coklit) coklit.value = view.coklit;
-        if (rt) rt.value = view.rt;
-        applyFilters();
-        const totalPages = Math.max(1, Math.ceil((filteredData?.length ? filteredData.length - 1 : 0) / rowsPerPage));
-        currentPage = Math.min(Math.max(1, view.page || 1), totalPages);
-        renderTablePage();
-    }
-
-    function showSaveSuccessPopup(message) {
-        const el = document.getElementById('saveSuccessMessage');
-        if (el) el.textContent = message || 'Data sudah tersimpan ke Google Sheet.';
-        const modalEl = document.getElementById('saveSuccessModal');
-        if (modalEl) new bootstrap.Modal(modalEl).show();
-    }
-
-    function getAdminTokenOrWarn() {
-        if (!isAdmin || !adminToken) {
-            showToast('Sesi Admin tidak valid. Silakan login kembali.', 'bg-warning');
-            processLogout(false);
-            return null;
-        }
-        return adminToken;
-    }
-
-    function postAdmin(payload) {
-        const token = getAdminTokenOrWarn();
-        if (!token) return Promise.reject(new Error('Sesi Admin tidak valid.'));
-
-        const securedPayload = Object.assign({}, payload, { adminToken: token });
-
-        return fetch(WEB_APP_URL, {
-            method: 'POST',
-            body: JSON.stringify(securedPayload)
-        }).then(res => res.json());
-    }
-
-    function executeRowEditAction() {
-        if (!isAdmin) return;
-        const isVoterSheet = voterSheets.includes(activeSheet);
-        const coklitType = document.getElementById('rowEditCoklitType').value;
-        const actionType = (isVoterSheet && (coklitType === '6' || coklitType === '8')) ? 'U' : (isVoterSheet ? coklitType : 'U');
-        let payload = { sheet: activeSheet, actionType: actionType, rowIndex: editingTargetRowIndex + 1 };
-
-        if (actionType === 'U') {
-            let updatedValues = [...editingTargetRowData];
-            document.querySelectorAll('.dynamic-row-edit-input').forEach(input => {
-                updatedValues[parseInt(input.getAttribute('data-col-index'))] = input.value;
-            });
-
-            if (coklitType === '6' && isVoterSheet) {
-                const targetRt = String(document.getElementById('targetRowRtSelect')?.value || '').trim();
-                const headers = currentRawData[0] || [];
-                const rtIdx = headers.findIndex(h => {
-                    const n = String(h || '').toUpperCase().trim();
-                    return n === 'RT' || n === 'NO RT' || n === 'RT.' || n.includes('RT');
-                });
-                const coklitIdx = headers.findIndex(h => {
-                    const n = String(h || '').toUpperCase();
-                    return n.includes('KODE COKLIT') || n.includes('COKLIT');
-                });
-                if (coklitIdx !== -1) updatedValues[coklitIdx] = '6';
-                if (rtIdx !== -1 && targetRt) updatedValues[rtIdx] = targetRt;
-                payload.targetRt = targetRt;
-                payload.coklitAction = '6';
-            }
-
-            if (coklitType === '8' && isVoterSheet) {
-                const headers = currentRawData[0] || [];
-                const coklitIdx = headers.findIndex(h => {
-                    const n = String(h || '').toUpperCase();
-                    return n.includes('KODE COKLIT') || n.includes('COKLIT');
-                });
-                if (coklitIdx !== -1) updatedValues[coklitIdx] = '8';
-                payload.coklitAction = '8';
-            }
-
-            payload.values = updatedValues;
-        } else if (actionType === '5') {
-            payload.targetPindahLuar = document.getElementById('targetRowPindahLuarInput').value;
-        } else if (actionType === '6') {
-            payload.targetRt = document.getElementById('targetRowRtSelect').value;
-        } else if (actionType === '7') {
-            payload.newNkk = document.getElementById('rowNewNkkInput').value;
-            payload.newNik = document.getElementById('rowNewNikInput').value;
-            payload.newNama = document.getElementById('rowNewNamaInput').value;
-            payload.newTempatLahir = document.getElementById('rowNewTempatLahirInput').value;
-            payload.newTglLahir = document.getElementById('rowNewTglLahirInput').value;
-            payload.newUsia = document.getElementById('rowCalculatedAgeOutput').value;
-        }
-
-        const submitBtn = document.getElementById('btnSubmitRowEdit');
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Menyimpan...';
-
-        postAdmin(payload)
-        .then(result => {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = 'Simpan Perubahan';
-            if (result.status === 'success') {
-                const savedView = captureCurrentViewState();
-
-                if (actionType === 'U' && Array.isArray(payload.values) && coklitType !== '6') {
-                    updateLocalRow(activeSheet, editingTargetRowIndex, payload.values);
-                    bootstrap.Modal.getInstance(document.getElementById('adminRowEditModal')).hide();
-                    loadSheetData(activeSheet, null, false, true);
-                    restoreCurrentViewState(savedView);
-                } else {
-                    deleteLocalSheetData(activeSheet);
-                    bootstrap.Modal.getInstance(document.getElementById('adminRowEditModal')).hide();
-                    loadSheetData(activeSheet, null, true, true);
-                    window.__pendingRestoreView = savedView;
-                }
-                showSaveSuccessPopup('Perubahan berhasil tersimpan ke Google Sheet. Tampilan tetap pada filter yang Anda pilih.');
-                showToast("Perubahan baris berhasil disimpan!", "bg-success");
-            } else {
-                const msg = String(result.message || '');
-                if (msg.toLowerCase().includes('sesi admin') || msg.toLowerCase().includes('akses admin ditolak')) {
-                    processLogout(false);
-                }
-                showToast("Gagal menyimpan: " + (result.message || 'Error'), "bg-danger");
-            }
-        }).catch(() => {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = 'Simpan Perubahan';
-            showToast("Gagal terhubung ke server.", "bg-danger");
-        });
-    }
-
-    function voterHeaderIndex(headers, patterns) {
-        return headers.findIndex(h => {
-            const n = String(h || '').toUpperCase().trim();
-            return patterns.some(p => n.includes(p));
-        });
-    }
-
-    function calculateNewVoterAge(dateValue) {
-        if (!dateValue) return '';
-        const birth = new Date(dateValue + 'T00:00:00');
-        const target = new Date('2026-10-29T00:00:00');
-        if (isNaN(birth.getTime())) return '';
-        let age = target.getFullYear() - birth.getFullYear();
-        const m = target.getMonth() - birth.getMonth();
-        if (m < 0 || (m === 0 && target.getDate() < birth.getDate())) age--;
-        return age >= 0 ? String(age) : '';
-    }
-
-    function getNextVoterNumber(headers, rows) {
-        const noIdx = voterHeaderIndex(headers, ['NO', 'NOMOR']);
-        if (noIdx === -1) return '';
-        let maxNo = 0;
-        rows.forEach(r => {
-            const n = parseInt(String(r[noIdx] ?? '').replace(/\D/g, ''), 10);
-            if (!isNaN(n)) maxNo = Math.max(maxNo, n);
-        });
-        return String(maxNo + 1);
-    }
-
-    function makeAddField(label, idx, value, type = 'text', options = {}) {
-        const wrap = document.createElement('div');
-        wrap.className = options.full ? 'col-12' : 'col-md-6';
-        const lab = document.createElement('label');
-        lab.className = 'form-label small fw-bold text-uppercase';
-        lab.textContent = label + ':';
-        wrap.appendChild(lab);
-
-        let input;
-        if (options.selectOptions) {
-            input = document.createElement('select');
-            input.className = 'form-select form-select-sm add-voter-input';
-            options.selectOptions.forEach(opt => {
-                const o = document.createElement('option');
-                o.value = opt.value;
-                o.textContent = opt.label;
-                if (String(opt.value) === String(value)) o.selected = true;
-                input.appendChild(o);
-            });
-        } else {
-            input = document.createElement('input');
-            input.type = type;
-            input.className = 'form-control form-control-sm add-voter-input';
-            input.value = value ?? '';
-        }
-        input.dataset.colIndex = String(idx);
-        input.dataset.header = String(label);
-        if (options.readonly) input.readOnly = true;
-        if (options.placeholder) input.placeholder = options.placeholder;
-        if (options.inputMode) input.inputMode = options.inputMode;
-        if (options.maxLength) input.maxLength = options.maxLength;
-        if (options.required) input.required = true;
-        if (options.onInput) input.addEventListener('input', options.onInput);
-        if (options.onChange) input.addEventListener('change', options.onChange);
-        wrap.appendChild(input);
-        if (options.help) {
-            const help = document.createElement('div');
-            help.className = 'form-text';
-            help.textContent = options.help;
-            wrap.appendChild(help);
-        }
-        return wrap;
-    }
-
-    function buildAddVoterFields() {
-        const container = document.getElementById('addVoterFieldsContainer');
-        container.innerHTML = '';
-        if (!currentRawData || currentRawData.length === 0) return;
-
-        const headers = currentRawData[0];
-        const rows = currentRawData.slice(1);
-        const nextNo = getNextVoterNumber(headers, rows);
-        const noIdx = voterHeaderIndex(headers, ['NO', 'NOMOR']);
-        const nkkIdx = voterHeaderIndex(headers, ['NKK', 'NO KK', 'NOMOR KARTU KELUARGA']);
-        const nikIdx = voterHeaderIndex(headers, ['NIK', 'NO KTP', 'NOMOR INDUK KEPENDUDUKAN']);
-        const tglIdx = voterHeaderIndex(headers, ['TANGGAL LAHIR', 'TGL LAHIR', 'TGL. LAHIR']);
-        const usiaIdx = voterHeaderIndex(headers, ['USIA', 'UMUR']);
-        const lpIdx = voterHeaderIndex(headers, ['L/P', 'JENIS KELAMIN', 'JK']);
-        const hubIdx = voterHeaderIndex(headers, ['STATUS HUB', 'HUBUNGAN', 'STATUS HUBUNGAN']);
-        const coklitIdx = voterHeaderIndex(headers, ['KODE COKLIT', 'COKLIT']);
-        const statusDataIdx = voterHeaderIndex(headers, ['STATUS DATA']);
-        const dpIdx = voterHeaderIndex(headers, ['DP-ID', 'DP ID']);
-
-        headers.forEach((header, idx) => {
-            const name = String(header || '').trim();
-            const upper = name.toUpperCase();
-            let value = '';
-            let type = 'text';
-            const opts = {};
-
-            if (idx === noIdx || upper === 'NO') {
-                value = nextNo;
-                opts.readonly = true;
-                opts.help = 'Nomor dibuat otomatis dari nomor terbesar pada sheet.';
-            } else if (idx === dpIdx || upper.includes('DP-ID') || upper.includes('DP ID')) {
-                value = '';
-                opts.readonly = true;
-                opts.help = 'DP-ID dibiarkan kosong untuk pemilih baru; tidak dibuat secara manual.';
-            } else if (idx === coklitIdx || upper.includes('KODE COKLIT') || upper === 'COKLIT') {
-                value = 'B';
-                opts.readonly = true;
-                opts.help = 'Otomatis: B - Baru.';
-            } else if (idx === statusDataIdx || upper.includes('STATUS DATA')) {
-                value = 'B';
-                opts.selectOptions = [
-                    {value:'B', label:'B - Baru'},
-                    {value:'U', label:'U - Ubah'}
-                ];
-            } else if (idx === hubIdx || upper.includes('STATUS HUB') || upper.includes('STATUS HUBUNGAN') || upper.includes('HUBUNGAN')) {
-                value = 'ANAK';
-                opts.selectOptions = [
-                    {value:'KEPALA KELUARGA',label:'KEPALA KELUARGA'},
-                    {value:'SUAMI',label:'SUAMI'},
-                    {value:'ISTRI',label:'ISTRI'},
-                    {value:'ANAK',label:'ANAK'},
-                    {value:'BELUM CUKUP UMUR (BCU)',label:'BELUM CUKUP UMUR (BCU)'}
-                ];
-            } else if (idx === lpIdx || upper === 'L/P' || upper.includes('JENIS KELAMIN')) {
-                value = 'L';
-                opts.selectOptions = [{value:'L',label:'L - Laki-laki'},{value:'P',label:'P - Perempuan'}];
-            } else if (idx === nkkIdx || upper.includes('NKK') || upper.includes('NO KK')) {
-                opts.required = true;
-                opts.inputMode = 'numeric';
-                opts.maxLength = 16;
-                opts.placeholder = '16 digit NKK';
-            } else if (idx === nikIdx || upper === 'NIK' || upper.includes('NO KTP')) {
-                opts.required = true;
-                opts.inputMode = 'numeric';
-                opts.maxLength = 16;
-                opts.placeholder = '16 digit NIK';
-            } else if (idx === tglIdx || upper.includes('TANGGAL LAHIR') || upper.includes('TGL LAHIR')) {
-                type = 'date';
-                opts.required = true;
-                opts.onChange = () => {
-                    if (usiaIdx !== -1) {
-                        const ageInput = container.querySelector(`[data-col-index="${usiaIdx}"]`);
-                        if (ageInput) ageInput.value = calculateNewVoterAge(input.value);
-                    }
-                };
-            } else if (idx === usiaIdx || upper === 'USIA' || upper === 'UMUR') {
-                opts.readonly = true;
-                opts.help = 'Usia otomatis dihitung per 29 Oktober 2026.';
-            } else if (upper.includes('RT')) {
-                opts.selectOptions = Array.from({length:36}, (_,i) => ({value:String(i+1),label:`RT ${String(i+1).padStart(2,'0')}`}));
-            } else if (upper.includes('TPS')) {
-                opts.placeholder = 'Nomor TPS jika ada';
-            }
-
-            container.appendChild(makeAddField(name, idx, value, type, opts));
-        });
-
-        const nkkInput = nkkIdx !== -1 ? container.querySelector(`[data-col-index="${nkkIdx}"]`) : null;
-        if (nkkInput) {
-            nkkInput.addEventListener('input', updateAddVoterInsertInfo);
-            nkkInput.addEventListener('change', updateAddVoterInsertInfo);
-        }
-        updateAddVoterInsertInfo();
-    }
-
-    function updateAddVoterInsertInfo() {
-        const info = document.getElementById('addVoterInsertInfo');
-        if (!info || !currentRawData.length) return;
-        const headers = currentRawData[0];
-        const nkkIdx = voterHeaderIndex(headers, ['NKK', 'NO KK', 'NOMOR KARTU KELUARGA']);
-        const input = nkkIdx !== -1 ? document.querySelector(`#addVoterFieldsContainer [data-col-index="${nkkIdx}"]`) : null;
-        const nkk = String(input?.value || '').trim();
-        if (!nkk) {
-            info.textContent = 'Menentukan berdasarkan NKK';
-            return;
-        }
-        let last = -1;
-        for (let i = 1; i < currentRawData.length; i++) {
-            if (String(currentRawData[i][nkkIdx] || '').trim() === nkk) last = i;
-        }
-        info.textContent = last !== -1
-            ? `Ditempatkan setelah anggota terakhir NKK ${nkk}`
-            : 'NKK belum ada: ditempatkan setelah data terakhir';
-    }
-
-    function openAddVoterModal() {
-        if (!isAdmin) {
-            showToast('Silakan Login Admin terlebih dahulu.', 'bg-warning');
-            return;
-        }
-        if (activeSheet !== 'DPS (SEMENTARA)') {
-            const dpsLink = Array.from(document.querySelectorAll('#subCategoryPemilih .nav-link'))
-                .find(el => el.textContent.toUpperCase().includes('DPS (SEMENTARA)'));
-            loadSheetData('DPS (SEMENTARA)', dpsLink || null);
-            let tries = 0;
-            const waitForDps = setInterval(() => {
-                tries++;
-                if (activeSheet === 'DPS (SEMENTARA)' && currentRawData && currentRawData.length > 0) {
-                    clearInterval(waitForDps);
-                    document.getElementById('addVoterTargetSheet').textContent = activeSheet;
-                    buildAddVoterFields();
-                    new bootstrap.Modal(document.getElementById('addVoterModal')).show();
-                } else if (tries >= 30) {
-                    clearInterval(waitForDps);
-                    showToast('Data DPS belum berhasil dimuat. Silakan klik Refresh Cache lalu coba lagi.', 'bg-warning');
-                }
-            }, 200);
-            return;
-        }
-        if (!currentRawData || currentRawData.length < 1) {
-            showToast('Data DPS belum selesai dimuat. Silakan tunggu sebentar.', 'bg-warning');
-            return;
-        }
-        document.getElementById('addVoterTargetSheet').textContent = activeSheet;
-        buildAddVoterFields();
-        new bootstrap.Modal(document.getElementById('addVoterModal')).show();
-    }
-
-    function saveNewVoter() {
-        if (!isAdmin) return;
-        if (activeSheet !== 'DPS (SEMENTARA)') {
-            showToast('Tambah pemilih baru hanya dilakukan pada DPS (SEMENTARA).', 'bg-warning');
-            return;
-        }
-        const headers = currentRawData[0] || [];
-        const values = Array(headers.length).fill('');
-        document.querySelectorAll('.add-voter-input').forEach(input => {
-            values[parseInt(input.dataset.colIndex, 10)] = input.value.trim();
-        });
-
-        const nkkIdx = voterHeaderIndex(headers, ['NKK', 'NO KK', 'NOMOR KARTU KELUARGA']);
-        const nikIdx = voterHeaderIndex(headers, ['NIK', 'NO KTP', 'NOMOR INDUK KEPENDUDUKAN']);
-        const namaIdx = voterHeaderIndex(headers, ['NAMA', 'NAMA LENGKAP']);
-        const tglIdx = voterHeaderIndex(headers, ['TANGGAL LAHIR', 'TGL LAHIR']);
-        const coklitIdx = voterHeaderIndex(headers, ['KODE COKLIT', 'COKLIT']);
-
-        if (nkkIdx === -1 || nikIdx === -1 || namaIdx === -1) {
-            showToast('Kolom NKK, NIK, atau NAMA tidak ditemukan pada header DPS.', 'bg-danger');
-            return;
-        }
-        if (!/^\d{16}$/.test(values[nkkIdx])) {
-            showToast('NKK harus 16 digit angka.', 'bg-danger');
-            return;
-        }
-        if (!/^\d{16}$/.test(values[nikIdx])) {
-            showToast('NIK harus 16 digit angka.', 'bg-danger');
-            return;
-        }
-        if (!values[namaIdx]) {
-            showToast('Nama lengkap wajib diisi.', 'bg-danger');
-            return;
-        }
-        if (tglIdx !== -1 && values[tglIdx]) {
-            const usiaIdx = voterHeaderIndex(headers, ['USIA', 'UMUR']);
-            if (usiaIdx !== -1) values[usiaIdx] = calculateNewVoterAge(values[tglIdx]);
-        }
-        if (coklitIdx !== -1) values[coklitIdx] = 'B';
-
-        let lastSameNkkArrayIndex = -1;
-        for (let i = 1; i < currentRawData.length; i++) {
-            if (String(currentRawData[i][nkkIdx] || '').trim() === values[nkkIdx]) lastSameNkkArrayIndex = i;
-        }
-        let lastNonEmptyArrayIndex = 0;
-        for (let i = currentRawData.length - 1; i >= 1; i--) {
-            if (currentRawData[i].some(v => String(v ?? '').trim() !== '')) { lastNonEmptyArrayIndex = i; break; }
-        }
-        const insertAfterRow = (lastSameNkkArrayIndex !== -1 ? lastSameNkkArrayIndex : lastNonEmptyArrayIndex) + 1;
-
-        const btn = document.getElementById('btnSaveNewVoter');
-        btn.disabled = true;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Menyimpan ke Google Sheet...';
-
-        const payload = {
-            sheet: 'DPS (SEMENTARA)',
-            actionType: 'B',
-            values: values,
-            insertAfterRow: insertAfterRow,
-            insertMode: 'AFTER_FAMILY',
-            source: 'Tambah Pemilih Baru',
-            autoNumber: true
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzheyKohPbO2SatKV80UDI8HFzBxFKM68tOIa9P-Cf-jvNweFp_ePwbXOCWiSTTGaFxiQ/exec";
+
+        const DPT_TPS1 = 2113;
+        const DPT_TPS2 = 2072;
+        const TOTAL_DPT = DPT_TPS1 + DPT_TPS2;
+
+        let activeAdminPin = ""; 
+
+        // Tema Warna Kartu 3D
+        const CANDIDATE_COLORS = [
+            { bg: "bg-gradient-to-r from-red-800 to-rose-700", text: "text-red-800", border: "border-red-200", fill: "bg-gradient-to-r from-red-700 to-rose-600", accentBg: "bg-red-50", badgeBg: "bg-red-800 text-white" },
+            { bg: "bg-gradient-to-r from-blue-700 to-indigo-600", text: "text-blue-700", border: "border-blue-200", fill: "bg-gradient-to-r from-blue-600 to-indigo-500", accentBg: "bg-blue-50", badgeBg: "bg-blue-700 text-white" },
+            { bg: "bg-gradient-to-r from-amber-600 to-orange-500", text: "text-amber-600", border: "border-amber-200", fill: "bg-gradient-to-r from-amber-500 to-orange-500", accentBg: "bg-amber-50", badgeBg: "bg-amber-600 text-white" },
+            { bg: "bg-gradient-to-r from-emerald-700 to-teal-600", text: "text-emerald-700", border: "border-emerald-200", fill: "bg-gradient-to-r from-emerald-600 to-teal-500", accentBg: "bg-emerald-50", badgeBg: "bg-emerald-700 text-white" },
+            { bg: "bg-gradient-to-r from-purple-700 to-indigo-700", text: "text-purple-700", border: "border-purple-200", fill: "bg-gradient-to-r from-purple-600 to-indigo-600", accentBg: "bg-purple-50", badgeBg: "bg-purple-700 text-white" }
+        ];
+
+        let candidates = [
+            { id: 1, name: "Memuat nama..." },
+            { id: 2, name: "Memuat nama..." },
+            { id: 3, name: "Memuat nama..." },
+            { id: 4, name: "Memuat nama..." },
+            { id: 5, name: "Memuat nama..." }
+        ];
+
+        let voteData = {
+            tps1: { c1: 0, c2: 0, c3: 0, c4: 0, c5: 0, invalid: 0 },
+            tps2: { c1: 0, c2: 0, c3: 0, c4: 0, c5: 0, invalid: 0 }
         };
 
-        postAdmin(payload)
-            .then(result => {
-                btn.disabled = false;
-                btn.innerHTML = '<i class="fas fa-save me-1"></i>Simpan Pemilih Baru';
-                if (result.status === 'success') {
-                    insertLocalRow('DPS (SEMENTARA)', insertAfterRow, values);
-                    bootstrap.Modal.getInstance(document.getElementById('addVoterModal')).hide();
-                    loadSheetData('DPS (SEMENTARA)', null, false);
-                    showToast('Pemilih baru berhasil ditambahkan dan disusun pada Google Sheet.', 'bg-success');
-                } else {
-                    showToast('Gagal menambah pemilih: ' + (result.message || 'Server belum menerima aksi B.'), 'bg-danger');
-                }
-            })
-            .catch(err => {
-                console.error(err);
-                btn.disabled = false;
-                btn.innerHTML = '<i class="fas fa-save me-1"></i>Simpan Pemilih Baru';
-                showToast('Gagal terhubung ke server Google Sheet.', 'bg-danger');
-            });
-    }
-
-    function deleteRowData(originalRowIndex) {
-        if (!isAdmin || !confirm(`Hapus baris sheet #${originalRowIndex + 1}?`)) return;
-        postAdmin({ sheet: activeSheet, actionType: 'DELETE', rowIndex: originalRowIndex + 1 })
-        .then(res => {
-            if (res.status === 'success') {
-                deleteLocalSheetData(activeSheet);
-                bootstrap.Modal.getInstance(document.getElementById('adminRowEditModal'))?.hide();
-                loadSheetData(activeSheet, null, true);
-                showToast("Berhasil dihapus dari Google Sheet!", "bg-success");
-            } else {
-                showToast("Gagal menghapus: " + (res.message || 'Server menolak penghapusan.'), "bg-danger");
-            }
-        })
-        .catch(err => {
-            console.error('DELETE error:', err);
-            showToast("Gagal menghapus: " + (err?.message || 'Tidak dapat terhubung ke server.'), "bg-danger");
-        });
-    }
-
-    function toggleChartSection() {
-        const section = document.getElementById('directChartSection');
-        const btnText = document.getElementById('chartToggleText');
-        if (section.classList.contains('d-none')) {
-            section.classList.remove('d-none');
-            btnText.innerText = "Tutup Grafik";
-            generateCustomChartsAndAccumulation();
-        } else {
-            section.classList.add('d-none');
-            btnText.innerText = "Tampilkan Akumulasi & Grafik";
-        }
-    }
-
-    function generateCustomChartsAndAccumulation() {
-        if (!filteredData || filteredData.length <= 1) return;
-
-        const headers = filteredData[0];
-        const rows = filteredData.slice(1);
-
-        const cardLabel1 = document.getElementById('cardLabel1');
-        const cardLabel2 = document.getElementById('cardLabel2');
-        const cardLabel3 = document.getElementById('cardLabel3');
-        const cardLabel4 = document.getElementById('cardLabel4');
-        const chartTitleLeft = document.getElementById('chartTitleLeft');
-        const chartTitleRight = document.getElementById('chartTitleRight');
-
-        if (activeSheet === 'DPS') {
-            cardLabel1.innerText = "Total Pemilih DPS";
-            cardLabel2.innerText = "Total Pemilih Laki-Laki";
-            cardLabel3.innerText = "Total Pemilih Perempuan";
-            cardLabel4.innerText = "Jumlah RT Terdata";
-
-            chartTitleLeft.innerText = "Grafik Pemilih Berdasarkan Dusun";
-            chartTitleRight.innerText = "Rincian Coklit RT (Laki-Laki vs Perempuan)";
-
-            const dpsSourceData = (dpsSheetDataCache && dpsSheetDataCache.length > 1) ? dpsSheetDataCache : filteredData;
-            const dpsHeaders = dpsSourceData[0];
-            const dpsRows = dpsSourceData.slice(1);
-
-            let dusunIdx = dpsHeaders.findIndex(h => String(h).toUpperCase().includes('DUSUN'));
-            let rtIdx = dpsHeaders.findIndex(h => String(h).toUpperCase().includes('RT'));
-            let jkIdx = dpsHeaders.findIndex(h => {
-                let u = String(h).toUpperCase();
-                return u.includes('JENIS KELAMIN') || u.includes('JK') || u === 'L/P';
-            });
-            let coklitIdx = dpsHeaders.findIndex(h => String(h).toUpperCase().includes('KODE COKLIT') || String(h).toUpperCase().includes('COKLIT'));
-
-            let totalDPS = dpsRows.length;
-            let totalLaki = 0;
-            let totalPerempuan = 0;
-            let dusunMap = {};
-            let rtGenderMap = {};
-
-            dpsRows.forEach(row => {
-                let dusun = dusunIdx !== -1 ? String(row[dusunIdx] || 'Lainnya').trim() : 'Lainnya';
-                let rt = rtIdx !== -1 ? String(row[rtIdx] || '0').trim() : '0';
-                let jk = jkIdx !== -1 ? String(row[jkIdx] || '').toUpperCase().trim() : '';
-                
-                let isLaki = jk === 'L' || jk.includes('LAKI');
-                let isPerempuan = jk === 'P' || jk.includes('PEREM');
-
-                if (isLaki) totalLaki++;
-                if (isPerempuan) totalPerempuan++;
-
-                if (!dusunMap[dusun]) dusunMap[dusun] = 0;
-                dusunMap[dusun]++;
-
-                if (rt !== '0' && rt !== '') {
-                    let formattedRt = `RT ${rt.padStart(2, '0')}`;
-                    if (!rtGenderMap[formattedRt]) {
-                        rtGenderMap[formattedRt] = { L: 0, P: 0 };
-                    }
-                    if (isLaki) rtGenderMap[formattedRt].L++;
-                    else if (isPerempuan) rtGenderMap[formattedRt].P++;
-                }
-            });
-
-            let rtCount = Object.keys(rtGenderMap).length || 36;
-
-            document.getElementById('accTotalCount').innerText = totalDPS;
-            document.getElementById('accMsCount').innerText = totalLaki;
-            document.getElementById('accTmsCount').innerText = totalPerempuan;
-            document.getElementById('accOtherCount').innerText = rtCount;
-
-            const ctx1 = document.getElementById('msTmsChart').getContext('2d');
-            if (msTmsChartInstance) msTmsChartInstance.destroy();
-            msTmsChartInstance = new Chart(ctx1, {
-                type: 'bar',
-                data: {
-                    labels: Object.keys(dusunMap),
-                    datasets: [{
-                        label: 'Jumlah Pemilih',
-                        data: Object.values(dusunMap),
-                        backgroundColor: ['#1e3a8a', '#065f46', '#b45309', '#6b21a8', '#0891b2', '#d97706'],
-                        borderRadius: 6
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
-                }
-            });
-
-            let sortedRtKeys = Object.keys(rtGenderMap).sort((a,b) => {
-                let numA = parseInt(a.replace(/\D/g,'')) || 0;
-                let numB = parseInt(b.replace(/\D/g,'')) || 0;
-                return numA - numB;
-            });
-
-            let dataLakiRt = sortedRtKeys.map(k => rtGenderMap[k].L);
-            let dataPerempuanRt = sortedRtKeys.map(k => rtGenderMap[k].P);
-
-            const ctx2 = document.getElementById('detailedCoklitChart').getContext('2d');
-            if (detailChartInstance) detailChartInstance.destroy();
-            detailChartInstance = new Chart(ctx2, {
-                type: 'bar',
-                data: {
-                    labels: sortedRtKeys,
-                    datasets: [
-                        { label: 'Laki-Laki', data: dataLakiRt, backgroundColor: '#1e3a8a', borderRadius: 4 },
-                        { label: 'Perempuan', data: dataPerempuanRt, backgroundColor: '#b91c3c', borderRadius: 4 }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { position: 'top', labels: { boxWidth: 12, font: { size: 10 } } } },
-                    scales: { x: { stacked: false, ticks: { font: { size: 9 } } }, y: { beginAtZero: true, ticks: { precision: 0 } } }
-                }
-            });
-
-        } else if (activeSheet === 'INPUT SUARA') {
-            cardLabel1.innerText = "Total TPS Masuk";
-            cardLabel2.innerText = "Akumulasi Suara Sah";
-            cardLabel3.innerText = "Suara Tidak Sah";
-            cardLabel4.innerText = "Total Suara Masuk";
-            chartTitleLeft.innerText = "Perbandingan Suara Sah vs Tidak Sah";
-            chartTitleRight.innerText = "Perolehan Suara Kandidat / Nomor Urut";
-
-            let totalTps = rows.length;
-            let totalSah = 0;
-            let totalTdkSah = 0;
-            let totalMasuk = 0;
-            let kandidatSuara = {};
-
-            rows.forEach(r => {
-                let sah = parseFloat(r[r.length - 4]) || 0;
-                let tdkSah = parseFloat(r[r.length - 3]) || 0;
-                let masuk = parseFloat(r[r.length - 2]) || 0;
-                totalSah += sah;
-                totalTdkSah += tdkSah;
-                totalMasuk += masuk;
-
-                for (let i = 2; i < r.length - 4; i++) {
-                    let kName = headers[i] || `Kandidat ${i-1}`;
-                    kandidatSuara[kName] = (kandidatSuara[kName] || 0) + (parseFloat(r[i]) || 0);
-                }
-            });
-
-            document.getElementById('accTotalCount').innerText = totalTps;
-            document.getElementById('accMsCount').innerText = totalSah;
-            document.getElementById('accTmsCount').innerText = totalTdkSah;
-            document.getElementById('accOtherCount').innerText = totalMasuk;
-
-            const ctx1 = document.getElementById('msTmsChart').getContext('2d');
-            if (msTmsChartInstance) msTmsChartInstance.destroy();
-            msTmsChartInstance = new Chart(ctx1, {
-                type: 'bar',
-                data: {
-                    labels: ['Total Suara Sah', 'Total Suara Tidak Sah'],
-                    datasets: [{ data: [totalSah, totalTdkSah], backgroundColor: ['#065f46', '#b45309'], borderWidth: 2, borderColor: '#ffffff' }]
-                },
-                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 9 } } } }, scales: { x: { beginAtZero: true, ticks: { precision: 0, font: { size: 9 } } }, y: { ticks: { font: { size: 9 } } } } }
-            });
-
-            const ctx2 = document.getElementById('detailedCoklitChart').getContext('2d');
-            if (detailChartInstance) detailChartInstance.destroy();
-            detailChartInstance = new Chart(ctx2, {
-                type: 'bar',
-                data: {
-                    labels: Object.keys(kandidatSuara),
-                    datasets: [{ label: 'Perolehan Suara', data: Object.values(kandidatSuara), backgroundColor: '#1e3a8a', borderRadius: 6 }]
-                },
-                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, ticks: { precision: 0, font: { size: 9 } } }, y: { ticks: { font: { size: 9 } } } } }
-            });
-
-        } else if (activeSheet === 'PROFIL CALON KADES') {
-            cardLabel1.innerText = "Total Calon";
-            cardLabel2.innerText = "Kandidat Calon";
-            cardLabel3.innerText = "Total Suara Calon";
-            cardLabel4.innerText = "Persentase Max";
-            chartTitleLeft.innerText = "Proporsi Perolehan Suara";
-            chartTitleRight.innerText = "Grafik Batang Perolehan Suara";
-
-            let totalKandidat = rows.length;
-            let kandidatNama = [];
-            let kandidatPerolehanSuara = [];
-            let totalSuaraSemua = 0;
-
-            rows.forEach(r => {
-                let nama = r[2] || `Kandidat ${r[1]}`;
-                let suara = parseFloat(r[4]) || 0;
-                kandidatNama.push(nama);
-                kandidatPerolehanSuara.push(suara);
-                totalSuaraSemua += suara;
-            });
-
-            document.getElementById('accTotalCount').innerText = totalKandidat;
-            document.getElementById('accMsCount').innerText = totalKandidat;
-            document.getElementById('accTmsCount').innerText = totalSuaraSemua;
-            document.getElementById('accOtherCount').innerText = totalSuaraSemua > 0 ? "100%" : "0%";
-
-            const ctx1 = document.getElementById('msTmsChart').getContext('2d');
-            if (msTmsChartInstance) msTmsChartInstance.destroy();
-            msTmsChartInstance = new Chart(ctx1, {
-                type: 'bar',
-                data: {
-                    labels: kandidatNama,
-                    datasets: [{ data: kandidatPerolehanSuara, backgroundColor: ['#1e3a8a', '#065f46', '#b45309', '#6b21a8', '#0891b2'], borderWidth: 2, borderColor: '#ffffff' }]
-                },
-                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 9 } } } }, scales: { x: { beginAtZero: true, ticks: { precision: 0, font: { size: 9 } } }, y: { ticks: { font: { size: 9 } } } } }
-            });
-
-            const ctx2 = document.getElementById('detailedCoklitChart').getContext('2d');
-            if (detailChartInstance) detailChartInstance.destroy();
-            detailChartInstance = new Chart(ctx2, {
-                type: 'bar',
-                data: {
-                    labels: kandidatNama,
-                    datasets: [{ label: 'Suara', data: kandidatPerolehanSuara, backgroundColor: '#065f46', borderRadius: 6 }]
-                },
-                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, ticks: { precision: 0, font: { size: 9 } } }, y: { ticks: { font: { size: 9 } } } } }
-            });
-
-        } else {
-            cardLabel1.innerText = "Total Pemilih";
-            cardLabel2.innerText = "Memenuhi Syarat (MS - Aktif)";
-            cardLabel3.innerText = "Tidak Memenuhi Syarat (TMS)";
-            cardLabel4.innerText = "Ubah / Baru / Lainnya";
-            
-            chartTitleLeft.innerText = "Proporsi Rinci: NKK . NIK . MS . TMS";
-            chartTitleRight.innerText = "Rincian Coklit";
-
-            let coklitIdx = headers.findIndex(h => String(h).toUpperCase().includes('KODE COKLIT') || String(h).toUpperCase().includes('COKLIT'));
-            let nkkIdx = headers.findIndex(h => String(h).toUpperCase().includes('NKK') || String(h).toUpperCase().includes('NO KK'));
-            let nikIdx = headers.findIndex(h => String(h).toUpperCase().includes('NIK'));
-
-            let total = rows.length;
-            let countMs = 0;
-            let countTms = 0;
-            let countOther = 0;
-            let detailedCounts = {};
-            Object.keys(coklitMap).forEach(k => detailedCounts[k] = 0);
-
-            let uniqueNkkSet = new Set();
-            let totalNikCount = 0;
-
-            rows.forEach(row => {
-                let val = coklitIdx !== -1 ? String(row[coklitIdx] || '0').trim() : '0';
-                
-                if (msCodes.includes(val)) {
-                    countMs++;
-                } else if (tmsCodes.includes(val)) {
-                    countTms++;
-                } else {
-                    countOther++;
-                }
-
-                if (detailedCounts.hasOwnProperty(val)) detailedCounts[val]++;
-                else detailedCounts[val] = (detailedCounts[val] || 0) + 1;
-
-                if (nkkIdx !== -1 && row[nkkIdx]) {
-                    uniqueNkkSet.add(String(row[nkkIdx]).trim());
-                }
-                if (nikIdx !== -1 && row[nikIdx]) {
-                    totalNikCount++;
-                } else if (nkkIdx === -1 && nikIdx === -1) {
-                    totalNikCount = total;
-                }
-            });
-
-            let totalUniqueNkk = uniqueNkkSet.size > 0 ? uniqueNkkSet.size : total;
-            let totalNik = totalNikCount > 0 ? totalNikCount : total;
-
-            document.getElementById('accTotalCount').innerText = total;
-            document.getElementById('accMsCount').innerText = countMs;
-            document.getElementById('accTmsCount').innerText = countTms;
-            document.getElementById('accOtherCount').innerText = countOther;
-
-            const ctxMsTms = document.getElementById('msTmsChart').getContext('2d');
-            if (msTmsChartInstance) msTmsChartInstance.destroy();
-            msTmsChartInstance = new Chart(ctxMsTms, {
-                type: 'bar',
-                data: {
-                    labels: [
-                        'Jumlah NKK (Keluarga Sama)', 
-                        'Jumlah NIK (Individu)', 
-                        'Memenuhi Syarat (MS - Aktif)', 
-                        'Tidak Memenuhi Syarat (TMS)'
-                    ],
-                    datasets: [{ 
-                        data: [totalUniqueNkk, totalNik, countMs, countTms], 
-                        backgroundColor: [
-                            '#1e3a8a', 
-                            '#065f46', 
-                            '#b45309', 
-                            '#6b21a8'  
-                        ], 
-                        borderWidth: 2, 
-                        borderColor: '#ffffff' 
-                    }]
-                },
-                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 9 } } } }, scales: { x: { beginAtZero: true, ticks: { precision: 0, font: { size: 9 } } }, y: { ticks: { font: { size: 9 } } } } }
-            });
-
-            let detailLabels = Object.keys(detailedCounts).map(k => `${k} - ${coklitMap[k] || 'Lainnya'}`);
-            let detailValues = Object.values(detailedCounts);
-
-            const ctxDetail = document.getElementById('detailedCoklitChart').getContext('2d');
-            if (detailChartInstance) detailChartInstance.destroy();
-            detailChartInstance = new Chart(ctxDetail, {
-                type: 'bar',
-                data: {
-                    labels: detailLabels,
-                    datasets: [{ label: 'Jumlah Pemilih', data: detailValues, backgroundColor: '#065f46', borderRadius: 6 }]
-                },
-                options: { responsive: true, maintainAspectRatio: false, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { beginAtZero: true, ticks: { precision: 0, font: { size: 9 } } }, y: { ticks: { font: { size: 9 } } } } }
-            });
-        }
-    }
-
-    function openAdminLoginFromPopup() {
-        const welcomeModalEl = document.getElementById('welcomePopupModal');
-        const welcomeModal = bootstrap.Modal.getInstance(welcomeModalEl);
-        welcomeModal.hide();
-        
-        setTimeout(() => {
-            const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-            loginModal.show();
-        }, 300);
-    }
-
-    function showAdminTransition(title, subtitle, iconClass) {
-        const overlay = document.getElementById('adminTransitionOverlay');
-        if (!overlay) return;
-        document.getElementById('adminTransitionTitle').textContent = title || 'Memproses Admin';
-        document.getElementById('adminTransitionSubtitle').textContent = subtitle || 'Mohon tunggu sebentar...';
-        const icon = overlay.querySelector('.admin-transition-icon i');
-        if (icon) icon.className = iconClass || 'fas fa-shield-alt';
-        overlay.classList.add('show');
-        overlay.setAttribute('aria-hidden','false');
-    }
-
-    function hideAdminTransition() {
-        const overlay = document.getElementById('adminTransitionOverlay');
-        if (!overlay) return;
-        overlay.classList.remove('show');
-        overlay.setAttribute('aria-hidden','true');
-    }
-
-    function processLogin() {
-        const pass = document.getElementById('adminPassword').value;
-        if (!pass) { alert('Masukkan password Admin.'); return; }
-        showAdminTransition('Login Admin', 'Memverifikasi akses dan menyiapkan panel Admin...', 'fas fa-user-shield');
-
-        fetch(`${WEB_APP_URL}?action=login&pass=${encodeURIComponent(pass)}`)
-            .then(res => res.json())
-            .then(res => {
-                if (res.status === 'success' && res.token) {
-                    isAdmin = true;
-                    adminToken = res.token;
-                    sessionStorage.setItem('pilkades_admin_token', adminToken);
-
-                    bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
-                    document.getElementById('adminPassword').value = '';
-                    updateAuthUI();
-                    renderTablePage();
-                    setTimeout(() => { hideAdminTransition(); showToast("Login Berhasil! Sesi Admin aktif.", "bg-success"); }, 650);
-                } else {
-                    hideAdminTransition();
-                    alert("Password salah!");
-                }
-            })
-            .catch(err => {
-                console.error(err);
-                hideAdminTransition();
-                showToast("Gagal terhubung ke server login.", "bg-danger");
-            });
-    }
-
-    function processLogout(sendToServer = true) {
-        const oldToken = adminToken;
-        if (sendToServer) showAdminTransition('Logout Admin', 'Menutup sesi Admin dengan aman...', 'fas fa-sign-out-alt');
-
-        isAdmin = false;
-        adminToken = '';
-        sessionStorage.removeItem('pilkades_admin_token');
-
-        updateAuthUI();
-        renderTablePage();
-        if (sendToServer) setTimeout(() => { hideAdminTransition(); showToast("Berhasil Logout.", "bg-secondary"); }, 650);
-
-        if (sendToServer && oldToken) {
-            fetch(WEB_APP_URL, {
-                method: 'POST',
-                body: JSON.stringify({
-                    actionType: 'LOGOUT',
-                    adminToken: oldToken
-                })
-            }).catch(() => {});
-        }
-    }
-
-    function updateAuthUI() {
-        const authArea = document.getElementById('authArea');
-        const adminActionButtons = document.getElementById('adminActionButtons');
-        if (isAdmin) {
-            authArea.innerHTML = `<button class="btn btn-warning btn-sm px-3 fw-bold text-dark shadow-sm" onclick="processLogout()"><i class="fas fa-sign-out-alt me-1"></i> Logout Admin</button>`;
-            adminActionButtons.classList.remove('d-none');
-            adminActionButtons.classList.add('d-flex');
-            document.querySelectorAll('.admin-only-menu').forEach(el => el.classList.remove('d-none'));
-        } else {
-            authArea.innerHTML = `<button class="btn btn-outline-light btn-sm px-3 fw-bold" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="fas fa-lock me-1"></i> Login Admin</button>`;
-            adminActionButtons.classList.remove('d-flex');
-            adminActionButtons.classList.add('d-none');
-            document.querySelectorAll('.admin-only-menu').forEach(el => el.classList.add('d-none'));
-        }
-    }
-
-    function maskCurrentTableForPrint() {
-        const table = document.getElementById('dataTable');
-        if (!table) return;
-
-        const headerCells = Array.from(table.querySelectorAll('thead th'));
-        const dataHeaderIndexes = [];
-
-        headerCells.forEach((th, displayIndex) => {
-            const label = String(th.textContent || '').trim().toUpperCase();
-            if (label !== '#' && label !== 'AKSI') {
-                dataHeaderIndexes.push({
-                    displayIndex,
-                    columnName: label
-                });
-            }
-        });
-
-        table.querySelectorAll('tbody tr').forEach(tr => {
-            const cells = Array.from(tr.children);
-
-            dataHeaderIndexes.forEach(item => {
-                const cell = cells[item.displayIndex];
-                if (!cell) return;
-
-                const columnName = item.columnName;
-                const isSensitive =
-                    columnName.includes('NKK') ||
-                    columnName.includes('NO KK') ||
-                    columnName.includes('NOMOR KARTU KELUARGA') ||
-                    columnName.includes('NIK') ||
-                    columnName.includes('NO KTP') ||
-                    columnName.includes('NOMOR INDUK KEPENDUDUKAN');
-
-                if (isSensitive) {
-                    cell.textContent = maskSensitiveData(columnName, cell.textContent, true);
-                }
-            });
-        });
-    }
-
-    function dpsPrintText(value) {
-        return String(value ?? '').replace(/\s+/g, ' ').trim();
-    }
-
-    function dpsPrintDate(value) {
-        if (value === null || value === undefined || value === '') return '';
-        const s = dpsPrintText(value);
-        const m = s.match(/(\d{1,2})[\/\-.](\d{1,2})[\/\-.](\d{4})/);
-        if (m) return String(m[1]).padStart(2,'0') + '/' + String(m[2]).padStart(2,'0') + '/' + m[3];
-        const iso = s.match(/^(\d{4})-(\d{2})-(\d{2})/);
-        if (iso) return iso[3] + '/' + iso[2] + '/' + iso[1];
-        const dt = new Date(value);
-        if (!isNaN(dt.getTime())) return String(dt.getDate()).padStart(2,'0') + '/' + String(dt.getMonth()+1).padStart(2,'0') + '/' + dt.getFullYear();
-        return s.split(/[ T]/)[0];
-    }
-
-    function dpsPrintNik(value) {
-        const nik = dpsPrintText(value).replace(/\D/g, '');
-        if (!nik) return '';
-        return nik.length >= 10 ? nik.slice(0,6) + 'XXX' + nik.slice(9) : (nik.length > 6 ? nik.slice(0,6) + 'XXX' : nik);
-    }
-
-    function dpsPrintFind(headers, patterns) {
-        return voterHeaderIndex(headers, patterns);
-    }
-
-    function dpsPrintKawin(value) {
-        const v = dpsPrintText(value).toUpperCase();
-        if (v.includes('BELUM') || v === 'B') return 'B';
-        if (v.includes('SUDAH') || v === 'S') return 'S';
-        if (v.includes('PERNAH') || v === 'P') return 'P';
-        return v;
-    }
-
-    function dpsPrintGender(value) {
-        const v = dpsPrintText(value).toUpperCase();
-        if (v === 'L' || v.includes('LAKI')) return 'L';
-        if (v === 'P' || v.includes('PEREM')) return 'P';
-        return v;
-    }
-
-    function dpsPrintAddress(row, headers) {
-        const rtIdx = dpsPrintFind(headers, ['RT','RT DOMISILI','RT ALAMAT']);
-        const dusunIdx = dpsPrintFind(headers, ['DUSUN','LINGKUNGAN']);
-        const rt = rtIdx !== -1 ? dpsPrintText(row[rtIdx]) : '';
-        const dusun = dusunIdx !== -1 ? dpsPrintText(row[dusunIdx]) : '';
-        const out = [];
-        if (rt) out.push('RT ' + rt.replace(/^RT\.?\s*/i,''));
-        if (dusun) out.push('Dusun ' + dusun.replace(/^Dusun\s*/i,''));
-        return out.join(' ');
-    }
-
-    function buildDpsPrintHtml() {
-        const headers = currentRawData[0] || [];
-        if (!headers.length) throw new Error('Data DPS belum tersedia.');
-
-        const activeRt = document.getElementById('filterRt')?.value?.trim() || '';
-        const activeKeyword = document.getElementById('filterKeyword')?.value?.trim() || '';
-        const activeCoklit = document.getElementById('filterCoklit')?.value?.trim() || '';
-        let rows = (Array.isArray(filteredData) && filteredData.length > 0)
-            ? filteredData.slice(1)
-            : currentRawData.slice(1);
-
-        const rtIdxForPrint = dpsPrintFind(headers, ['RT','RT DOMISILI','RT ALAMAT']);
-        const coklitIdxForPrint = dpsPrintFind(headers, ['KODE COKLIT','COKLIT']);
-        if (activeRt && rtIdxForPrint !== -1) {
-            rows = rows.filter(r => dpsPrintText(r[rtIdxForPrint]).replace(/^RT\.?\s*/i,'') === activeRt.replace(/^RT\.?\s*/i,''));
-        }
-        if (activeCoklit && coklitIdxForPrint !== -1) {
-            rows = rows.filter(r => dpsPrintText(r[coklitIdxForPrint]) === activeCoklit);
+        function safeNum(val) {
+            let n = Number(val);
+            return isNaN(n) ? 0 : n;
         }
 
-        const coklitIdx = dpsPrintFind(headers, ['KODE COKLIT','COKLIT']);
-        const nikIdx = dpsPrintFind(headers, ['NIK','NO KTP','NOMOR INDUK KEPENDUDUKAN']);
-        const namaIdx = dpsPrintFind(headers, ['NAMA LENGKAP','NAMA']);
-        const tempatIdx = dpsPrintFind(headers, ['TEMPAT LAHIR']);
-        const tglIdx = dpsPrintFind(headers, ['TANGGAL LAHIR','TGL LAHIR']);
-        const umurIdx = dpsPrintFind(headers, ['UMUR','USIA']);
-        const kawinIdx = dpsPrintFind(headers, ['STS KAWIN','STATUS PERKAWINAN','STATUS KAWIN','PERKAWINAN']);
-        const jkIdx = dpsPrintFind(headers, ['JENIS KELAMIN','JK','L/P']);
+        function initApp() {
+            renderPublicView();
+            loadVotesFromSheet();
+        }
 
-        const msRows = rows.filter(r => {
-            if (!r || r.every(v => dpsPrintText(v) === '')) return false;
-            const raw = coklitIdx === -1 ? '' : dpsPrintText(r[coklitIdx]).toUpperCase();
-            const code = (raw.match(/^(0|1|2|3|4|5|6|7|8|U|B)/) || [raw])[0];
-            return msCodes.includes(code);
-        });
-
-        const esc = v => String(v ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-        let html = '<div id="dpsPrintContainer">';
-        html += '<div class="dps-first-page-title">DAFTAR PEMILIH SEMENTARA (DPS)<br>PEMILIHAN KEPALA DESA TAHUN 2026</div>';
-        html += '<div class="dps-meta"><div>DESA : PAYO LEBAR<br>KECAMATAN : SINGKUT</div><div>KABUPATEN : SAROLANGUN<br>PROVINSI : JAMBI</div></div>';
-        html += '<table><thead><tr>';
-        html += '<th class="c-no">NO</th><th class="c-nik">NIK</th><th class="c-nama">NAMA PEMILIH</th><th class="c-tempat">TEMPAT LAHIR</th><th class="c-tgl">TANGGAL,<br>BULAN DAN<br>TAHUN LAHIR</th><th class="c-umur">UMUR<br>(TAHUN)</th><th class="c-kawin">STATUS<br>PERKAWINAN<br>(B/S/P)</th><th class="c-jk">JENIS<br>KELAMIN</th><th class="c-alamat">ALAMAT TEMPAT TINGGAL<br>RT / DUSUN</th><th class="c-ket">KET</th></tr></thead><tbody>';
-        let laki = 0, perempuan = 0;
-        msRows.forEach((r,i) => {
-            const jk = jkIdx !== -1 ? dpsPrintGender(r[jkIdx]) : '';
-            if (jk === 'L') laki++; else if (jk === 'P') perempuan++;
-            html += '<tr>';
-            html += '<td class="c-no" style="text-align:center">' + (i+1) + '</td>';
-            html += '<td class="c-nik" style="text-align:center">' + esc(nikIdx !== -1 ? dpsPrintNik(r[nikIdx]) : '') + '</td>';
-            html += '<td class="c-nama">' + esc(namaIdx !== -1 ? r[namaIdx] : '') + '</td>';
-            html += '<td class="c-tempat">' + esc(tempatIdx !== -1 ? r[tempatIdx] : '') + '</td>';
-            html += '<td class="c-tgl" style="text-align:center">' + esc(tglIdx !== -1 ? dpsPrintDate(r[tglIdx]) : '') + '</td>';
-            html += '<td class="c-umur" style="text-align:center">' + esc(umurIdx !== -1 ? r[umurIdx] : '') + '</td>';
-            html += '<td class="c-kawin" style="text-align:center">' + esc(kawinIdx !== -1 ? dpsPrintKawin(r[kawinIdx]) : '') + '</td>';
-            html += '<td class="c-jk" style="text-align:center">' + esc(jk) + '</td>';
-            html += '<td class="c-alamat">' + esc(dpsPrintAddress(r, headers)) + '</td>';
-            html += '<td class="c-ket"></td></tr>';
-        });
-        html += '</tbody></table>';
-        html += '<div class="dps-summary"><div>JUMLAH DPS LAKI-LAKI : <u>' + laki + '</u></div><div>JUMLAH DPS PEREMPUAN : <u>' + perempuan + '</u></div><div>JUMLAH TOTAL DPS (1+2) : <u>' + msRows.length + '</u></div></div>';
-        html += '<div class="dps-notes"><b>KETERANGAN :</b><br>B = Belum Kawin<br>S = Sudah Kawin<br>P = Pernah Kawin<br>LK = Laki-laki<br>Pr = Perempuan</div>';
-        html += '<div class="dps-signature"><div>PANITIA PEMILIHAN KEPALA DESA</div><div class="dps-sign-grid"><div>KETUA<div class="dps-sign-space"></div><div class="dps-sign-line">________________________</div></div><div>WAKIL KETUA<div class="dps-sign-space"></div><div class="dps-sign-line">________________________</div></div><div>SEKRETARIS<div class="dps-sign-space"></div><div class="dps-sign-line">________________________</div></div><div>KETUA, ANGGOTA<div class="dps-sign-space"></div><div class="dps-sign-line">________________________</div></div></div></div>';
-        html += '</div>';
-        return html;
-    }
-
-    function printFolioLandscape() {
-        if (activeSheet === 'DPS (SEMENTARA)') {
-            const area = document.getElementById('printableArea');
-            const oldHTML = area ? area.innerHTML : '';
+        async function loadVotesFromSheet() {
             try {
-                document.body.classList.add('printing-dps');
-                if (area) area.innerHTML = buildDpsPrintHtml();
-                window.print();
+                let res = await fetch(WEB_APP_URL);
+                if (!res.ok) throw new Error("Gagal mengambil data server");
+                let data = await res.json();
+                
+                if (data) {
+                    if (data.candidates && Array.isArray(data.candidates) && data.candidates.length > 0) {
+                        candidates = data.candidates;
+                    }
+                    if (data.tps1 && data.tps2) {
+                        voteData = {
+                            tps1: {
+                                c1: safeNum(data.tps1.c1),
+                                c2: safeNum(data.tps1.c2),
+                                c3: safeNum(data.tps1.c3),
+                                c4: safeNum(data.tps1.c4),
+                                c5: safeNum(data.tps1.c5),
+                                invalid: safeNum(data.tps1.invalid)
+                            },
+                            tps2: {
+                                c1: safeNum(data.tps2.c1),
+                                c2: safeNum(data.tps2.c2),
+                                c3: safeNum(data.tps2.c3),
+                                c4: safeNum(data.tps2.c4),
+                                c5: safeNum(data.tps2.c5),
+                                invalid: safeNum(data.tps2.invalid)
+                            }
+                        };
+                    }
+                }
+            } catch (err) {
+                console.warn("Gagal memuat data:", err);
             } finally {
-                if (area) area.innerHTML = oldHTML;
-                document.body.classList.remove('printing-dps');
+                renderPublicView();
             }
-            return;
         }
 
-        const table = document.getElementById('dataTable');
-        const originalTableHTML = table ? table.innerHTML : '';
-        document.getElementById('printSheetName').innerText = activeSheet;
-        document.getElementById('printHeader').classList.remove('d-none');
-        try {
-            maskCurrentTableForPrint();
-            window.print();
-        } finally {
-            if (table) table.innerHTML = originalTableHTML;
-            document.getElementById('printHeader').classList.add('d-none');
-        }
-    }
-
-    function exportToExcel() {
-        let table = document.getElementById('dataTable');
-        let blob = new Blob(['\ufeff' + table.outerHTML], { type: 'application/vnd.ms-excel' });
-        let a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = `Data_${activeSheet.replace(/\s+/g, '_')}_Pilkades2026.xls`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        showToast("Diekstrak ke Excel!", "bg-success");
-    }
-
-    function showToast(msg, bgClass) {
-        const toastEl = document.getElementById('statusToast');
-        toastEl.className = `toast align-items-center text-white ${bgClass} border-0 p-2 show`;
-        document.getElementById('toastMessage').innerHTML = `<i class="fas fa-info-circle me-2"></i> ${msg}`;
-        setTimeout(() => toastEl.classList.remove('show'), 2500);
-    }
-
-    function refreshData() {
-        const savedView = captureCurrentViewState();
-        deleteLocalSheetData(activeSheet);
-
-        try {
-            const meta = JSON.parse(localStorage.getItem(LOCAL_DB_META) || 'null');
-            if (meta && meta.validatedSheet === activeSheet) {
-                localStorage.removeItem(LOCAL_DB_META);
+        async function handleAdminLogin() {
+            const pinInput = document.getElementById('adminPinInput').value;
+            if (!pinInput) {
+                alert('Masukkan PIN terlebih dahulu!');
+                return;
             }
-        } catch (e) {}
 
-        window.__pendingRestoreView = savedView;
-        loadSheetData(activeSheet, null, true, true);
-        showToast("Mengambil data terbaru dari Google Sheet...", "bg-info");
-    }
+            const btnLogin = document.getElementById('btnLogin');
+            btnLogin.innerText = "Memeriksa PIN...";
+            btnLogin.disabled = true;
 
-    window.onload = function() {
-        loadSheetData('INPUT SUARA', null);
-        updateRealtimeClock();
-        setInterval(updateRealtimeClock, 1000);
+            try {
+                let res = await fetch(`${WEB_APP_URL}?action=verifyPin&pin=${encodeURIComponent(pinInput)}`);
+                let result = await res.json();
 
-        setTimeout(() => {
-            const welcomeModal = new bootstrap.Modal(document.getElementById('welcomePopupModal'));
-            welcomeModal.show();
-        }, 500);
-    };
+                if (result.status === "success") {
+                    activeAdminPin = pinInput;
+                    document.getElementById('adminLoginBox').classList.add('hidden');
+                    document.getElementById('adminEditorPanel').classList.remove('hidden');
+                    renderAdminForms();
+                } else {
+                    alert(result.message || 'PIN Admin Salah!');
+                }
+            } catch (err) {
+                alert('Gagal terhubung ke server untuk verifikasi.');
+            } finally {
+                btnLogin.innerText = "Masuk ke Panel Input Data";
+                btnLogin.disabled = false;
+            }
+        }
 
-function toggleHiddenMenu(force){const sidebar=document.getElementById('sidebar'),btn=document.getElementById('menuToggleButton'),back=document.getElementById('menuBackdrop');if(!sidebar)return;const open=typeof force==='boolean'?force:!sidebar.classList.contains('menu-visible');sidebar.classList.toggle('menu-visible',open);if(back)back.classList.toggle('show',open);if(btn){btn.setAttribute('aria-expanded',String(open));btn.innerHTML=open?'<i class="fas fa-times me-1"></i> TUTUP MENU':'<i class="fas fa-bars me-1"></i> MENU';}}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')toggleHiddenMenu(false);});
-</script>
+        async function saveVotesToSheet() {
+            if (!activeAdminPin) {
+                alert('Sesi login telah berakhir. Silakan login kembali.');
+                handleAdminLogout();
+                return;
+            }
 
-<div id="adminTransitionOverlay" aria-hidden="true">
-  <div class="admin-transition-card">
-    <div class="admin-transition-icon"><i class="fas fa-shield-alt"></i></div>
-    <div class="admin-transition-title" id="adminTransitionTitle">Memproses Admin</div>
-    <div class="admin-transition-subtitle" id="adminTransitionSubtitle">Mohon tunggu sebentar...</div>
-    <div class="admin-slides"></div>
-  </div>
-</div>
+            const t1c1 = safeNum(document.getElementById('t1_c1').value);
+            const t1c2 = safeNum(document.getElementById('t1_c2').value);
+            const t1c3 = safeNum(document.getElementById('t1_c3').value);
+            const t1c4 = safeNum(document.getElementById('t1_c4').value);
+            const t1c5 = safeNum(document.getElementById('t1_c5').value);
+            const t1Invalid = safeNum(document.getElementById('t1_invalid').value);
+
+            if ((t1c1 + t1c2 + t1c3 + t1c4 + t1c5 + t1Invalid) > DPT_TPS1) {
+                alert('Peringatan: Total suara TPS 01 melebihi DPT (2.113)!');
+                return;
+            }
+
+            const t2c1 = safeNum(document.getElementById('t2_c1').value);
+            const t2c2 = safeNum(document.getElementById('t2_c2').value);
+            const t2c3 = safeNum(document.getElementById('t2_c3').value);
+            const t2c4 = safeNum(document.getElementById('t2_c4').value);
+            const t2c5 = safeNum(document.getElementById('t2_c5').value);
+            const t2Invalid = safeNum(document.getElementById('t2_invalid').value);
+
+            if ((t2c1 + t2c2 + t2c3 + t2c4 + t2c5 + t2Invalid) > DPT_TPS2) {
+                alert('Peringatan: Total suara TPS 02 melebihi DPT (2.072)!');
+                return;
+            }
+
+            const btnSave = document.getElementById('btnSave');
+            btnSave.innerText = "Proses Menyimpan...";
+            btnSave.disabled = true;
+
+            voteData = {
+                tps1: { c1: t1c1, c2: t1c2, c3: t1c3, c4: t1c4, c5: t1c5, invalid: t1Invalid },
+                tps2: { c1: t2c1, c2: t2c2, c3: t2c3, c4: t2c4, c5: t2c5, invalid: t2Invalid }
+            };
+
+            try {
+                let url = `${WEB_APP_URL}?action=save&pin=${encodeURIComponent(activeAdminPin)}&t1_c1=${t1c1}&t1_c2=${t1c2}&t1_c3=${t1c3}&t1_c4=${t1c4}&t1_c5=${t1c5}&t1_invalid=${t1Invalid}&t2_c1=${t2c1}&t2_c2=${t2c2}&t2_c3=${t2c3}&t2_c4=${t2c4}&t2_c5=${t2c5}&t2_invalid=${t2Invalid}`;
+                
+                let res = await fetch(url);
+                let result = await res.json();
+                
+                if (result.status === "success") {
+                    alert('Data berhasil disimpan dan disinkronkan ke Spreadsheet!');
+                    switchMode('public');
+                    loadVotesFromSheet();
+                } else {
+                    alert(result.message || 'Gagal menyimpan ke Spreadsheet.');
+                }
+            } catch (error) {
+                alert('Terjadi kesalahan jaringan.');
+            } finally {
+                btnSave.innerText = "Simpan & Sinkronkan ke Spreadsheet";
+                btnSave.disabled = false;
+            }
+        }
+
+        function switchMode(mode) {
+            const btnPub = document.getElementById('btnPublic');
+            const btnAdm = document.getElementById('btnAdmin');
+            const viewPub = document.getElementById('viewPublic');
+            const viewAdm = document.getElementById('viewAdmin');
+
+            if (mode === 'public') {
+                btnPub.className = "bg-gradient-to-r from-amber-400 to-amber-500 text-red-950 px-4 py-1.5 rounded-xl text-xs font-extrabold transition shadow-md flex items-center gap-1.5";
+                btnAdm.className = "text-red-200 hover:text-white hover:bg-red-800/60 px-4 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5";
+                viewPub.classList.remove('hidden');
+                viewAdm.classList.add('hidden');
+                loadVotesFromSheet();
+            } else {
+                btnAdm.className = "bg-gradient-to-r from-amber-400 to-amber-500 text-red-950 px-4 py-1.5 rounded-xl text-xs font-extrabold transition shadow-md flex items-center gap-1.5";
+                btnPub.className = "text-red-200 hover:text-white hover:bg-red-800/60 px-4 py-1.5 rounded-xl text-xs font-semibold transition flex items-center gap-1.5";
+                viewPub.classList.add('hidden');
+                viewAdm.classList.remove('hidden');
+            }
+        }
+
+        function handleAdminLogout() {
+            activeAdminPin = "";
+            document.getElementById('adminLoginBox').classList.remove('hidden');
+            document.getElementById('adminEditorPanel').classList.add('hidden');
+            document.getElementById('adminPinInput').value = '';
+        }
+
+        function renderPublicView() {
+            const t1 = voteData.tps1 || {};
+            const t2 = voteData.tps2 || {};
+
+            const totalC1 = safeNum(t1.c1) + safeNum(t2.c1);
+            const totalC2 = safeNum(t1.c2) + safeNum(t2.c2);
+            const totalC3 = safeNum(t1.c3) + safeNum(t2.c3);
+            const totalC4 = safeNum(t1.c4) + safeNum(t2.c4);
+            const totalC5 = safeNum(t1.c5) + safeNum(t2.c5);
+
+            const totalInvalid = safeNum(t1.invalid) + safeNum(t2.invalid);
+            const totalValid = totalC1 + totalC2 + totalC3 + totalC4 + totalC5;
+            const totalMasuk = totalValid + totalInvalid;
+            const turnout = TOTAL_DPT > 0 ? ((totalMasuk / TOTAL_DPT) * 100).toFixed(1) : "0.0";
+
+            document.getElementById('statTotalMasuk').innerText = totalMasuk.toLocaleString('id-ID');
+            document.getElementById('statSah').innerText = totalValid.toLocaleString('id-ID');
+            document.getElementById('statTidakSah').innerText = totalInvalid.toLocaleString('id-ID');
+            document.getElementById('statTurnout').innerText = turnout + '%';
+
+            const container = document.getElementById('candidateResultsContainer');
+            container.innerHTML = '';
+            
+            const totals = [totalC1, totalC2, totalC3, totalC4, totalC5];
+
+            candidates.forEach((c, index) => {
+                const votes = totals[index] || 0;
+                const percentage = totalValid > 0 ? ((votes / totalValid) * 100).toFixed(1) : "0.0";
+                const colorStyle = CANDIDATE_COLORS[index % CANDIDATE_COLORS.length];
+                
+                // DESAIN FOTO KOTAK 3D (Pasfoto Persegi Panjang Tegas)
+                const photoHtml = c.photo 
+                    ? `<div class="relative group">
+                        <div class="w-36 h-48 md:w-40 md:h-52 rounded-2xl overflow-hidden border-4 border-white photo-3d-box bg-slate-200 transition-transform duration-300 group-hover:scale-105">
+                            <img src="${c.photo}" class="w-full h-full object-cover object-top" alt="${c.name}" referrerpolicy="no-referrer">
+                        </div>
+                       </div>`
+                    : `<div class="relative group">
+                        <div class="w-36 h-48 md:w-40 md:h-52 rounded-2xl overflow-hidden border-4 border-white photo-3d-box bg-gradient-to-b from-slate-100 to-slate-300 flex flex-col items-center justify-center text-slate-400">
+                            <i class="fa-solid fa-user text-5xl mb-2"></i>
+                            <span class="text-[10px] font-bold text-slate-400">TANPA FOTO</span>
+                        </div>
+                       </div>`;
+
+                container.innerHTML += `
+                    <div class="bg-white rounded-3xl border border-slate-200/80 card-3d flex flex-col justify-between relative overflow-hidden group">
+                        <!-- Strip Gradasi Atas Kartu -->
+                        <div class="h-3.5 w-full ${colorStyle.bg}"></div>
+
+                        <div class="p-5 md:p-6 flex flex-col items-center">
+                            <!-- Header Kartu: Nomor Urut & Persentase -->
+                            <div class="w-full flex items-center justify-between gap-2 mb-5 pb-3 border-b border-slate-100">
+                                <div class="w-12 h-12 rounded-2xl ${colorStyle.badgeBg} font-black text-xl flex items-center justify-center shadow-lg shadow-slate-900/10">
+                                    0${c.id}
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-3xl font-black ${colorStyle.text} tracking-tight">${percentage}%</span>
+                                    <p class="text-[11px] font-bold text-slate-400 uppercase tracking-wider">${votes.toLocaleString('id-ID')} Suara</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Foto Kotak 3D & Nama Calon -->
+                            <div class="flex flex-col items-center my-2 text-center">
+                                <div class="mb-4">
+                                    ${photoHtml}
+                                </div>
+                                <h3 class="font-black text-slate-900 text-lg md:text-xl leading-snug tracking-tight px-1">${c.name}</h3>
+                                <span class="inline-block mt-2 px-3 py-1 rounded-full text-[10px] font-black ${colorStyle.accentBg} ${colorStyle.text} uppercase tracking-widest border ${colorStyle.border}">
+                                    Calon Kades No. 0${c.id}
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Progress Bar At Bawah -->
+                        <div class="p-4 bg-slate-50/80 border-t border-slate-100 rounded-b-3xl">
+                            <div class="w-full bg-slate-200 rounded-full h-4 overflow-hidden p-0.5 shadow-inner">
+                                <div class="${colorStyle.fill} h-full rounded-full progress-bar-fill shadow-sm" style="width: ${percentage}%"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            const tableBody = document.getElementById('recapTableBody');
+            let tableHTML = '';
+
+            candidates.forEach((c, index) => {
+                const t1Vote = safeNum(t1['c' + c.id]);
+                const t2Vote = safeNum(t2['c' + c.id]);
+                const totVote = totals[index] || 0;
+                
+                tableHTML += `
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-3.5 pl-5 font-bold text-slate-800">
+                            <span class="inline-block w-6 text-slate-400 font-extrabold">0${c.id}.</span> ${c.name}
+                        </td>
+                        <td class="p-3.5 text-center text-slate-600 font-semibold">${t1Vote.toLocaleString('id-ID')}</td>
+                        <td class="p-3.5 text-center text-slate-600 font-semibold">${t2Vote.toLocaleString('id-ID')}</td>
+                        <td class="p-3.5 text-center pr-5 bg-slate-50 font-black text-slate-900">${totVote.toLocaleString('id-ID')}</td>
+                    </tr>
+                `;
+            });
+
+            const totalValidTps1 = safeNum(t1.c1) + safeNum(t1.c2) + safeNum(t1.c3) + safeNum(t1.c4) + safeNum(t1.c5);
+            const totalValidTps2 = safeNum(t2.c1) + safeNum(t2.c2) + safeNum(t2.c3) + safeNum(t2.c4) + safeNum(t2.c5);
+            const totalMasukTps1 = totalValidTps1 + safeNum(t1.invalid);
+            const totalMasukTps2 = totalValidTps2 + safeNum(t2.invalid);
+
+            tableHTML += `
+                <tr class="bg-slate-100/80 font-black text-slate-900 border-t-2 border-slate-200">
+                    <td class="p-4 pl-5">TOTAL SUARA SAH</td>
+                    <td class="p-4 text-center text-emerald-700 font-extrabold">${totalValidTps1.toLocaleString('id-ID')}</td>
+                    <td class="p-4 text-center text-emerald-700 font-extrabold">${totalValidTps2.toLocaleString('id-ID')}</td>
+                    <td class="p-4 text-center pr-5 bg-slate-200 text-emerald-800 font-black">${totalValid.toLocaleString('id-ID')}</td>
+                </tr>
+                <tr class="font-bold text-slate-600">
+                    <td class="p-4 pl-5 text-rose-600">SUARA TIDAK SAH (RUSAK)</td>
+                    <td class="p-4 text-center text-rose-500 font-semibold">${safeNum(t1.invalid).toLocaleString('id-ID')}</td>
+                    <td class="p-4 text-center text-rose-500 font-semibold">${safeNum(t2.invalid).toLocaleString('id-ID')}</td>
+                    <td class="p-4 text-center pr-5 bg-slate-50 text-rose-600 font-black">${totalInvalid.toLocaleString('id-ID')}</td>
+                </tr>
+                <tr class="bg-slate-900 text-white font-black">
+                    <td class="p-4 pl-5">TOTAL SUARA MASUK (PARTISIPASI)</td>
+                    <td class="p-4 text-center">${totalMasukTps1.toLocaleString('id-ID')} <span class="text-slate-400 font-normal">/ ${DPT_TPS1.toLocaleString('id-ID')}</span></td>
+                    <td class="p-4 text-center">${totalMasukTps2.toLocaleString('id-ID')} <span class="text-slate-400 font-normal">/ ${DPT_TPS2.toLocaleString('id-ID')}</span></td>
+                    <td class="p-4 text-center pr-5 bg-slate-950 text-amber-400 font-black">${totalMasuk.toLocaleString('id-ID')} <span class="text-slate-400 font-normal">/ ${TOTAL_DPT.toLocaleString('id-ID')}</span></td>
+                </tr>
+            `;
+
+            tableBody.innerHTML = tableHTML;
+        }
+
+        function renderAdminForms() {
+            const f1 = document.getElementById('formTps1');
+            const f2 = document.getElementById('formTps2');
+            
+            f1.innerHTML = '';
+            f2.innerHTML = '';
+
+            candidates.forEach(c => {
+                f1.innerHTML += `
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">0${c.id}. ${c.name}</label>
+                        <input type="number" id="t1_c${c.id}" value="${safeNum(voteData.tps1['c'+c.id])}" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm font-extrabold focus:ring-2 focus:ring-red-800 focus:outline-none" min="0">
+                    </div>
+                `;
+                f2.innerHTML += `
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">0${c.id}. ${c.name}</label>
+                        <input type="number" id="t2_c${c.id}" value="${safeNum(voteData.tps2['c'+c.id])}" class="w-full px-3.5 py-2.5 border border-slate-300 rounded-xl text-sm font-extrabold focus:ring-2 focus:ring-red-800 focus:outline-none" min="0">
+                    </div>
+                `;
+            });
+
+            f1.innerHTML += `
+                <div class="pt-3 border-t border-slate-100">
+                    <label class="block text-xs font-black text-rose-600 mb-1">Suara Tidak Sah (Rusak)</label>
+                    <input type="number" id="t1_invalid" value="${safeNum(voteData.tps1.invalid)}" class="w-full px-3.5 py-2.5 border border-rose-200 rounded-xl text-sm font-extrabold text-rose-700 focus:ring-2 focus:ring-rose-500 focus:outline-none bg-rose-50/50" min="0">
+                </div>
+            `;
+            f2.innerHTML += `
+                <div class="pt-3 border-t border-slate-100">
+                    <label class="block text-xs font-black text-rose-600 mb-1">Suara Tidak Sah (Rusak)</label>
+                    <input type="number" id="t2_invalid" value="${safeNum(voteData.tps2.invalid)}" class="w-full px-3.5 py-2.5 border border-rose-200 rounded-xl text-sm font-extrabold text-rose-700 focus:ring-2 focus:ring-rose-500 focus:outline-none bg-rose-50/50" min="0">
+                </div>
+            `;
+        }
+
+        function resetDataLocal() {
+            if (confirm('Atur ulang seluruh nilai pada form di layar?')) {
+                voteData = {
+                    tps1: { c1: 0, c2: 0, c3: 0, c4: 0, c5: 0, invalid: 0 },
+                    tps2: { c1: 0, c2: 0, c3: 0, c4: 0, c5: 0, invalid: 0 }
+                };
+                renderAdminForms();
+            }
+        }
+
+        // Jalankan aplikasi pertama kali
+        initApp();
+    </script>
 </body>
 </html>
